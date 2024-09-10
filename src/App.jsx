@@ -1,3 +1,4 @@
+import SearchPage from "./pages/SearchPage/SearchPage"
 
 
 function App() {
@@ -5,6 +6,7 @@ function App() {
   return (
     <>
       <div>
+        <SearchPage/>
       </div>
     </>
   )
