@@ -13,7 +13,6 @@ const MyLocationContents = () => {
     const [locationContents,SetLocationContents] = useState([]);
 
     const {data} = useLocationContents(myLocation.signgucode);
-    console.log()
 
     const ctprvn = {
         "서울특별시": 11,"부산광역시": 26,"대구광역시": 27,
