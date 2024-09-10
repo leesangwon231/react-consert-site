@@ -1,6 +1,6 @@
 import {useQuery} from "@tanstack/react-query";
 import xml2js from "xml2js";
-import Api from "../utils/api.jsx";
+import api from "../utils/api.jsx";
 const API_KEY = import.meta.env.VITE_API_KEY;
 
 
@@ -17,7 +17,7 @@ const parseXml = async (xml) => {
 const fetchContentsData =  async ({mt20id}) => {
 
     try {
-        const response = await Api.get(`/contents/${mt20id}`, {
+        const response = await api.get(`/contents/${mt20id}`, {
             params: {
                 service: API_KEY,
             }

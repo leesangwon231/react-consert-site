@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import xml2js from "xml2js";
-import Api from "../utils/api.jsx";
+import api from "../utils/api.jsx";
 
 const parseXml = async (xml) => {
     const parser = new xml2js.Parser({ explicitArray: false });
@@ -16,7 +16,7 @@ const fetchCentersData = async (param) => {
     const { poster='', shcate = '', signgucode = '', prfstate = '', shprfnm = '' } = param.queryKey[1] || {};
 
     try {
-        const response = await Api.get('', {
+        const response = await api.get('', {
             params: {
                 poster,
                 shcate,

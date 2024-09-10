@@ -1,7 +1,7 @@
 // usePerformances.jsx
 
 import { useQuery } from "@tanstack/react-query";
-import Api from "../utils/api";
+import api from "../utils/api";
 import xml2js from "xml2js";
 
 // XML을 JSON으로 변환하는 함수
@@ -18,7 +18,7 @@ const parseXml = async (xml) => {
 // 공연 데이터를 가져오는 함수
 const fetchPerformancesData = async ({ queryKey }) => {
     const [_, regionCode] = queryKey; // regionCode는 사용자가 선택한 지역 코드
-    const response = await Api.get('', {
+    const response = await api.get('', {
         params: {
             stdate: '20240101',
             eddate: '20240909',
