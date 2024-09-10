@@ -1,6 +1,7 @@
 import {useQuery} from "@tanstack/react-query";
 import xml2js from "xml2js";
 import Api from "../utils/api.jsx";
+const API_KEY = import.meta.env.VITE_API_KEY;
 
 
 const parseXml = async (xml) => {
@@ -13,15 +14,12 @@ const parseXml = async (xml) => {
     }
 };
 
-const fetchContentsData =  async () => {
+const fetchContentsData =  async ({mt20id}) => {
 
     try {
-        const response = await Api.get('', {
+        const response = await Api.get(`/contents/${mt20id}`, {
             params: {
-                stdate: '20160601',
-                eddate: '20160630',
-                cpage: '1',
-                rows: '5'
+                service: API_KEY,
             }
         });
 
@@ -38,10 +36,10 @@ const fetchContentsData =  async () => {
     }
 };
 
-export const useContents = () => {
+export const useContents = ({mt20id}) => {
     return useQuery({
-        queryKey : ["contents"],
-        queryFn :fetchContentsData,
+        queryKey : ["contents-detail", mt20id],
+        queryFn :()=>fetchContentsData({mt20id}),
         retry : 1,
     });
 }
