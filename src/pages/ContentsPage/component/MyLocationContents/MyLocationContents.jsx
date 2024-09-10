@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 import axios from "axios";
 import ContentCard from "../ContentCard/ContentCard.jsx";
 import "./MyLocationContents.css"
-import {useLocationContents} from "../../../../hooks/getContentsLocation.jsx";
+import {useLocationContents} from "../../../../hooks/useContentsLocation.jsx";
 
 const MyLocationContents = () => {
 
@@ -13,7 +13,6 @@ const MyLocationContents = () => {
     const [locationContents,SetLocationContents] = useState([]);
 
     const {data} = useLocationContents(myLocation.signgucode);
-    console.log()
 
     const ctprvn = {
         "서울특별시": 11,"부산광역시": 26,"대구광역시": 27,
@@ -62,7 +61,7 @@ const MyLocationContents = () => {
     <div className={"ContentsPage_LocationContainer"}>
         <Container>
             <Row>
-                <Col className="text-center">{myLocation?.name} 의 이런걸 보는건 어때?</Col>
+                <Col className="text-center">{myLocation?.name} 에서 이런걸 보는건 어때?</Col>
                 <Col lg={12} xs={12}>
                     <Row>
                         {locationContents?.map((content,index) => (

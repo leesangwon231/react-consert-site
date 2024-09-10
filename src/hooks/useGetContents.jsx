@@ -1,6 +1,7 @@
 import {useQuery} from "@tanstack/react-query";
 import xml2js from "xml2js";
 import Api from "../utils/api.jsx";
+const API_KEY = import.meta.env.VITE_API_KEY;
 
 
 const parseXml = async (xml) => {
@@ -13,19 +14,12 @@ const parseXml = async (xml) => {
     }
 };
 
-const fetchContentsData =  async (param) => {
+const fetchContentsData =  async ({mt20id}) => {
 
     try {
-        const response = await Api.get('', {
+        const response = await Api.get(`/contents/${mt20id}`, {
             params: {
-                shcate : param.queryKey[1].shcate,
-                signgucode : param.queryKey[1].signgucode,
-                prfstate : param.queryKey[1].prfstate,
-                shprfnm : param.queryKey[1].shprfnm,
-                stdate: '20240101',
-                eddate: '20240909',
-                cpage: '1',
-                rows: '12'
+                service: API_KEY,
             }
         });
 
@@ -33,6 +27,7 @@ const fetchContentsData =  async (param) => {
 
         const jsonData = await parseXml(xmlData);
 
+        console.log('자바스크립트 객체:', jsonData);
         return jsonData;
 
     } catch (error) {
@@ -41,10 +36,10 @@ const fetchContentsData =  async (param) => {
     }
 };
 
-export const useContents = (param) => {
+export const useContents = ({mt20id}) => {
     return useQuery({
-        queryKey : ["contents",param],
-        queryFn :fetchContentsData,
+        queryKey : ["contents-detail", mt20id],
+        queryFn :()=>fetchContentsData({mt20id}),
         retry : 1,
     });
 }

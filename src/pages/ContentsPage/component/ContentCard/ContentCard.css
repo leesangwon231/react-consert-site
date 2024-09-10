@@ -4,7 +4,14 @@
     transition: 0.5s;
 }
 
+
+
+
 .ContentsPage_Card_Image:hover{
     transform: scale(1.1);
     transition: 0.5s;
+}
+
+.ContentsPage_Card_Info{
+    margin-top: 30px;
 }

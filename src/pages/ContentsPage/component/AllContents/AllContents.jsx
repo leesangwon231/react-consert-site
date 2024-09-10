@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import {useContents} from "../../../../hooks/getContents.jsx";
+import {useContents} from "../../../../hooks/useContents.jsx";
 import ContentCard from "../ContentCard/ContentCard.jsx";
 
 const  AllContents = () => {
