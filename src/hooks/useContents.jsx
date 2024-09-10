@@ -1,6 +1,6 @@
 import {useQuery} from "@tanstack/react-query";
 import xml2js from "xml2js";
-import Api from "../utils/api.jsx";
+import api from "../utils/api.jsx";
 
 
 const parseXml = async (xml) => {
@@ -13,9 +13,20 @@ const parseXml = async (xml) => {
     }
 };
 
-const fetchContentsDetailData =  async (param) => {
+const fetchContentsData =  async (param) => {
+
     try {
-        const response = await Api.get(`/${param.queryKey[1]}`, {
+        const response = await api.get('', {
+            params: {
+                shcate : param.queryKey[1].shcate,
+                signgucode : param.queryKey[1].signgucode,
+                prfstate : param.queryKey[1].prfstate,
+                shprfnm : param.queryKey[1].shprfnm,
+                stdate: '20240101',
+                eddate: '20240909',
+                cpage: '1',
+                rows: '12'
+            }
         });
 
         const xmlData = response.data;
@@ -30,11 +41,10 @@ const fetchContentsDetailData =  async (param) => {
     }
 };
 
-export const useContentsDetail = (contentId) => {
+export const useContents = (param) => {
     return useQuery({
-        queryKey : ["contents-details-all",contentId],
-        queryFn :fetchContentsDetailData,
+        queryKey : ["contents",param],
+        queryFn :fetchContentsData,
         retry : 1,
-        enabled : !!contentId
     });
 }

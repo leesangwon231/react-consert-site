@@ -1,6 +1,6 @@
 import {useQuery} from "@tanstack/react-query";
 import xml2js from "xml2js";
-import Api from "../utils/api.jsx";
+import api from "../utils/api.jsx";
 
 
 const parseXml = async (xml) => {
@@ -15,7 +15,7 @@ const parseXml = async (xml) => {
 
 const fetchLocationContentsData =  async (param) => {
     try {
-        const response = await Api.get('', {
+        const response = await api.get('', {
             params: {
                 signgucode : param.queryKey[1],
                 stdate: '20240101',

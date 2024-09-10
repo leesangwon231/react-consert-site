@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 import axios from "axios";
 import ContentCard from "../ContentCard/ContentCard.jsx";
 import "./MyLocationContents.css"
-import {useLocationContents} from "../../../../hooks/getContentsLocation.jsx";
+import {useLocationContents} from "../../../../hooks/useContentsLocation.jsx";
 
 const MyLocationContents = () => {
 
