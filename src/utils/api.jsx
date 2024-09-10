@@ -6,7 +6,9 @@ const Api = axios.create({
     baseURL: '/api',
     params: {
         service: API_KEY
-    }
+    },
+    headers: { Accept: 'application/xml' }
+
 
 })
 
