@@ -3,7 +3,7 @@ import axios from "axios";
 const API_KEY = import.meta.env.VITE_API_KEY;
 
 const Api = axios.create({
-    baseURL: 'http://www.kopis.or.kr/openApi/restful/pblprfr',
+    baseURL: '/api',
     params: {
         service: API_KEY
     }
