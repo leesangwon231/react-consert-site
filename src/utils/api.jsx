@@ -2,7 +2,7 @@ import axios from "axios";
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 
-const Api = axios.create({
+const api = axios.create({
     baseURL: '/api',
     params: {
         service: API_KEY
@@ -17,4 +17,4 @@ const Api = axios.create({
 
 
 
-export default Api;
+export default api;
