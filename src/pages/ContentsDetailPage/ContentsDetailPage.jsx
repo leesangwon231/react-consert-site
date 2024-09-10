@@ -2,7 +2,7 @@ import './ContentsDetailPage.style.css';
 
 const ContentsDetailPage = () => {
   return (
-    <div>ContentsDetailPage</div>
+    <div></div>
   )
 }
 
