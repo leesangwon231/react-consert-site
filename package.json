@@ -16,10 +16,13 @@
     "@tanstack/react-query": "^5.55.4",
     "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
+    "events": "^3.3.0",
+    "prop-types": "^15.8.1",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.4",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.26.1"
+    "react-router-dom": "^6.26.2",
+    "xml2js": "^0.6.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
