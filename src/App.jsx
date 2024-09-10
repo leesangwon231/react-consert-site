@@ -1,18 +1,13 @@
-import ContentsPage from "./pages/ContentsPage/ContentsPage.jsx";
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import PerformancesList from "./pages/Location/component/PerformancesList";
 
+const App = () => {
+    return (
+        <Routes>
+            <Route path="/performances" element={<PerformancesList />} />
+        </Routes>
+    );
+};
 
-function App() {
-
-  return (
-    <>
-      <div>
-<<<<<<< HEAD
-=======
-          <ContentsPage/>
->>>>>>> ContentsPage
-      </div>
-    </>
-  )
-}
-
-export default App
+export default App;
