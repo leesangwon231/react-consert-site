@@ -13,15 +13,11 @@ const parseXml = async (xml) => {
     }
 };
 
-const fetchContentsData =  async (param) => {
-
+const fetchLocationContentsData =  async (param) => {
     try {
         const response = await Api.get('', {
             params: {
-                shcate : param.queryKey[1].shcate,
-                signgucode : param.queryKey[1].signgucode,
-                prfstate : param.queryKey[1].prfstate,
-                shprfnm : param.queryKey[1].shprfnm,
+                signgucode : param.queryKey[1],
                 stdate: '20240101',
                 eddate: '20240909',
                 cpage: '1',
@@ -41,10 +37,10 @@ const fetchContentsData =  async (param) => {
     }
 };
 
-export const useContents = (param) => {
+export const useLocationContents = (param) => {
     return useQuery({
-        queryKey : ["contents",param],
-        queryFn :fetchContentsData,
+        queryKey : ["location-contents",param],
+        queryFn :fetchLocationContentsData,
         retry : 1,
     });
 }

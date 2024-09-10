@@ -13,20 +13,9 @@ const parseXml = async (xml) => {
     }
 };
 
-const fetchContentsData =  async (param) => {
-
+const fetchContentsDetailData =  async (param) => {
     try {
-        const response = await Api.get('', {
-            params: {
-                shcate : param.queryKey[1].shcate,
-                signgucode : param.queryKey[1].signgucode,
-                prfstate : param.queryKey[1].prfstate,
-                shprfnm : param.queryKey[1].shprfnm,
-                stdate: '20240101',
-                eddate: '20240909',
-                cpage: '1',
-                rows: '12'
-            }
+        const response = await Api.get(`/${param.queryKey[1]}`, {
         });
 
         const xmlData = response.data;
@@ -41,10 +30,11 @@ const fetchContentsData =  async (param) => {
     }
 };
 
-export const useContents = (param) => {
+export const useContentsDetail = (contentId) => {
     return useQuery({
-        queryKey : ["contents",param],
-        queryFn :fetchContentsData,
+        queryKey : ["contents-details-all",contentId],
+        queryFn :fetchContentsDetailData,
         retry : 1,
+        enabled : !!contentId
     });
 }
