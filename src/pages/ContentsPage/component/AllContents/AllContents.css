@@ -1,0 +1,8 @@
+@import url('https://cdn.jsdelivr.net/gh/sun-typeface/SUITE@2/fonts/variable/woff2/SUITE-Variable.css');
+
+
+.text-center{
+    margin-bottom: 50px;
+    font-family: 'SUITE Variable', sans-serif;
+    font-size: 70px;
+}
