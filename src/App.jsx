@@ -1,31 +1,29 @@
-<<<<<<< HEAD
-import React from "react";
-import { Routes, Route } from "react-router-dom";
-import PerformancesList from "./pages/Location/component/PerformancesList";
-=======
->>>>>>> develop
+import {Routes, Route} from 'react-router-dom';
+import AppLayout from './AppLayout/AppLayout';
+import HomePage from './pages/HomePage/HomePage';
+import SearchPage from './pages/SearchPage/SearchPage';
+import ContentsPage from './pages/ContentsPage/ContentsPage';
+import ContentsDetailPage from './pages/ContentsDetailPage/ContentsDetailPage';
+import LocationPage from './pages/location/LocationPage';
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
+
+// 앱 레이아웃 - 헤더랑 푸터
 
 const App = () => {
-    return (
-        <Routes>
-            <Route path="/performances" element={<PerformancesList />} />
-        </Routes>
-    );
+  return (
+    <Routes>
+      <Route path="/" element={<AppLayout />}>
+        <Route index element={<HomePage />} />
+        <Route path="/search" element={<SearchPage />} />
+        <Route path="/contents">
+          <Route index element={<ContentsPage />} />
+          <Route path=":id" element={<ContentsDetailPage />} />
+        </Route>
+        <Route path="/location" element={<LocationPage />} />
+        <Route path="/*" element={<NotFoundPage />}></Route>
+      </Route>
+    </Routes>
+  );
 };
 
-<<<<<<< HEAD
 export default App;
-=======
-function App() {
-
-  return (
-    <>
-      <div>
-
-      </div>
-    </>
-  )
-}
-
-export default App
->>>>>>> develop
