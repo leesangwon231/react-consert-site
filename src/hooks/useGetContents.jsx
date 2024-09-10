@@ -1,6 +1,7 @@
 import {useQuery} from "@tanstack/react-query";
 import xml2js from "xml2js";
-import api from "../utils/api.jsx";
+import Api from "../utils/api.jsx";
+const API_KEY = import.meta.env.VITE_API_KEY;
 
 
 const parseXml = async (xml) => {
@@ -13,15 +14,12 @@ const parseXml = async (xml) => {
     }
 };
 
-const fetchLocationContentsData =  async (param) => {
+const fetchContentsData =  async ({mt20id}) => {
+
     try {
-        const response = await api.get('', {
+        const response = await Api.get(`/contents/${mt20id}`, {
             params: {
-                signgucode : param.queryKey[1],
-                stdate: '20240601',
-                eddate: '20241231',
-                cpage: '1',
-                rows: '12'
+                service: API_KEY,
             }
         });
 
@@ -29,6 +27,7 @@ const fetchLocationContentsData =  async (param) => {
 
         const jsonData = await parseXml(xmlData);
 
+        console.log('자바스크립트 객체:', jsonData);
         return jsonData;
 
     } catch (error) {
@@ -37,10 +36,10 @@ const fetchLocationContentsData =  async (param) => {
     }
 };
 
-export const useLocationContents = (param) => {
+export const useContents = ({mt20id}) => {
     return useQuery({
-        queryKey : ["location-contents",param],
-        queryFn :fetchLocationContentsData,
+        queryKey : ["contents-detail", mt20id],
+        queryFn :()=>fetchContentsData({mt20id}),
         retry : 1,
     });
 }

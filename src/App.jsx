@@ -1,4 +1,3 @@
-import ContentsPage from "./pages/ContentsPage/ContentsPage.jsx";
 
 
 function App() {
@@ -6,7 +5,7 @@ function App() {
   return (
     <>
       <div>
-          <ContentsPage/>
+
       </div>
     </>
   )
