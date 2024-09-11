@@ -2,7 +2,11 @@
 
 .ContentsPage_Card_Container{
     opacity: 0;
-    animation: fadeIn 1s ease-in both;
+    animation: fadeIn 0.4s ease-in both;
+    background-color: white;
+    border-radius: 10px;
+    max-width: 300px;
+
 }
 
 @keyframes fadeIn {

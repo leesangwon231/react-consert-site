@@ -11,7 +11,7 @@ const ContentCard = ({content}) => {
     useEffect(() => {
         const cards = document.querySelectorAll('.ContentsPage_Card_Container');
         cards.forEach((card, index) => {
-            card.style.animationDelay = `${index * 0.3}s`;
+            card.style.animationDelay = `${index * 0.2}s`;
         });
     }, []);
 

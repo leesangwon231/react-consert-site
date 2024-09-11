@@ -30,15 +30,15 @@
 
 @media only screen and (min-width: 1000px)  {
     .ContentsPage_col-lg-12{
-        height: 900px;
-        max-height: 1320px;
+        height: auto;
+        max-height: 3000px;
         width: 100%;
         align-items: center;
     }
 
     .ContentsPage_row {
         width: 100%;
-        height: 100%;
+        height: auto;
         display: flex;
         justify-content: center;
         align-items: center;

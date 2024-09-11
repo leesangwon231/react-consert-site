@@ -56,7 +56,7 @@ const MyLocationContents = ({ctprvn,performanceKinds}) => {
                 <Col lg={12} xs={12}>
                     <Row>
                         {locationContents?.map((content,index) => (
-                            <Col lg={2} xs={12} key = {index}>
+                            <Col lg={3} xs={12} key = {index}>
                                 <ContentCard content={content}/>
                             </Col>
                         ))}
