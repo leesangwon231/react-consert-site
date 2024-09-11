@@ -52,7 +52,7 @@ const MyLocationContents = ({ctprvn}) => {
     <div className={"ContentsPage_LocationContainer"}>
         <Container>
             <Row>
-                <Col className="text-center">{myLocation?.name} 에서 이런걸 보는건 어때?</Col>
+                <Col className="ContentsPage_text-center">{myLocation?.name} 에서 이런걸 보는건 어때?</Col>
                 <Col lg={12} xs={12}>
                     <Row>
                         {locationContents?.map((content,index) => (

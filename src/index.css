@@ -1,0 +1,14 @@
+@import url('https://cdn.jsdelivr.net/gh/sun-typeface/SUITE@2/fonts/variable/woff2/SUITE-Variable.css');
+
+body {
+    font-family: 'SUITE Variable', sans-serif;
+    color: var(--main-font-color);
+}
+
+:root {
+    --main-font-color: #333333;
+    --highlight-color1: #383554;
+    --highlight-color2: #7b5482;
+    --highlight-color3: #b8749d;
+    --highlight-color4: #cea6c0;
+}

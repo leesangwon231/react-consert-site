@@ -54,10 +54,10 @@ const  AllContents = ({performanceFilterArray}) => {
                           performanceState = {performanceState} setPerformanceState = {setPerformanceState}
                           ctprvnFlag = {ctprvnFlag} setCtprvnFlag = {setCtprvnFlag}/>
 
-            <Container>
+            <Container className={"ContentsPage_All_Container"}>
                 <Row>
-                    <Col className="text-center">공공예술</Col>
-                    <Col lg={12} xs={12}>
+                    <Col className="ContentsPage_text-center">공공예술</Col>
+                    <Col className={"ContentsPage_col-lg-12"} lg={12} xs={12}>
                         <Row>
                             {isLoading
                                 ?  <Spinner animation="border" variant="dark" />
