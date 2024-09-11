@@ -5,7 +5,7 @@ import "./ListCenter.css"
 const ListCenter = ({data}) => {
   const centerEvents = data?.dbs?.db || [];
   return (
-    <div className='list-Allcontainer'>
+    <div>
             <h3 className='list-title'>시설</h3>
             <div className='list-itemarea'>
                 <Container fluid>
@@ -15,8 +15,7 @@ const ListCenter = ({data}) => {
                                 <div className="list-details">
                                     <div className="list-detail">{event.fcltynm}</div>
                                     <div className="list-detail">{event.fcltychartr}</div>
-                                    <div className="list-detail">{event.sidonm}</div>
-                                    <div className="list-detail">{event.gugunnm}</div>
+                                    <div className="list-detail">{event.sidonm} {event.gugunnm}</div>
                                 </div>
                             </div>
                         </Row>

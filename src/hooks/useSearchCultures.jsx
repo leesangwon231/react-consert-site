@@ -16,7 +16,7 @@ const fetchSearchContentsData = async (param) => {
     const { shprfnm = '' } = param.queryKey[1] || {};
 
     try {
-        const response = await api.get('/pblprfr', {
+        const response = await api.get('pblprfr', {
             params: {
                 shprfnm,
                 stdate: '20240101',

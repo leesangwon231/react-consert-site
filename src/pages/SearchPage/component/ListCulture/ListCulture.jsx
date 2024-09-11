@@ -6,7 +6,7 @@ const ListCulture = ({ data }) => {
     const culturalEvents = data?.dbs?.db || [];
 
     return (
-        <div className='list-Allcontainer'>
+        <div>
             <h3 className='list-title'>공연</h3>
             <div className='list-itemarea'>
                 <Container fluid>

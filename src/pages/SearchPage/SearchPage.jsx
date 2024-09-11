@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSearchCultures } from '../../hooks/useSearchCultures';
-import { useCenters } from '../../hooks/useCenter';
+import { useSearchCenters } from '../../hooks/useSearchCenter';
 import { Form, Container, Row, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,7 +15,7 @@ const SearchPage = () => {
   const [activeButton, setActiveButton] = useState("all");
   const navigate = useNavigate(); 
   const { data: cultureData, error: cultureError, isLoading: cultureLoading } = useSearchCultures({ shprfnm: keyword });
-  const { data: centerData, error: centerError, isLoading: centerLoading } = useCenters({ fcltynm: keyword });
+  const { data: centerData, error: centerError, isLoading: centerLoading } = useSearchCenters({ shprfnmfct: keyword });
 
   if (cultureLoading || centerLoading) {
       return <div>Loading...</div>;
@@ -86,8 +86,21 @@ const SearchPage = () => {
               시설
             </Button>
           </div>
-          {activeButton === "all" || activeButton === "culture" ? <ListCulture data={cultureData}/> : null}
-          {activeButton === "all" || activeButton === "center" ? <ListCenter data={centerData}/> : null}
+          {keyword && (
+            <>
+              {(activeButton === "all" || activeButton === "culture") && cultureData?.dbs?.length > 0 && (
+                <ListCulture data={cultureData} />
+              )}
+
+              {(activeButton === "all" || activeButton === "center") && centerData?.dbs?.length > 0 && (
+                <ListCenter data={centerData} />
+              )}
+
+              {cultureData?.dbs?.length === 0 && centerData?.dbs?.length === 0 && (
+                <h3 className='none-search'>검색 결과가 없습니다.</h3>
+              )}
+            </>
+          )}
         </Row>
       </Container>
     </div>

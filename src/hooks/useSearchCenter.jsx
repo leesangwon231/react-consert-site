@@ -12,16 +12,13 @@ const parseXml = async (xml) => {
     }
 };
 
-const fetchCentersData = async (param) => {
-    const { shprfnmfct = '', fcltychartr = '', signgucode = '', signgucodesub = '' } = param.queryKey[1] || {};
+const fetchSearchCentersData = async (param) => {
+    const { shprfnmfct = ''} = param.queryKey[1] || {};
 
     try {
         const response = await api.get('prfplc', { 
             params: {
                 shprfnmfct, 
-                fcltychartr,
-                signgucode,
-                signgucodesub,
                 cpage: '1',
                 rows: '5'
             }
@@ -37,10 +34,10 @@ const fetchCentersData = async (param) => {
     }
 };
 
-export const useCenters = (param) => {
+export const useSearchCenters = (param) => {
     return useQuery({
         queryKey: ["centers", param],
-        queryFn: fetchCentersData,
+        queryFn: fetchSearchCentersData,
         retry: 1,
     });
 }
