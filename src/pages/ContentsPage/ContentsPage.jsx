@@ -3,7 +3,21 @@ import "./ContentsPage.css"
 import React from "react";
 import AllContents from "./component/AllContents/AllContents.jsx";
 import MyLocationContents from "./component/MyLocationContents/MyLocationContents.jsx";
+import {useParams} from "react-router-dom";
 const ContentsPage = () => {
+    let params = useParams();
+
+    console.log(params.category);
+
+    let performanceKinds = ["콘서트", "CCCD"];
+
+    if(params.category === "musical"){
+        performanceKinds = ["뮤지컬", "GGGA"]
+    }else if(params.category === "classical"){
+        performanceKinds = ["클래식/무용" , "BBBC"]
+    }else if(params.category === "play"){
+        performanceKinds = ["연극", "AAAA"]
+    }
 
     const ctprvn = {
         "서울특별시": 11,"부산광역시": 26,"대구광역시": 27,
@@ -38,8 +52,8 @@ const ContentsPage = () => {
 
     return (
         <div className={"ContentsPage_Container"}>
-            <AllContents performanceFilterArray = {performanceFilterArray}/>
-            <MyLocationContents ctprvn ={ctprvn}/>
+            <AllContents performanceFilterArray = {performanceFilterArray} performanceKinds={performanceKinds}/>
+            <MyLocationContents ctprvn ={ctprvn} performanceKinds = {performanceKinds}/>
         </div>
     )
 }

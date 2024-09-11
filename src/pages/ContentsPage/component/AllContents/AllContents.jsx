@@ -7,10 +7,9 @@ import {useContents} from "../../../../hooks/useContents.jsx";
 import ContentCard from "../ContentCard/ContentCard.jsx";
 import "./AllContents.css"
 import ContentFiler from "../ContentFilter/ContentFilter.jsx";
-import ProgressBar from "react-bootstrap/ProgressBar";
 import {Spinner} from "react-bootstrap";
 
-const  AllContents = ({performanceFilterArray}) => {
+const  AllContents = ({performanceFilterArray,performanceKinds}) => {
 
 
     //필터링을 위한 데이터
@@ -42,7 +41,7 @@ const  AllContents = ({performanceFilterArray}) => {
     }, [param,data]);
 
     useEffect(() => {
-        setParam({...param,signgucode: ctprvnFlag ,shcate: performanceKind , prfstate: performanceState})
+        setParam({...param,signgucode: ctprvnFlag ,shcate: performanceKinds[1] , prfstate: performanceState})
     }, [ctprvnFlag,performanceKind,performanceState]);
 
 
@@ -55,7 +54,7 @@ const  AllContents = ({performanceFilterArray}) => {
                           ctprvnFlag = {ctprvnFlag} setCtprvnFlag = {setCtprvnFlag}/>
 
             <Container className={"ContentsPage_All_Container"}>
-                <Row>
+                <Row className={"ContentsPage_row"}>
                     <Col className="ContentsPage_text-center">공공예술</Col>
                     <Col className={"ContentsPage_col-lg-12"} lg={12} xs={12}>
                         <Row>

@@ -7,12 +7,12 @@ import ContentCard from "../ContentCard/ContentCard.jsx";
 import "./MyLocationContents.css"
 import {useLocationContents} from "../../../../hooks/useContentsLocation.jsx";
 
-const MyLocationContents = ({ctprvn}) => {
+const MyLocationContents = ({ctprvn,performanceKinds}) => {
     //진척도
-    const [myLocation , setMyLocation] = useState({name : "" , signgucode : ""});
+    const [myLocation , setMyLocation] = useState({name : "" , signgucode : "", shcate : ""});
     const [locationContents,SetLocationContents] = useState([]);
 
-    const {data} = useLocationContents(myLocation.signgucode);
+    const {data} = useLocationContents(myLocation);
 
     //내 위치 찾기
     const getMyLocation = async () => {
@@ -34,7 +34,7 @@ const MyLocationContents = ({ctprvn}) => {
     useEffect(() => {
         const fetchLocation = async () => {
             const city = await getMyLocation();
-            setMyLocation({...myLocation, name: city, signgucode: ctprvn[city] });
+            setMyLocation({...myLocation, name: city, signgucode: ctprvn[city] , shcate: performanceKinds[1]});
         };
 
         fetchLocation();
@@ -52,7 +52,7 @@ const MyLocationContents = ({ctprvn}) => {
     <div className={"ContentsPage_LocationContainer"}>
         <Container>
             <Row>
-                <Col className="ContentsPage_text-center">{myLocation?.name} 에서 이런걸 보는건 어때?</Col>
+                <Col className="ContentsPage_text-center">{myLocation?.name} 에서 {performanceKinds[0]} 보는건 어때?</Col>
                 <Col lg={12} xs={12}>
                     <Row>
                         {locationContents?.map((content,index) => (

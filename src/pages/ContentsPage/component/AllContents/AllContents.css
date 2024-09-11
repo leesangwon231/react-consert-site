@@ -14,8 +14,8 @@
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: start;
+    align-items: start;
 }
 
 .ContentsPage_col-lg-12{
@@ -29,14 +29,14 @@
 }
 
 @media only screen and (min-width: 1000px)  {
-    .col-lg-12{
+    .ContentsPage_col-lg-12{
         height: 900px;
         max-height: 1320px;
         width: 100%;
         align-items: center;
     }
 
-    .row {
+    .ContentsPage_row {
         width: 100%;
         height: 100%;
         display: flex;

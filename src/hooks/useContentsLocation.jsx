@@ -14,10 +14,14 @@ const parseXml = async (xml) => {
 };
 
 const fetchLocationContentsData =  async (param) => {
+
+    console.log(param)
+
     try {
         const response = await api.get('pblprfr', {
             params: {
-                signgucode : param.queryKey[1],
+                shcate : param.queryKey[1].shcate,
+                signgucode : param.queryKey[1].signgucode,
                 stdate: '20240601',
                 eddate: '20241231',
                 cpage: '1',
