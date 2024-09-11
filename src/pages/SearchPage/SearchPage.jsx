@@ -86,21 +86,8 @@ const SearchPage = () => {
               시설
             </Button>
           </div>
-          {keyword && (
-            <>
-              {(activeButton === "all" || activeButton === "culture") && cultureData?.dbs?.length > 0 && (
-                <ListCulture data={cultureData} />
-              )}
-
-              {(activeButton === "all" || activeButton === "center") && centerData?.dbs?.length > 0 && (
-                <ListCenter data={centerData} />
-              )}
-
-              {cultureData?.dbs?.length === 0 && centerData?.dbs?.length === 0 && (
-                <h3 className='none-search'>검색 결과가 없습니다.</h3>
-              )}
-            </>
-          )}
+          {keyword && activeButton === "all" || activeButton === "culture" ? <ListCulture data={cultureData}/> : null}
+          {keyword && activeButton === "all" || activeButton === "center" ? <ListCenter data={centerData}/> : null}
         </Row>
       </Container>
     </div>
