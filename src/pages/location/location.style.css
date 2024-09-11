@@ -1,0 +1,30 @@
+.region-list {
+    display: flex;
+    justify-content: center; /* 가로로 가운데 정렬 */
+    align-items: center; /* 세로로 가운데 정렬 */
+    flex-wrap: nowrap; /* 탭이 한 줄로 유지되도록 설정 */
+    overflow-x: auto; /* 가로 스크롤 허용 */
+    white-space: nowrap; /* 탭들이 한 줄로 나열되도록 설정 */
+    border-bottom: 2px solid #ddd; /* 탭 아래에 구분선 추가 */
+    height: auto; /* 높이 자동 조정 */
+}
+
+.region-item {
+    padding: 10px 20px; /* 여백 추가 */
+    margin: 0 5px; /* 탭 간 간격 추가 */
+    cursor: pointer; /* 마우스 커서 변경 */
+    text-align: center; /* 텍스트 가운데 정렬 */
+    border-bottom: 3px solid transparent; /* 기본적으로 투명한 테두리 */
+    transition: border-color 0.3s, background-color 0.3s; /* 배경색, 테두리색 전환 효과 */
+    color: #333; /* 기본 텍스트 색상 */
+}
+
+.region-item:hover {
+    background-color: #f0f0f0; /* 호버 시 배경색 */
+}
+
+.region-item.active {
+    border-bottom: 3px solid red; /* 활성화된 탭에 빨간색 밑줄 */
+    background-color: #fafafa; /* 활성화된 탭의 배경색 */
+    color: red; /* 활성화된 탭의 텍스트 색상 */
+}
