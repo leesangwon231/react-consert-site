@@ -1,0 +1,13 @@
+.homepage-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5rem;
+
+  .card {
+    font-size: smaller;
+  }
+  .box {
+    display: inline;
+  }
+}

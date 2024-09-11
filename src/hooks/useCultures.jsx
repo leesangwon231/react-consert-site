@@ -16,7 +16,7 @@ const fetchContentsData = async (param) => {
     const { poster='', shcate = '', signgucode = '', prfstate = '', shprfnm = '' } = param.queryKey[1] || {};
 
     try {
-        const response = await api.get('', {
+        const response = await api.get('pblprfr', {
             params: {
                 poster,
                 shcate,

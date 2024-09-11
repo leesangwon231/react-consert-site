@@ -1,0 +1,10 @@
+
+.nav-menu-item.active {
+  color: red;
+}
+
+.nav-menu-item:hover {
+  color: blueviolet;
+}
+
+

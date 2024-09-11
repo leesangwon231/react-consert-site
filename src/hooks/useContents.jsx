@@ -16,7 +16,7 @@ const parseXml = async (xml) => {
 const fetchContentsData =  async (param) => {
 
     try {
-        const response = await api.get('', {
+        const response = await api.get('/pblprfr', {
             params: {
                 shcate : param.queryKey[1].shcate,
                 signgucode : param.queryKey[1].signgucode,

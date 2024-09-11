@@ -18,7 +18,7 @@ const parseXml = async (xml) => {
 // 공연 데이터를 가져오는 함수
 const fetchPerformancesData = async ({ queryKey }) => {
     const [_, regionCode] = queryKey; // regionCode는 사용자가 선택한 지역 코드
-    const response = await api.get('', {
+    const response = await api.get('pblprfr', {
         params: {
             stdate: '20240101',
             eddate: '20240909',

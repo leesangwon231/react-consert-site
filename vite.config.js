@@ -7,7 +7,8 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://www.kopis.or.kr/openApi/restful/pblprfr',
+        target: 'http://www.kopis.or.kr/openApi/restful/',
+        // target: 'http://www.kopis.or.kr/openApi/restful/pblprfr',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '')
       }
