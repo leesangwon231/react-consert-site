@@ -1,5 +1,8 @@
 @import url('https://cdn.jsdelivr.net/gh/sun-typeface/SUITE@2/fonts/variable/woff2/SUITE-Variable.css');
 
+.container{
+    margin-top: 0;
+}
 
 .text-center{
     margin-bottom: 50px;
@@ -8,7 +11,6 @@
 }
 
 .row {
-    max-height: 1320px;
     width: 100%;
     height: 100%;
     display: flex;
@@ -17,8 +19,6 @@
 }
 
 .col-lg-12{
-    height: 900px;
-    max-height: 1320px;
     width: 100%;
     align-items: center;
 }
@@ -26,4 +26,29 @@
 
 .progress-bar {
  background-color: black;
+}
+
+@media only screen and (min-width: 1000px)  {
+    .col-lg-12{
+        height: 900px;
+        max-height: 1320px;
+        width: 100%;
+        align-items: center;
+    }
+
+    .row {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .text-center{
+        margin-bottom: 50px;
+        font-family: 'SUITE Variable', sans-serif;
+        font-size: 40px;
+    }
 }

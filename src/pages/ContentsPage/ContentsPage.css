@@ -1,0 +1,11 @@
+.ContentsPage_Container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .ContentsPage_Container {
+        flex-direction: column;
+    }
+}

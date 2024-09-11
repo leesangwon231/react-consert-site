@@ -1,10 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 import "./ContentFilter.css"
 
 
 const ContentFiler = ({performanceFilterArray,ctprvnFlag,setCtprvnFlag,performanceKind,setPerformanceKind,performanceState,setPerformanceState}) => {
 
 
+    const [visibleFlag,setVisibleFlag] = useState(false);
+
+    const onClickVisible = () => {
+        setVisibleFlag(!visibleFlag);
+    }
     const onClickCtprvn = (index) => {
         const selectedKey = Object.keys(performanceFilterArray[0][index])[0];
         if (ctprvnFlag === selectedKey) {
@@ -36,7 +41,8 @@ const ContentFiler = ({performanceFilterArray,ctprvnFlag,setCtprvnFlag,performan
 
     return (
         <div className={"ContentsPage_FilterArea_Container"}>
-            <div className={"ContentsPage_FilterArea_Wrapper"}>
+            <button  className={"ContentsPage_FilterArea_Button"} onClick={()=>onClickVisible()}>test</button>
+            <div className={visibleFlag ? "ContentsPage_FilterArea_Wrapper" : "ContentsPage_FilterArea_Wrapper_UnVisible"}>
                 <div className={"ContentsPage_FilterArea_PerState"}>
                     <p>공연종류</p>
                     <div className={"ContentsPage_FilterArea_StateInfoWrapper"}>

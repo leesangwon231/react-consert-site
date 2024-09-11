@@ -37,7 +37,7 @@ const ContentsPage = () => {
 
 
     return (
-        <div>
+        <div className={"ContentsPage_Container"}>
             <AllContents performanceFilterArray = {performanceFilterArray}/>
             <MyLocationContents ctprvn ={ctprvn}/>
         </div>

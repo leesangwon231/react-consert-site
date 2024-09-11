@@ -6,7 +6,6 @@ import axios from "axios";
 import ContentCard from "../ContentCard/ContentCard.jsx";
 import "./MyLocationContents.css"
 import {useLocationContents} from "../../../../hooks/useContentsLocation.jsx";
-import ProgressBar from "react-bootstrap/ProgressBar";
 
 const MyLocationContents = ({ctprvn}) => {
     //진척도
