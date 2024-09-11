@@ -29,7 +29,7 @@ const SearchPage = () => {
     event.preventDefault();
     if (inputValue !== "") {
       setKeyword(inputValue); 
-      navigate(`/Search?q=${inputValue}`);
+      navigate(`/search?q=${inputValue}`);
       setInputValue(""); 
     } else {
       alert("검색어를 입력해 주세요");
@@ -41,7 +41,7 @@ const SearchPage = () => {
   };
 
   return (
-    <div>
+    <div className="search-container">
       <Container>
         <Row>
           <div className="search-box">
