@@ -16,6 +16,13 @@ const parseXml = async (xml) => {
 const fetchContentsDetailData =  async (param) => {
     try {
         const response = await api.get(`/${param.queryKey[1]}`, {
+            params: {
+                prfnm : param.queryKey[1].prfnm,
+                prfpdfrom : param.queryKey[1].prfpdfrom,
+                prfpdto : param.queryKey[1].prfpdto,
+                prfcast : param.queryKey[1].prfcast,
+                mt20id: 'PF132236',
+            }
         });
 
         const xmlData = response.data;

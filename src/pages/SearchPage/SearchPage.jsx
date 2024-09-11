@@ -14,7 +14,7 @@ const SearchPage = () => {
   const [activeButton, setActiveButton] = useState("all"); // State to track which button is active
   const navigate = useNavigate(); 
   const { data: cultureData, error, isLoading } = useContents();
-
+  console.log(cultureData)
   if (isLoading) {
       return <div>Loading...</div>;
   }
