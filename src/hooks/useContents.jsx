@@ -46,5 +46,6 @@ export const useContents = (param) => {
         queryKey : ["contents",param],
         queryFn :fetchContentsData,
         retry : 1,
+        staleTime : 600000,
     });
 }

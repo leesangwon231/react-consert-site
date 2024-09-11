@@ -6,22 +6,14 @@ import axios from "axios";
 import ContentCard from "../ContentCard/ContentCard.jsx";
 import "./MyLocationContents.css"
 import {useLocationContents} from "../../../../hooks/useContentsLocation.jsx";
+import ProgressBar from "react-bootstrap/ProgressBar";
 
-const MyLocationContents = () => {
-
+const MyLocationContents = ({ctprvn}) => {
+    //진척도
     const [myLocation , setMyLocation] = useState({name : "" , signgucode : ""});
     const [locationContents,SetLocationContents] = useState([]);
 
     const {data} = useLocationContents(myLocation.signgucode);
-
-    const ctprvn = {
-        "서울특별시": 11,"부산광역시": 26,"대구광역시": 27,
-        "인천광역시": 28, "광주광역시": 29,"대전광역시": 30,
-        "울산광역시": 31,"세종특별자치시": 36,"경기도": 41,
-        "강원특별자치도": 42,"충청북도": 43,"충청남도": 44,
-        "전라북도": 45,"전라남도": 46,"경상북도": 47,
-        "경상남도": 48,"제주특별자치도": 50
-    };
 
     //내 위치 찾기
     const getMyLocation = async () => {

@@ -6,3 +6,24 @@
     font-family: 'SUITE Variable', sans-serif;
     font-size: 70px;
 }
+
+.row {
+    max-height: 1320px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.col-lg-12{
+    height: 900px;
+    max-height: 1320px;
+    width: 100%;
+    align-items: center;
+}
+
+
+.progress-bar {
+ background-color: black;
+}

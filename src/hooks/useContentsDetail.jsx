@@ -35,6 +35,7 @@ export const useContentsDetail = (contentId) => {
         queryKey : ["contents-details-all",contentId],
         queryFn :fetchContentsDetailData,
         retry : 1,
-        enabled : !!contentId
+        enabled : !!contentId,
+        staleTime : 600000
     });
 }

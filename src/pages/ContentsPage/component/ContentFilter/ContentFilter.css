@@ -1,0 +1,110 @@
+@import url('https://cdn.jsdelivr.net/gh/sun-typeface/SUITE@2/fonts/variable/woff2/SUITE-Variable.css');
+
+
+.ContentsPage_FilterArea_Container{
+    font-family: 'SUITE Variable', sans-serif;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.ContentsPage_FilterArea_Wrapper{
+    display: flex;
+    max-width: 1320px;
+    gap: 90px;
+}
+
+
+.ContentsPage_FilterArea_PerState{
+    max-width: 660px;
+}
+
+.ContentsPage_FilterArea_PerState>span{
+    margin-top: 40px;
+}
+
+.ContentsPage_FilterArea_StateInfoWrapper{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    justify-content: start;
+    margin-bottom: 10px;
+    gap: 10px;
+}
+
+
+
+
+
+
+.ContentsPage_FilterArea_Ctprvn{
+    display: flex;
+    flex-direction: column;
+    max-width: 660px;
+}
+
+
+.ContentsPage_FilterArea_Ctprvn > p{
+    font-family: 'SUITE Variable', sans-serif;
+
+
+}
+
+.ContentsPage_FilterArea_InfoWrapper{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+
+}
+
+
+.ContentsPage_FilterArea_Flag{
+    font-family: 'SUITE Variable', sans-serif;
+    border: 1px solid;
+    width: 100%;
+    max-width: 200px;
+    min-width: 120px;
+    min-height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1 1 0;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.ContentsPage_FilterArea_Flag:hover{
+    background-color: black;
+    color: white;
+    transition: 1s;
+}
+
+.ContentsPage_FilterArea_Flag_active{
+    font-family: 'SUITE Variable', sans-serif;
+    border: 1px solid;
+    width: 100%;
+    max-width: 200px;
+    min-width: 120px;
+    min-height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    color: white;
+    flex: 1 1 0;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+
+
+@media only screen and (max-width: 1000px) {
+    .ContentsPage_FilterArea_Wrapper{
+        display: flex;
+        max-width: 1320px;
+        gap: 30px;
+    }
+}
