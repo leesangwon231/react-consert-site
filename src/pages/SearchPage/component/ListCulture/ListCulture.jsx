@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 import "./ListCulture.css";
 
 const ListCulture = ({ data }) => {
@@ -7,37 +7,30 @@ const ListCulture = ({ data }) => {
 
     return (
         <div className='list-Allcontainer'>
-            <Container fluid>
-                <Row>
+            <h3 className='list-title'>공연</h3>
+            <div className='list-itemarea'>
+                <Container fluid>
                     {culturalEvents.map((event) => (
-                        <Col key={event.mt20id} md={4} lg={3} className="mb-4 list-container">
+                        <Row key={event.mt20id} className="mb-4 list-container">
                             <div className="list-item">
                                 <img 
                                     className="list-img"
                                     src={event.poster}
                                     alt={event.prfnm}
                                 />
-                                <Row>
-                                    <Col className="list-detail1">
+                                <div className="list-details">
+                                    <div className="list-detail-group">
                                         <div>{event.prfstate}</div>
                                         <div>{event.prfnm}</div>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col className="list-detail2">
-                                        <div>{event.fcltynm}</div>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col className="list-detail3">
-                                        <div>{event.prfpdfrom} ~ {event.prfpdto}</div>
-                                    </Col>
-                                </Row>
+                                    </div>
+                                    <div className="list-detail">{event.fcltynm}</div>
+                                    <div className="list-detail">{event.prfpdfrom} ~ {event.prfpdto}</div>
+                                </div>
                             </div>
-                        </Col>
+                        </Row>
                     ))}
-                </Row>
-            </Container>
+                </Container>
+            </div>
         </div>
     );
 };

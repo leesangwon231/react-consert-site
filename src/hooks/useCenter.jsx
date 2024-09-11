@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import xml2js from "xml2js";
-import api from "../utils/api.jsx";
+import api from "../utils/api.jsx"; 
 
 const parseXml = async (xml) => {
     const parser = new xml2js.Parser({ explicitArray: false });
@@ -12,28 +12,23 @@ const parseXml = async (xml) => {
     }
 };
 
-const fetchContentsData = async (param) => {
-    const { poster='', shcate = '', signgucode = '', prfstate = '', shprfnm = '' } = param.queryKey[1] || {};
+const fetchCentersData = async (param) => {
+    const { shprfnmfct = '', fcltychartr = '', signgucode = '', signgucodesub = '' } = param.queryKey[1] || {};
 
     try {
-        const response = await api.get('', {
+        const response = await api.get('prfplc', { 
             params: {
-                poster,
-                shcate,
+                shprfnmfct, 
+                fcltychartr,
                 signgucode,
-                prfstate,
-                shprfnm,
-                stdate: '20240101',
-                eddate: '20240909',
+                signgucodesub,
                 cpage: '1',
                 rows: '5'
             }
         });
 
         const xmlData = response.data;
-
         const jsonData = await parseXml(xmlData);
-
         return jsonData;
 
     } catch (error) {
@@ -42,10 +37,10 @@ const fetchContentsData = async (param) => {
     }
 };
 
-export const useContents = (param) => {
+export const useCenters = (param) => {
     return useQuery({
-        queryKey: ["contents", param],
-        queryFn: fetchContentsData,
+        queryKey: ["centers", param],
+        queryFn: fetchCentersData,
         retry: 1,
     });
 }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useContents } from '../../hooks/useCultures';
+import { useSearchCultures } from '../../hooks/useSearchCultures';
+import { useCenters } from '../../hooks/useCenter';
 import { Form, Container, Row, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,14 +14,15 @@ const SearchPage = () => {
   const [keyword, setKeyword] = useState(""); 
   const [activeButton, setActiveButton] = useState("all");
   const navigate = useNavigate(); 
-  const { data: cultureData, error, isLoading } = useContents();
+  const { data: cultureData, error: cultureError, isLoading: cultureLoading } = useSearchCultures({ shprfnm: keyword });
+  const { data: centerData, error: centerError, isLoading: centerLoading } = useCenters({ fcltynm: keyword });
 
-  if (isLoading) {
+  if (cultureLoading || centerLoading) {
       return <div>Loading...</div>;
   }
 
-  if (error) {
-      return <div>Error: {error.message}</div>;
+  if (cultureError || centerError) {
+      return <div>Error: {cultureError?.message || centerError?.message}</div>;
   }
 
   const searchByKeyword = (event) => {
@@ -43,9 +45,9 @@ const SearchPage = () => {
       <Container>
         <Row>
           <div className="search-box">
-          <h1>
-            <span className="keyword">'{keyword}'</span>에 대한 검색 결과 입니다.
-          </h1>
+            <h1>
+              <span className="keyword">'{keyword}'</span>에 대한 검색 결과 입니다.
+            </h1>
             <Form className="d-flex search-form" onSubmit={searchByKeyword}>
               <Form.Control
                 type="search"
@@ -85,7 +87,7 @@ const SearchPage = () => {
             </Button>
           </div>
           {activeButton === "all" || activeButton === "culture" ? <ListCulture data={cultureData}/> : null}
-          {activeButton === "all" || activeButton === "center" ? <ListCenter/> : null}
+          {activeButton === "all" || activeButton === "center" ? <ListCenter data={centerData}/> : null}
         </Row>
       </Container>
     </div>

@@ -1,0 +1,54 @@
+.list-Allcontainer {
+    margin-top: 3%;
+}
+
+.list-title {
+    margin-bottom: 2%;
+}
+
+.list-container {
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.list-itemarea {
+    border-top: 5px solid #e2e2e2;
+    border-bottom: 5px solid #e2e2e2;
+    padding-top: 15px;
+}
+
+.list-item {
+    display: flex;
+    flex-direction: row; 
+    align-items: center; 
+    border-radius: 5px;
+    overflow: hidden;
+    border-bottom: 3px solid #f3f3f3;
+}
+
+.list-item:last-child {
+    border-bottom: none; 
+}
+
+.list-img {
+    width: 100px;
+    height: 140px;
+    margin-right: 15px; 
+    margin-bottom: 15px; 
+}
+
+.list-details {
+    display: flex;
+    flex-direction: row; 
+    align-items: center; 
+    gap: 20px;
+}
+
+.list-detail-group {
+    display: flex;
+    flex-direction: column; 
+}
+
+.list-detail {
+    margin-left: 15px;
+}
