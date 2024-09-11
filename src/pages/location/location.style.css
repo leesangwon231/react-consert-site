@@ -24,7 +24,7 @@
 }
 
 .region-item.active {
-    border-bottom: 3px solid red; /* 활성화된 탭에 빨간색 밑줄 */
+    border-bottom: 3px solid var(--highlight-color3); /* 활성화된 탭에 빨간색 밑줄 */
     background-color: #fafafa; /* 활성화된 탭의 배경색 */
-    color: red; /* 활성화된 탭의 텍스트 색상 */
+    color: var(--highlight-color3); /* 활성화된 탭의 텍스트 색상 */
 }

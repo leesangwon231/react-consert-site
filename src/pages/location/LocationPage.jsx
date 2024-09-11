@@ -16,10 +16,10 @@ const regions = [
   { code: "51", name: "강원" },
   { code: "43", name: "충청" },
   { code: "44", name: "충청" },
-  { code: "45", name: "전라" },
-  { code: "46", name: "전라" },
-  { code: "47", name: "경상" },
-  { code: "48", name: "경상" },
+  { code: "45", name: "전북" },
+  { code: "46", name: "전남" },
+  { code: "47", name: "경북" },
+  { code: "48", name: "경남" },
   { code: "50", name: "제주" }
 ];
 
