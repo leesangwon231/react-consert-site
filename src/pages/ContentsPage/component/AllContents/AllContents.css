@@ -8,6 +8,9 @@
     margin-bottom: 50px;
     font-family: 'SUITE Variable', sans-serif;
     font-size: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .ContentsPage_row {
@@ -21,6 +24,14 @@
 .ContentsPage_col-lg-12{
     width: 100%;
     align-items: center;
+    min-height: 1300px;
+}
+
+.ContentsPage_NotFoundText{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 1300px;
 }
 
 
@@ -50,5 +61,14 @@
         margin-bottom: 50px;
         font-family: 'SUITE Variable', sans-serif;
         font-size: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
+    .ContentsPage_col-lg-12{
+        width: 100%;
+        align-items: center;
+        height: auto;
+    }
+
 }

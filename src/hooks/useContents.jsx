@@ -24,7 +24,7 @@ const fetchContentsData =  async (param) => {
                 shprfnm : param.queryKey[1].shprfnm,
                 stdate: '20240601',
                 eddate: '20241231',
-                cpage: '1',
+                cpage: param.queryKey[1].page,
                 rows: '12'
             }
         });

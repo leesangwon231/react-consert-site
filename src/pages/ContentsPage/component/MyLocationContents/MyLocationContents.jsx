@@ -6,13 +6,14 @@ import axios from "axios";
 import ContentCard from "../ContentCard/ContentCard.jsx";
 import "./MyLocationContents.css"
 import {useLocationContents} from "../../../../hooks/useContentsLocation.jsx";
+import {Spinner} from "react-bootstrap";
 
 const MyLocationContents = ({ctprvn,performanceKinds}) => {
     //진척도
     const [myLocation , setMyLocation] = useState({name : "" , signgucode : "", shcate : ""});
     const [locationContents,SetLocationContents] = useState([]);
 
-    const {data} = useLocationContents(myLocation);
+    const {data,isLoading} = useLocationContents(myLocation);
 
     //내 위치 찾기
     const getMyLocation = async () => {
@@ -51,15 +52,18 @@ const MyLocationContents = ({ctprvn,performanceKinds}) => {
   return (
     <div className={"ContentsPage_LocationContainer"}>
         <Container>
-            <Row>
+            <Row className={"ContentsPage_row"}>
                 <Col className="ContentsPage_text-center">{myLocation?.name} 에서 {performanceKinds[0]} 보는건 어때?</Col>
-                <Col lg={12} xs={12}>
-                    <Row>
-                        {locationContents?.map((content,index) => (
-                            <Col lg={3} xs={12} key = {index}>
-                                <ContentCard content={content}/>
-                            </Col>
-                        ))}
+                <Col className={"ContentsPage_col-lg-12"} lg={12} xs={12}>
+                    <Row >
+                        {isLoading
+                            ?  <Spinner animation="border" variant="dark" />
+                            :   locationContents?.map((content,index) => (
+                                <Col lg={3} xs={12} key = {index}>
+                                    <ContentCard content={content}/>
+                                </Col>
+                            ))
+                        }
                     </Row>
                 </Col>
             </Row>

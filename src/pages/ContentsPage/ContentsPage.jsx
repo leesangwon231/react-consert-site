@@ -7,7 +7,6 @@ import {useParams} from "react-router-dom";
 const ContentsPage = () => {
     let params = useParams();
 
-    console.log(params.category);
 
     let performanceKinds = ["콘서트", "CCCD"];
 
@@ -28,16 +27,15 @@ const ContentsPage = () => {
         "경상남도": 48,"제주특별자치도": 50
     };
 
-    const performance = {
-        "뮤지컬": "GGGA","콘서트": "CCCD","클래식/무용": "BBBC",
-        "연극": "AAAA"
+    const sortedState = {
+        "가나다순": "01","최신순": "02"
     }
 
     const perFormanceState = {
         "공연예정": "01","공연중": "02","공연완료": "03",
     }
 
-    let performanceFilterArray = [ctprvn,performance,perFormanceState]
+    let performanceFilterArray = [ctprvn,sortedState,perFormanceState]
 
     performanceFilterArray = performanceFilterArray?.map((state)=>(
         Object.entries(state)

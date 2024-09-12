@@ -2,7 +2,9 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    background-color: var(--highlight-color1);
+    justify-content: center;
+    background-color: white;
+    /*background-color: var(--highlight-color1);*/
 }
 
 @media (max-width: 768px) {

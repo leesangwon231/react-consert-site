@@ -1,5 +1,42 @@
 @import url('https://cdn.jsdelivr.net/gh/sun-typeface/SUITE@2/fonts/variable/woff2/SUITE-Variable.css');
 
+.ContentsPage_ContentsPage_FilterArea{
+
+}
+
+.ContentsPage_Filter_Wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ContentsPage_Filter_ButtonArea{
+    max-width: 1320px;
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+
+.ContentsPage_Filter_Button{
+    border : 1px solid black;
+    width: 100%;
+    max-width: 50px;
+    height: 100%;
+    max-height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+
+    &.active{
+        background-color: black;
+        color: white;
+    }
+}
+
+
 
 .ContentsPage_FilterArea_Container{
     font-family: 'SUITE Variable', sans-serif;
@@ -9,15 +46,22 @@
     justify-content: center;
     align-items: center;
     padding: 10px;
+
 }
 
 .ContentsPage_FilterArea_Wrapper{
     display: flex;
     max-width: 1320px;
+    width: 100%;
     gap: 90px;
     opacity: 1;
     margin-bottom: 2rem;
-    transition: height 1s ease, opacity 1s ease;
+    transition: max-height 1s ease, opacity 1s ease;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    overflow: hidden;
+    min-height: 300px;
 }
 
 .ContentsPage_FilterArea_Wrapper_UnVisible{
@@ -50,21 +94,6 @@
 
 
 
-
-
-
-.ContentsPage_FilterArea_Ctprvn{
-    display: flex;
-    flex-direction: column;
-    max-width: 660px;
-}
-
-
-.ContentsPage_FilterArea_Ctprvn > p{
-    font-family: 'SUITE Variable', sans-serif;
-
-
-}
 
 .ContentsPage_FilterArea_InfoWrapper{
     display: flex;
@@ -112,7 +141,6 @@
     border-radius: 20px;
     cursor: pointer;
 }
-
 
 
 @media only screen and (max-width: 1000px) {
