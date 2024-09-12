@@ -14,30 +14,22 @@ const parseXml = async (xml) => {
 };
 
 
-const fetchContentsDetailData = async (param) => {
+const fetchContentsDetailData = async (id) => {
     try {
-        const contentId = param.queryKey[1]; 
-        const response = await api.get(`/pblprfr/${contentId}`, {
-            params: {
-                mt20id: contentId,  
-            }
-        });
-
+        const response = await api.get(`/pblprfr/${id}`);  // 공연 ID로 세부 정보 요청
         const xmlData = response.data;
-        const jsonData = await parseXml(xmlData);  
+        const jsonData = await parseXml(xmlData);
         return jsonData;
-
     } catch (error) {
-        console.error('데이터 가져오기 오류:', error);
+        console.error('상세 정보 가져오기 오류:', error);
         throw error;
     }
 };
 
-export const useContentsDetail = (contentId) => {
+export const useContentsDetail = (id) => {
     return useQuery({
-        queryKey: ["contents-details-all", contentId],
-        queryFn: fetchContentsDetailData,
+        queryKey: ["detail", id],
+        queryFn: () => fetchContentsDetailData(id),
         retry: 1,
-        enabled: !!contentId  
     });
 };
