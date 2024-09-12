@@ -33,8 +33,8 @@ const AppLayout = () => {
   // navigate(/search?q=${inputValue});
 
   return (
-    <div>
-      <header className="d-flex align-items-center position-sticky top-0 bg-light-subtle">
+    <div className='min-vh-100 d-flex flex-column'>
+      <header id='header' className="d-flex align-items-center position-sticky top-0 bg-light-subtle">
         <h3>
           <Link to="/">
             <div>LOGO</div>
@@ -55,7 +55,8 @@ const AppLayout = () => {
       <main className="pb-4">
         <Outlet />
       </main>
-      <footer>여기는 푸터</footer>
+      <div className="flex-grow-1"></div>
+      <footer id='footer' className='bg-light-subtle'>여기는 푸터</footer>
     </div>
   );
 };

@@ -1,10 +1,15 @@
+#header {
+  .nav-menu-item.active {
+    color: red;
+  }
 
-.nav-menu-item.active {
-  color: red;
+  .nav-menu-item:hover {
+    color: blueviolet;
+  }
 }
 
-.nav-menu-item:hover {
-  color: blueviolet;
+
+
+#footer {
+  
 }
-
-
