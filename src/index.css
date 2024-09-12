@@ -8,10 +8,6 @@ a { text-decoration: none; color: inherit; display: block; }
 input, select, textarea, fieldset { border: 0; }
 img { vertical-align: top; border: 0; }
 
-input[type="search"]::-webkit-search-cancel-button {
-  -webkit-appearance: none;
-}
-
 body {
   font-family: 'SUITE Variable', sans-serif;
   color: var(--main-font-color);
