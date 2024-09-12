@@ -1,8 +1,8 @@
 import {Button, Form} from 'react-bootstrap';
 import './AppLayoutStyle.css';
 import {Link, NavLink, Outlet} from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 const AppLayout = () => {
   const menuItems = [
@@ -37,7 +37,7 @@ const AppLayout = () => {
 
   return (
     <div className="min-vh-100 d-flex flex-column">
-      <header id="header" className="global-mx position-sticky top-0 bg-light-subtle py-2 py-lg-0">
+      <header id="header" className="global-mx position-sticky top-0 bg-light-subtle py-2 py-lg-0 z-2">
         <div className="big-menu-box d-flex align-items-center">
           <h2>
             <Link to="/" className="me-4">
