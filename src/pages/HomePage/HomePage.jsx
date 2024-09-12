@@ -6,7 +6,7 @@ const array = [1, 2, 3, 4, 5, 6, 7, 8];
 const HomePage = () => {
   return (
     <Container className="homepage-container">
-      <div className="card-box-container d-flex gap-3 flex-wrap">
+      <div className="card-box-container d-flex gap-3 flex-wrap justify-content-between">
         {array.map((i) => (
           <div key={i} className="card-box border p-3 shadow-sm rounded-3">
             <div className="img-box">

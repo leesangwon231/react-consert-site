@@ -1,11 +1,6 @@
 .homepage-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 5rem;
-
   .card-box {
-    width: 30%;
+    /* width: 30%; */
     cursor: pointer;
     transition: all 0.3s;
     &:hover {
@@ -13,6 +8,8 @@
     }
     img {
       width: 100%;
+      object-fit: cover;
+      aspect-ratio: 2/3;
     }
   }
 }
