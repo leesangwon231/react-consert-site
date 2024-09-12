@@ -16,13 +16,13 @@ const parseXml = async (xml) => {
 const fetchContentsData =  async (param) => {
 
     try {
-        const response = await api.get('/pblprfr', {
+        const response = await api.get('pblprfr', {
             params: {
                 shcate : param.queryKey[1].shcate,
                 signgucode : param.queryKey[1].signgucode,
                 prfstate : param.queryKey[1].prfstate,
                 shprfnm : param.queryKey[1].shprfnm,
-                stdate: '20240601',
+                stdate: '20240101',
                 eddate: '20241231',
                 cpage: '1',
                 rows: '12'
