@@ -1,3 +1,4 @@
+import {Button, Form} from 'react-bootstrap';
 import './AppLayoutStyle.css';
 import {Link, NavLink, Outlet} from 'react-router-dom';
 
@@ -33,30 +34,41 @@ const AppLayout = () => {
   // navigate(/search?q=${inputValue});
 
   return (
-    <div className='min-vh-100 d-flex flex-column'>
-      <header id='header' className="d-flex align-items-center position-sticky top-0 bg-light-subtle">
-        <h3>
-          <Link to="/">
-            <div>LOGO</div>
-          </Link>
-        </h3>
-        <nav>
-          <ul className="d-flex align-items-center">
-            {menuItems.map(({itemName, itemLink}, i) => (
-              <li key={i}>
-                <NavLink className="nav-menu-item border border-dark-subtle px-4 py-2" to={itemLink}>
-                  {itemName}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
-        </nav>
+    <div className="min-vh-100 d-flex flex-column">
+      <header id="header" className="global-mx position-sticky top-0 bg-light-subtle py-2 py-lg-0">
+        <div className="big-menu-box d-flex align-items-center">
+          <h2>
+            <Link to="/" className="me-4">
+              <div>LOGO</div>
+            </Link>
+          </h2>
+          <nav className="me-auto">
+            <ul className="d-flex align-items-center my-2 d-none d-lg-flex align-self-end ">
+              {menuItems.map(({itemName, itemLink}, i) => (
+                <li key={i} className="menu-item-box">
+                  <NavLink className="nav-menu-item pb-2 pt-3 fs-5" to={itemLink}>
+                    {itemName}
+                    <div className="underline"></div>
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <Form className="input-box d-flex">
+            <Form.Control type="text" placeholder="검색어를 입력하세요" className="fs-5 me-2 w-auto" />
+            <Button variant="primary" type="submit" className="input-button fs-5">
+              검색
+            </Button>
+          </Form>
+        </div>
       </header>
       <main className="pb-4">
         <Outlet />
       </main>
       <div className="flex-grow-1"></div>
-      <footer id='footer' className='bg-light-subtle'>여기는 푸터</footer>
+      <footer id="footer" className="bg-light-subtle">
+        여기는 푸터
+      </footer>
     </div>
   );
 };

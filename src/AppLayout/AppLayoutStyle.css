@@ -1,15 +1,84 @@
-#header {
-  .nav-menu-item.active {
-    color: red;
+.global-mx {
+  padding-inline: 1rem;
+
+  @media (min-width: 576px) {
+    padding-inline: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    padding-inline: 2rem;
   }
 
-  .nav-menu-item:hover {
-    color: blueviolet;
+  @media (min-width: 992px) {
+    padding-inline: 2.5rem;
+  }
+
+  @media (min-width: 1200px) {
+    padding-inline: 4rem;
+  }
+
+  @media (min-width: 1400px) {
+    padding-inline: 5rem;
   }
 }
 
+#header {
+  .menu-item-box:first-child {
+    display: none;
+    @media (min-width: 1200px) {
+      display: block;
+    }
+  }
+  .nav-menu-item {
+    font-weight: 600;
+    padding-inline: 1.75rem;
+    @media (min-width: 992px) {
+      padding-inline: 1rem;
+    }
+    @media (min-width: 1200px) {
+      padding-inline: 1.5rem;
+    }
+    @media (min-width: 1400px) {
+      padding-inline: 2rem;
+    }
 
+    .underline {
+      overflow: hidden;
+      display: block;
+      height: 3px;
+      width: 100%;
+      margin-top: 0.3rem;
+      background-color: var(--highlight-color3);
+      transform: translateX(-120%);
+      visibility: hidden;
+      transition: all 0.3s, visibility 0s ease-in-out;
+      width: 0;
+    }
+    &.active,
+    &:hover {
+      color: var(--highlight-color3);
+      .underline {
+        width: 100%;
+        visibility: visible;
+        transform: translateX(0);
+      }
+    }
+  }
+
+  .input-box {
+    .input-button {
+      background-color: var(--highlight-color3);
+      border-color: var(--highlight-color3);
+      opacity: 0.8;
+      transition: all 0.3s ease-in-out;
+    }
+
+    &:hover {
+      .input-button {
+        opacity: 1;
+      }
+    }
+  }
+}
 
 #footer {
-  
 }
