@@ -1,0 +1,42 @@
+.search-center-detail {
+    .search-center-container {
+        display: flex;              
+        flex-wrap: wrap;            
+        gap: 1rem;                  
+        padding: 1rem;             
+        align-items: center;       
+        width: 100%;                
+    }
+
+    .list-detail {
+        margin: 0.5rem;          
+        padding: 0.5rem;         
+        border-radius: 4px;      
+        display: flex;  
+        align-items: center;  
+        gap: 2%;                 
+    }
+
+    .list-detail:nth-child(1) {
+        flex: 0 0 30%;           
+    }
+
+    .list-detail:nth-child(2) {
+        flex: 0 0 35%;           
+    }
+
+    .list-detail:nth-child(3) {
+        flex: 0 0 15%;           
+    }
+
+    .list-detail:nth-child(4) {
+        flex: 0 0 10%;           
+    }
+
+    .list-detail-link {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: inherit; 
+    }
+}

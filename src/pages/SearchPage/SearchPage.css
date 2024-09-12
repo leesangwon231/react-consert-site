@@ -36,7 +36,7 @@
   .search-form .form-control {
     background-color: transparent; 
     border: none;
-    border-bottom: 1px solid gray; 
+    border-bottom: 1px solid var(--main-font-color); 
     width: 30vh;
     height: 3vh;
     border-radius: 0; 
@@ -45,6 +45,7 @@
   .search-form .form-control:focus {
     box-shadow: none; 
     border: none;
+    border-bottom: 1px solid var(--main-font-color);
   }
 
   .search-form .btn-srch {

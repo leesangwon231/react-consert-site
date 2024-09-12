@@ -12,8 +12,8 @@ const parseXml = async (xml) => {
     }
 };
 
-const fetchSearchCenterDeatilsData = async (param) => {
-    const { id } = param.queryKey[1] || {};  
+const fetchSearchCenterDeatilsData = async ({ queryKey }) => {
+    const { id } = queryKey[1] || {};  
 
     if (!id) {
         throw new Error('ID가 제공되지 않았습니다.');
@@ -38,8 +38,9 @@ const fetchSearchCenterDeatilsData = async (param) => {
 
 export const useSearchCenterDeatils = (id) => {
     return useQuery({
-        queryKey: ["center-details", { id }], 
+        queryKey: ["center-details", { id }],
         queryFn: fetchSearchCenterDeatilsData,
         retry: 1,
     });
 };
+

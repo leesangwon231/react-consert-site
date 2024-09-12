@@ -1,40 +1,37 @@
 import React from 'react';
 import { Container, Row } from 'react-bootstrap';
 import "./ListCenter.css";
+import ListCenterContainer from '../ListCenterContainer/ListCenterContainer'; // Correct import path
 
-
-const ListCenter = ({data}) => {  // props 이름을 id로 사용
-//   const { data: centerData, error, isLoading } = useSearchCenterDeatils(id);  // id를 올바르게 전달
-
-//   if (isLoading) {
-//       return <div>Loading...</div>;
-//   }
-
-//   if (error) {
-//       return <div>Error: {error.message}</div>;
-//   }
-
+const ListCenter = ({ data }) => {  
     const centerEvents = data?.dbs?.db || [];
-  return (
-    <div className="search-center">
-        <h3 className='list-title'>시설</h3>
-        <div className='list-itemarea'>
-            <Container fluid>
-                {centerEvents.map((event) => (
-                    <Row key={event.mt10id} className="mb-4 list-container">
-                        <div className="list-item">
-                            <div className="list-details">
-                                <div className="list-detail">{event.fcltynm}</div>
-                                <div className="list-detail">{event.fcltychartr}</div>
-                                <div className="list-detail">{event.sidonm} {event.gugunnm}</div>
+    
+    return (
+        <div className="search-center">
+            <h3 className='list-title'>시설</h3>
+            <div className='list-itemarea'>
+                <Container fluid>
+                    {centerEvents.length > 0 ? (
+                        <>
+                            <div className="list-titles">
+                                <div className="list-detail">시설명</div>
+                                <div className="list-detail">주소</div>
+                                <div className="list-detail">전화번호</div>
+                                <div className="list-detail">주요시설</div>
                             </div>
-                        </div>
-                    </Row>
-                ))}
-            </Container>
+                            {centerEvents.map((event) => (
+                                <Row key={event.mt10id} className="mb-4 list-container">
+                                    <ListCenterContainer data={event.mt10id} />
+                                </Row>
+                            ))}
+                        </>
+                    ) : (
+                        <h4 className="no-results">검색 결과가 없습니다</h4>
+                    )}
+                </Container>
+            </div>
         </div>
-    </div>
-  );
-}
+    );
+};
 
 export default ListCenter;

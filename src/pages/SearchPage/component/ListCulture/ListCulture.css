@@ -8,8 +8,8 @@
         margin-top: 2%;
         margin-bottom: 2%;
         display: flex;
-        align-items: center; /* 수직 정렬 */
-        justify-content: center; /* 수평 정렬 */
+        align-items: center; 
+        justify-content: center; 
     }
 
     .list-itemarea {
@@ -65,5 +65,13 @@
 
     .list-detail:last-child {
         flex: 0 0 35%; 
+    }
+
+    .no-results{
+        font-weight: bold;
+        text-align: center;
+        margin-top: 5%;
+        margin-bottom: 6%;
+        color: var(--highlight-color3);
     }
 }
