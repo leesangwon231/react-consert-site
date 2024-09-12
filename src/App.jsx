@@ -17,10 +17,10 @@ const App = () => {
         <Route path="/search" element={<SearchPage />} />
         <Route path="/contents">
           <Route index element={<ContentsPage />} />
-            <Route path=":category">
-              <Route index element={<ContentsPage />} />
-              <Route path=":id" element={<ContentsDetailPage />} />
-            </Route>
+          <Route path=":category">
+            <Route index element={<ContentsPage />} />
+            <Route path=":id" element={<ContentsDetailPage />} />
+          </Route>
         </Route>
         <Route path="/location" element={<LocationPage />} />
         <Route path="/*" element={<NotFoundPage />}></Route>

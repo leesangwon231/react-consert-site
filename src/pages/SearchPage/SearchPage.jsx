@@ -49,22 +49,28 @@ const SearchPage = () => {
               <span className="keyword">'{keyword}'</span>에 대한 검색 결과 입니다.
             </h1>
             <Form className="d-flex search-form" onSubmit={searchByKeyword}>
-              <Form.Control
-                type="search"
-                className="me-2"
-                aria-label="Search"
-                value={inputValue} 
-                onChange={(event) => setInputValue(event.target.value)} 
-              />
-              <a 
-                href="#"
-                onClick={searchByKeyword}
-                className="btn-srch"
-                aria-label="Search"
-              >
-                <FontAwesomeIcon icon={faSearch} />
-              </a>
-            </Form>
+          <div className="input-container">
+            <Form.Control
+              type="search"
+              className="me-2"
+              aria-label="Search"
+              value={inputValue}
+              onChange={(event) => setInputValue(event.target.value)}
+            />
+            {inputValue && (
+              <span className="clear-btn" onClick={() => setInputValue('')}>x</span>
+            )}
+          </div>
+          <a 
+            href="#"
+            onClick={searchByKeyword}
+            className="btn-srch"
+            aria-label="Search"
+          >
+            <FontAwesomeIcon icon={faSearch} />
+          </a>
+        </Form>
+
           </div>
           <div className="button-group">
             <Button 
