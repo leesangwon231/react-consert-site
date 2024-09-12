@@ -1,6 +1,6 @@
-import {useQuery} from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import xml2js from "xml2js";
-import api from "../utils/api.jsx";
+import api from "../utils/api.jsx"; 
 
 
 const parseXml = async (xml) => {
@@ -13,22 +13,18 @@ const parseXml = async (xml) => {
     }
 };
 
-const fetchContentsDetailData =  async (param) => {
+
+const fetchContentsDetailData = async (param) => {
     try {
-        const response = await api.get(`/${param.queryKey[1]}`, {
+        const contentId = param.queryKey[1]; 
+        const response = await api.get(`/pblprfr/${contentId}`, {
             params: {
-                prfnm : param.queryKey[1].prfnm,
-                prfpdfrom : param.queryKey[1].prfpdfrom,
-                prfpdto : param.queryKey[1].prfpdto,
-                prfcast : param.queryKey[1].prfcast,
-                mt20id: 'PF132236',
+                mt20id: contentId,  
             }
         });
 
         const xmlData = response.data;
-
-        const jsonData = await parseXml(xmlData);
-
+        const jsonData = await parseXml(xmlData);  
         return jsonData;
 
     } catch (error) {
@@ -39,9 +35,9 @@ const fetchContentsDetailData =  async (param) => {
 
 export const useContentsDetail = (contentId) => {
     return useQuery({
-        queryKey : ["contents-details-all",contentId],
-        queryFn :fetchContentsDetailData,
-        retry : 1,
-        enabled : !!contentId
+        queryKey: ["contents-details-all", contentId],
+        queryFn: fetchContentsDetailData,
+        retry: 1,
+        enabled: !!contentId  
     });
-}
+};
