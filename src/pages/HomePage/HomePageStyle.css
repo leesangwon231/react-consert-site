@@ -4,5 +4,15 @@
   align-items: center;
   margin-top: 5rem;
 
-  .ca
+  .card-box {
+    width: 30%;
+    cursor: pointer;
+    transition: all 0.3s;
+    &:hover {
+      transform: scale(1.05);
+    }
+    img {
+      width: 100%;
+    }
+  }
 }

@@ -45,7 +45,6 @@
       overflow: hidden;
       display: block;
       height: 3px;
-      width: 100%;
       margin-top: 0.3rem;
       background-color: var(--highlight-color3);
       transform: translateX(-120%);
@@ -70,11 +69,43 @@
       border-color: var(--highlight-color3);
       opacity: 0.8;
       transition: all 0.3s ease-in-out;
+      width: 3.8rem;
+      
+      @media (min-width: 576px) {
+        font-size: 1.25rem;
+      }
     }
 
     &:hover {
       .input-button {
         opacity: 1;
+      }
+    }
+  }
+
+  .mobile-menu {
+    li {
+    }
+    li:first-child {
+      display: none;
+    }
+    .mobile-menu-item {
+      .underline {
+        overflow: hidden;
+        display: block;
+        height: 3px;
+        width: 100%;
+        margin-top: 0.3rem;
+        background-color: var(--highlight-color3);
+        visibility: hidden;
+      }
+      &.active {
+        color: var(--highlight-color3);
+        .underline {
+          width: 100%;
+          visibility: visible;
+          transform: translateX(0);
+        }
       }
     }
   }

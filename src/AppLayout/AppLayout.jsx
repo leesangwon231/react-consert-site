@@ -1,6 +1,8 @@
 import {Button, Form} from 'react-bootstrap';
 import './AppLayoutStyle.css';
 import {Link, NavLink, Outlet} from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 const AppLayout = () => {
   const menuItems = [
@@ -43,7 +45,7 @@ const AppLayout = () => {
             </Link>
           </h2>
           <nav className="me-auto">
-            <ul className="d-flex align-items-center my-2 d-none d-lg-flex align-self-end ">
+            <ul className="d-flex align-items-center my-2 d-none d-lg-flex">
               {menuItems.map(({itemName, itemLink}, i) => (
                 <li key={i} className="menu-item-box">
                   <NavLink className="nav-menu-item pb-2 pt-3 fs-5" to={itemLink}>
@@ -54,12 +56,25 @@ const AppLayout = () => {
               ))}
             </ul>
           </nav>
-          <Form className="input-box d-flex">
-            <Form.Control type="text" placeholder="검색어를 입력하세요" className="fs-5 me-2 w-auto" />
-            <Button variant="primary" type="submit" className="input-button fs-5">
+          <Form className="input-box fs-5 d-flex">
+            <Form.Control type="text" placeholder="검색어를 입력하세요" className="me-2 w-75" />
+            <Button variant="primary" type="submit" className="input-button">
               검색
             </Button>
+            {/* <FontAwesomeIcon icon={faMagnifyingGlass} /> */}
           </Form>
+        </div>
+        <div className="mobile-menu">
+          <ul className="d-flex align-items-center my-2 d-flex d-lg-none justify-content-evenly">
+            {menuItems.map(({itemName, itemLink}, i) => (
+              <li key={i} className="mobile-menu-item-box">
+                <NavLink className="mobile-menu-item pb-2 pt-3 fs-5" to={itemLink}>
+                  {itemName}
+                <div className="underline"></div>
+                </NavLink>
+              </li>
+            ))}
+          </ul>
         </div>
       </header>
       <main className="pb-4">
