@@ -25,7 +25,7 @@ const fetchContentsData =  async (param) => {
                 stdate: '20240601',
                 eddate: '20241231',
                 cpage: '1',
-                rows: '12'
+                rows: '20'
             }
         });
 
