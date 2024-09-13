@@ -1,0 +1,84 @@
+.region-list {
+    display: flex;
+    justify-content: center; /* 가로로 가운데 정렬 */
+    align-items: center; /* 세로로 가운데 정렬 */
+    flex-wrap: nowrap; /* 탭이 한 줄로 유지되도록 설정 */
+    overflow-x: auto; /* 가로 스크롤 허용 */
+    white-space: nowrap; /* 탭들이 한 줄로 나열되도록 설정 */
+    border-bottom: 2px solid #ddd; /* 탭 아래에 구분선 추가 */
+    height: auto; /* 높이 자동 조정 */
+}
+
+.region-item {
+    padding: 10px 20px; /* 여백 추가 */
+    margin: 0 5px; /* 탭 간 간격 추가 */
+    cursor: pointer; /* 마우스 커서 변경 */
+    text-align: center; /* 텍스트 가운데 정렬 */
+    border-bottom: 3px solid transparent; /* 기본적으로 투명한 테두리 */
+    transition: border-color 0.3s, background-color 0.3s; /* 배경색, 테두리색 전환 효과 */
+    color: #333; /* 기본 텍스트 색상 */
+}
+
+.region-item:hover {
+    background-color: #f0f0f0; /* 호버 시 배경색 */
+}
+
+.region-item.active {
+    border-bottom: 3px solid var(--highlight-color3); /* 활성화된 탭에 빨간색 밑줄 */
+    background-color: #fafafa; /* 활성화된 탭의 배경색 */
+    color: var(--highlight-color3); /* 활성화된 탭의 텍스트 색상 */
+}
+/* 스위치 버튼 스타일링 */
+.view-mode-switch {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .switch-btn {
+    padding: 10px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .switch-btn.active {
+    background-color: var(--highlight-color3); /* 활성화된 상태 */
+    color: white;
+  }
+  
+  .switch-btn:hover {
+    background-color: #ddd;
+  }
+  
+  /* 공연장 카드 스타일링 */
+  .venue-card {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  /* 로딩 스피너를 가운데에 배치 */
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px; /* 적절한 높이 설정 */
+}
+
+/* venue-map-placeholder와 크기 맞춤 */
+.venue-map-placeholder {
+  height: 200px;
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: 8px;
+}
+
+.pagination-controls {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}

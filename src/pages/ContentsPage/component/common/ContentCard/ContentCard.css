@@ -1,0 +1,102 @@
+@import url('https://cdn.jsdelivr.net/gh/sun-typeface/SUITE@2/fonts/variable/woff2/SUITE-Variable.css');
+
+.ContentsPage_Card_Container{
+    opacity: 0;
+    animation: fadeIn 0.4s ease-in both;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 9px 10px -2px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.ContentsPage_Card_Container:hover{
+    transition: all .3s ease-in-out;
+    box-shadow: 0px 20px 50px -1px rgba(255, 223, 70, 0.8);
+    cursor: pointer;
+}
+
+
+.ContentsPage_container {
+   /*animation: fadeIn 0.4s ease-in both;*/
+    .ContentsPage_card-box {
+        background-color: white;
+        cursor: pointer;
+        transition: all 0.3s;
+        &:hover {
+            transform: scale(1.05);
+            border-radius: 10px;
+        }
+        img {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+        }
+    }
+    .ContentsPage_text-box{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: white;
+
+
+        span{
+            margin-top: 10px;
+        }
+    }
+}
+
+
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate3d(0, -20%, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.ContentsPage_Card_Image{
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    transition: 0.5s;
+    border-radius: 10px;
+}
+
+
+/*.ContentsPage_Card_Image:hover{
+    transform: scale(1.1);
+    transition: 0.5s;
+    cursor: pointer;
+}*/
+
+.ContentsPage_Card_Info{
+    margin-top: 10px;
+}
+
+
+.ContentsPage_Card_Info >.ContentsPage_Title{
+    font-family: 'SUITE Variable', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80px;
+    height: 80px;
+    margin: 0;
+}
+
+
+.ContentsPage_Card_Info > .ContentsPage_Info{
+    min-height: 20px;
+    font-family: 'SUITE Variable', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+}
+

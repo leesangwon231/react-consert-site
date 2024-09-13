@@ -16,7 +16,7 @@ const parseXml = async (xml) => {
 const fetchContentsData =  async (param) => {
 
     try {
-        const response = await api.get('/pblprfr/', {
+        const response = await api.get('/pblprfr', {
             params: {
                 shcate : param.queryKey[1].shcate,
                 signgucode : param.queryKey[1].signgucode,
@@ -24,8 +24,8 @@ const fetchContentsData =  async (param) => {
                 shprfnm : param.queryKey[1].shprfnm,
                 stdate: '20240601',
                 eddate: '20241231',
-                cpage: '1',
-                rows: '20'
+                cpage: param.queryKey[1].page,
+                rows: '12'
             }
         });
 
@@ -46,5 +46,6 @@ export const useContents = (param) => {
         queryKey : ["contents",param],
         queryFn :fetchContentsData,
         retry : 1,
+        staleTime : 600000,
     });
 }

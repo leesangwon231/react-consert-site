@@ -2,59 +2,61 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";  // useNavigate 추가
 import { useContents } from "../../hooks/useContents";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import "./ContentsPage.css";
-
+import "./ContentsPage.css"
+import React from "react";
+import AllContents from "./component/AllContents/AllContents.jsx";
+import MyLocationContents from "./component/MyLocationContents/MyLocationContents.jsx";
+import {useParams} from "react-router-dom";
+import Slider from "./component/common/Slider/Slider.jsx";
 const ContentsPage = () => {
+    let params = useParams();
 
-    const param = {
-        shcate: '',      
-        signgucode: '',   
-        prfstate: '',     
-        shprfnm: '',      
-        row:'', 
+
+    let performanceKinds = ["콘서트", "CCCD"];
+
+    if(params.category === "musical"){
+        performanceKinds = ["뮤지컬", "GGGA"]
+    }else if(params.category === "classical"){
+        performanceKinds = ["클래식/무용" , "BBBC"]
+    }else if(params.category === "play"){
+        performanceKinds = ["연극", "AAAA"]
+    }
+
+    const ctprvn = {
+        "서울특별시": 11,"부산광역시": 26,"대구광역시": 27,
+        "인천광역시": 28, "광주광역시": 29,"대전광역시": 30,
+        "울산광역시": 31,"세종특별자치시": 36,"경기도": 41,
+        "강원특별자치도": 42,"충청북도": 43,"충청남도": 44,
+        "전라북도": 45,"전라남도": 46,"경상북도": 47,
+        "경상남도": 48,"제주특별자치도": 50
     };
 
-    const { data, isLoading, error } = useContents(param);
-    const navigate = useNavigate();  // navigate 훅 사용
+    const sortedState = {
+        "가나다순": "01","최신순": "02"
+    }
 
-    useEffect(() => {
-        if (isLoading) {
-            console.log("데이터를 불러오는 중입니다...");
-        }
+    const perFormanceState = {
+        "공연예정": "01","공연중": "02","공연완료": "03",
+    }
 
-        if (error) {
-            console.error("데이터를 불러오는 중 오류 발생:", error);
-        }
+    let performanceFilterArray = [ctprvn,sortedState,perFormanceState]
 
-        if (data) {
-            console.log("불러온 데이터:", data); 
-        }
-    }, [data, isLoading, error]);
+    performanceFilterArray = performanceFilterArray?.map((state)=>(
+        Object.entries(state)
+            .map((data) =>{
+                return { [data[1]] : data[0]}
+            })
+    ));
 
-    const handleCardClick = (id) => {
-        navigate(`/contents/${id}`); // 경로를 /contents/:id로 수정
-    };
+
+
+
 
     return (
-        <div className="container mt-4">
-            <h1 className="text-center mb-4">Contents Page</h1>
-            {isLoading && <p>데이터를 불러오는 중입니다...</p>}
-            {error && <p>오류가 발생했습니다: {error.message}</p>}
-            {data?.dbs?.db && (
-                <div className="row">
-                    {data.dbs.db.map((item, index) => (
-                        <div className="col-md-4" key={index}>
-                            <div className="card mb-4" onClick={() => handleCardClick(item.mt20id)}> {/* 카드 클릭 핸들러 */}
-                                <div className="card-body">
-                                    <h5 className="card-title">{item.prfnm}</h5>
-                                    <p className="card-text">장소: {item.prfplc}</p>
-                                    <p className="card-text">기간: {item.prfpdfrom} ~ {item.prfpdto}</p>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            )}
+        <div className={"ContentsPage_Container"}>
+            <Slider performanceKinds={performanceKinds}/>
+            <AllContents performanceFilterArray = {performanceFilterArray} performanceKinds={performanceKinds}/>
+            <MyLocationContents ctprvn ={ctprvn} performanceKinds = {performanceKinds}/>
         </div>
     );
 };

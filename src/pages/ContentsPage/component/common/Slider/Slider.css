@@ -1,0 +1,30 @@
+.slider-container{
+    display: flex;
+    flex-direction: column;
+    object-fit: cover;
+    margin-bottom: 50px;
+    height: calc(100vh - 300px);
+    width: 100%;
+    overflow: hidden;
+
+
+.slick-slide{
+    height: calc(100vh - 300px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    div{
+        width: calc(100% - 20px);
+        img{
+            object-fit: cover;
+            height: 100%;
+            width: 100%;
+            gap: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+        }
+    }
+}
+
+}
+

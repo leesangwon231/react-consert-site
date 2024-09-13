@@ -1,0 +1,66 @@
+/* Venue Card Container */
+.venue-card {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px; /* Adding space between rows */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; /* 카드의 높이를 100%로 설정해 일정한 크기로 유지 */
+}
+
+.venue-map {
+    margin-top: 10px;
+    height: 200px;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #f0f0f0; /* 지도 영역이 없는 경우 빈 공간을 채울 색상 */
+}
+
+/* Placeholder for map area when no coordinates are available */
+.venue-map-placeholder {
+    height: 200px;
+    width: 100%;
+    background-color: #e0e0e0; /* Placeholder의 배경색 */
+    border-radius: 8px;
+}
+
+/* 로딩 스피너를 가운데에 배치 */
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* 스피너의 높이를 전체 지도 영역에 맞춤 */
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.col-3 {
+    width: 100%;
+    max-width: 25%; /* Ensure each card takes up 25% on larger screens */
+    padding: 15px;
+    box-sizing: border-box; /* 패딩 포함 크기 계산 */
+}
+
+@media (max-width: 992px) {
+    .col-3 {
+        max-width: 50%; /* Medium screen (50%) */
+    }
+}
+
+@media (max-width: 768px) {
+    .col-3 {
+        max-width: 100%; /* Small screen (100%) */
+    }
+}
+
+/* 텍스트 줄바꿈 처리 */
+h3, p {
+    word-wrap: break-word; /* 너무 긴 텍스트를 적절히 줄바꿈 */
+}
