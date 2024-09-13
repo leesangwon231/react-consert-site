@@ -1,0 +1,42 @@
+import {useQuery} from '@tanstack/react-query';
+import xml2js from 'xml2js';
+import api from '../utils/api.jsx';
+
+const parseXml = async (xml) => {
+  const parser = new xml2js.Parser({explicitArray: false});
+  try {
+    const result = await parser.parseStringPromise(xml);
+    return result;
+  } catch (err) {
+    throw new Error('XML 파싱 오류: ' + err.message);
+  }
+};
+
+export const useContentsList = ({itemNum, genreCode, kidState, performanceState}) => {
+  const fetchContentsList = async () => {
+    try {
+      const response = await api.get('/pblprfr', {
+        params: {
+          stdate: '20240101',
+          eddate: '20241231',
+          cpage: 1,
+          rows: itemNum,
+          shcate: genreCode,
+          kidstate: kidState,
+          prfstate: performanceState,
+        },
+      });
+      return await parseXml(response.data);
+    } catch (error) {
+      console.error('데이터 가져오기 오류:', error);
+      throw error;
+    }
+  };
+  return useQuery({
+    queryKey: ['contents-list', itemNum, genreCode, kidState, performanceState],
+    queryFn: fetchContentsList,
+    select: (result) => result.dbs.db,
+    retry: 1,
+    staleTime: 600000,
+  });
+};

@@ -1,0 +1,55 @@
+.poster-card-box {
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transition: all 2s;
+
+  &:nth-child(-n + 2) {
+    .card-title {
+      padding: 1.5rem;
+      font-size: 1.5rem;
+    }
+  }
+  .card-title {
+    color: var(--gray-color1);
+    padding: 1rem;
+    font-size: 1.2rem;
+  }
+
+  @media (min-width: 1200px) {
+    &:nth-child(-n + 2) {
+      .card-title {
+        padding: 2rem;
+        font-size: 2rem;
+      }
+    }
+    .card-title {
+      padding: 1rem;
+      font-size: 1.3rem;
+    }
+  }
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: var(--bs-secondary-color);
+    opacity: 0;
+  }
+
+  &:hover {
+    &::before {
+      transition: all 0.3s;
+      opacity: 0.7;
+    }
+    .card-title {
+      transition: all 0.3s;
+      transform: translateY(-100%);
+    }
+  }
+
+  img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+}
