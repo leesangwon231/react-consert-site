@@ -48,7 +48,7 @@ const fetchAllSearchCentersData = async (param) => {
             cpage++;
         }
 
-        return { dbs: { db: allResults } }; // Return wrapped data structure
+        return { dbs: { db: allResults } }; 
 
     } catch (error) {
         console.error('데이터 가져오기 오류:', error);

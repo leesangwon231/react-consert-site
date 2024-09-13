@@ -3,14 +3,18 @@ import { Container, Row } from 'react-bootstrap';
 import "./ListCulture.css";
 
 const ListCulture = ({ data }) => {
+    //console.log("Received data:", data); 
+
     const culturalEvents = data?.dbs?.db || [];
+    const totalCulturals = culturalEvents.length;
 
     return (
         <div className="search-culture">
-            <h3 className='list-title'>공연</h3>
+            <h3 className='list-title'>공연 ({totalCulturals})</h3>
             <div className='list-itemarea'>
                 <Container fluid>
-                    {culturalEvents.length > 0 ? (
+                    {totalCulturals > 0 ? (
+                    //{culturalEvents.length > 0 ? (
                         culturalEvents.map((event) => (
                             <Row key={event.mt20id} className="mb-4 list-container">
                                 <div className="list-item">

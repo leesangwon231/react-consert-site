@@ -4,14 +4,14 @@ import "./ListCenter.css";
 import ListCenterContainer from '../ListCenterContainer/ListCenterContainer'; 
 
 const ListCenter = ({ data }) => {  
-    console.log("Received data:", data); 
+    //console.log("Received data:", data); 
 
     const centerEvents = data?.dbs?.db || []; 
     const totalCenters = centerEvents.length;
 
     return (
         <div className="search-center">
-            <h3 className='list-title'>시설 ({totalCenters}개)</h3>
+            <h3 className='list-title'>시설 ({totalCenters})</h3>
             <div className='list-itemarea'>
                 <Container fluid>
                     {totalCenters > 0 ? (
