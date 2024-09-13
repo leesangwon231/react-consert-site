@@ -1,4 +1,4 @@
-import {Routes, Route} from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import AppLayout from './AppLayout/AppLayout';
 import HomePage from './pages/HomePage/HomePage';
 import SearchPage from './pages/SearchPage/SearchPage';
@@ -23,7 +23,10 @@ const App = () => {
           </Route>
         </Route>
         <Route path="/location" element={<LocationPage />} />
-        <Route path="/*" element={<NotFoundPage />}></Route>
+        {/* <Route path="/hall">
+            <Route path=":id" element={<HallDetailPage />} />
+          </Route> */}
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   );

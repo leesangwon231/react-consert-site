@@ -12,21 +12,43 @@ const parseXml = async (xml) => {
     }
 };
 
-const fetchSearchCentersData = async (param) => {
-    const { shprfnmfct = ''} = param.queryKey[1] || {};
+
+
+const fetchAllSearchCentersData = async (param) => {
+    const { shprfnmfct = '' } = param.queryKey[1] || {};
+    let allResults = [];
+    let cpage = 1;
+    let hasMoreData = true;
 
     try {
-        const response = await api.get('prfplc', { 
-            params: {
-                shprfnmfct, 
-                cpage: '1',
-                rows: '5'
-            }
-        });
+        while (hasMoreData) {
+            const response = await api.get('prfplc', { 
+                params: {
+                    shprfnmfct,
+                    cpage: cpage.toString(),
+                    rows: '5'
+                }
+            });
 
-        const xmlData = response.data;
-        const jsonData = await parseXml(xmlData);
-        return jsonData;
+            const xmlData = response.data;
+            const jsonData = await parseXml(xmlData);
+
+            if (jsonData.dbs && jsonData.dbs.db) {
+                const currentResults = jsonData.dbs.db;
+                
+                if (Array.isArray(currentResults) && currentResults.length > 0) {
+                    allResults = [...allResults, ...currentResults];
+                } else {
+                    hasMoreData = false;
+                }
+            } else {
+                hasMoreData = false;
+            }
+
+            cpage++;
+        }
+
+        return { dbs: { db: allResults } }; // Return wrapped data structure
 
     } catch (error) {
         console.error('데이터 가져오기 오류:', error);
@@ -34,10 +56,13 @@ const fetchSearchCentersData = async (param) => {
     }
 };
 
+
+
+
 export const useSearchCenters = (param) => {
     return useQuery({
         queryKey: ["centers", param],
-        queryFn: fetchSearchCentersData,
+        queryFn: fetchAllSearchCentersData,
         retry: 1,
     });
 }

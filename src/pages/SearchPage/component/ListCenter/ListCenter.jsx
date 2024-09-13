@@ -1,17 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, Row } from 'react-bootstrap';
 import "./ListCenter.css";
-import ListCenterContainer from '../ListCenterContainer/ListCenterContainer'; // Correct import path
+import ListCenterContainer from '../ListCenterContainer/ListCenterContainer'; 
 
 const ListCenter = ({ data }) => {  
-    const centerEvents = data?.dbs?.db || [];
-    
+    console.log("Received data:", data); 
+
+    const centerEvents = data?.dbs?.db || []; 
+    const totalCenters = centerEvents.length;
+
     return (
         <div className="search-center">
-            <h3 className='list-title'>시설</h3>
+            <h3 className='list-title'>시설 ({totalCenters}개)</h3>
             <div className='list-itemarea'>
                 <Container fluid>
-                    {centerEvents.length > 0 ? (
+                    {totalCenters > 0 ? (
                         <>
                             <div className="list-titles">
                                 <div className="list-detail">시설명</div>
@@ -33,5 +36,6 @@ const ListCenter = ({ data }) => {
         </div>
     );
 };
+
 
 export default ListCenter;

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSearchCultures } from '../../hooks/useSearchCultures';
 import { useSearchCenters } from '../../hooks/useSearchCenter';
 import { Form, Container, Row, Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import "./SearchPage.css";
@@ -14,8 +14,19 @@ const SearchPage = () => {
   const [keyword, setKeyword] = useState(""); 
   const [activeButton, setActiveButton] = useState("all");
   const navigate = useNavigate(); 
+  const location = useLocation();
+
   const { data: cultureData, error: cultureError, isLoading: cultureLoading } = useSearchCultures({ shprfnm: keyword });
   const { data: centerData, error: centerError, isLoading: centerLoading } = useSearchCenters({ shprfnmfct: keyword });
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const queryKeyword = queryParams.get('q');
+    
+    if (queryKeyword) {
+      setKeyword(queryKeyword);
+    }
+  }, [location.search]);
 
   if (cultureLoading || centerLoading) {
       return <div>Loading...</div>;

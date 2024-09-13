@@ -12,8 +12,8 @@
     }
     
     .list-itemarea {
-        border-top: 5px solid #e2e2e2;
-        border-bottom: 5px solid #e2e2e2;
+        border-top: 5px solid var(--gray-color2);
+        border-bottom: 5px solid var(--gray-color2);
         padding-top: 15px;
     }
     .list-titles{
@@ -24,7 +24,7 @@
         align-items: center;       
         width: 100%;  
         font-weight: bold; 
-        border-bottom: 2px solid #e2e2e2;     
+        border-bottom: 2px solid var(--gray-color2);     
     }
     .list-detail {
         margin: 0.5rem;          
