@@ -3,25 +3,19 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import axios from "axios";
-import ContentCard from "../ContentCard/ContentCard.jsx";
+import ContentCard from "../common/ContentCard/ContentCard.jsx";
 import "./MyLocationContents.css"
 import {useLocationContents} from "../../../../hooks/useContentsLocation.jsx";
+import {Spinner} from "react-bootstrap";
+import AOS from "aos";
+import 'aos/dist/aos.css';
 
-const MyLocationContents = () => {
-
-    const [myLocation , setMyLocation] = useState({name : "" , signgucode : ""});
+const MyLocationContents = ({ctprvn,performanceKinds}) => {
+    //진척도
+    const [myLocation , setMyLocation] = useState({name : "" , signgucode : "", shcate : ""});
     const [locationContents,SetLocationContents] = useState([]);
 
-    const {data} = useLocationContents(myLocation.signgucode);
-
-    const ctprvn = {
-        "서울특별시": 11,"부산광역시": 26,"대구광역시": 27,
-        "인천광역시": 28, "광주광역시": 29,"대전광역시": 30,
-        "울산광역시": 31,"세종특별자치시": 36,"경기도": 41,
-        "강원특별자치도": 42,"충청북도": 43,"충청남도": 44,
-        "전라북도": 45,"전라남도": 46,"경상북도": 47,
-        "경상남도": 48,"제주특별자치도": 50
-    };
+    const {data,isLoading} = useLocationContents(myLocation);
 
     //내 위치 찾기
     const getMyLocation = async () => {
@@ -41,9 +35,14 @@ const MyLocationContents = () => {
     };
 
     useEffect(() => {
+        AOS.init();
+    }, []);
+
+    useEffect(() => {
+
         const fetchLocation = async () => {
             const city = await getMyLocation();
-            setMyLocation({...myLocation, name: city, signgucode: ctprvn[city] });
+            setMyLocation({...myLocation, name: city, signgucode: ctprvn[city] , shcate: performanceKinds[1]});
         };
 
         fetchLocation();
@@ -60,15 +59,18 @@ const MyLocationContents = () => {
   return (
     <div className={"ContentsPage_LocationContainer"}>
         <Container>
-            <Row>
-                <Col className="text-center">{myLocation?.name} 에서 이런걸 보는건 어때?</Col>
-                <Col lg={12} xs={12}>
+            <Row className={"ContentsPage_row"}>
+                <Col className="ContentsPage_text-center_location"><span className={"ContentsPage_text-center_span"}>{myLocation?.name}</span>  에서  <span className={"ContentsPage_text-center_span"}>{performanceKinds[0]}</span>  보는건 어때?</Col>
+                <Col className={"ContentsPage_col-lg-12"} lg={12} xs={12}>
                     <Row>
-                        {locationContents?.map((content,index) => (
-                            <Col lg={2} xs={12} key = {index}>
-                                <ContentCard content={content}/>
-                            </Col>
-                        ))}
+                        {isLoading
+                            ? <Spinner animation="border" variant="dark"/>
+                            : locationContents?.map((content, index) => (
+                                <Col lg={3} xs={12} key={index}>
+                                    <ContentCard content={content} index={index}/>
+                                </Col>
+                            ))
+                        }
                     </Row>
                 </Col>
             </Row>

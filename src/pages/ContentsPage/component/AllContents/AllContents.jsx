@@ -1,82 +1,126 @@
-import React from 'react';
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import {useContents} from "../../../../hooks/useContents.jsx";
-import ContentCard from "../ContentCard/ContentCard.jsx";
+import ContentCard from "../common/ContentCard/ContentCard.jsx";
+import "./AllContents.css"
+import ContentFiler from "../ContentFilter/ContentFilter.jsx";
+import {Spinner} from "react-bootstrap";
+import PageNation from "../PageNation/PageNation.jsx";
 
-const  AllContents = () => {
-
-/* 파라미터 (데이터 검색용)
-        * shprfnm : 연극명 (검색)
-        * signgucode : 지역 (
-        * 서울광역시 : 11  , 부산광역시 : 26 , 대구광역시 : 27,
-        * 인천광역시 : 28  , 광주광역시 : 29 , 대전광역시 : 30 ,
-        * 울산광역시 : 31 , 세종특별자치도 : 36 , 경기도 : 41,
-        * 강원특별자치도 : 51 , 충청북도 : 43 , 충청남도 : 44 ,
-        * 전북특별자치도 : 45 , 전라남도 : 46 , 경상북도 : 47,
-        * 경상남도 : 48 , 제주특별자치도 : 50
-        * )
-        * prfstate : 공연상태코드 (공연 예정 : 01, 공연중 : 02 , 공연완료 : 03)
-        * shcate : 장르 (GGGA : 뮤지컬 , CCCD : 콘서트 , BBBC : 클래식/무용 , AAAA :연극)
-        * */
+const  AllContents = ({performanceFilterArray,performanceKinds}) => {
 
 
+    //필터링을 위한 데이터
     const [originData , setOriginData] = useState([]);
 
+    //정렬 값
+    const [sortWordFlag, setSortWordFlag] = useState(false);
+    const [sortLatestFlag, setSortLatestFlag] = useState(false);
+    const [performanceSort , setPerformanceSort] = useState({});
+    //필터링 값
+    const [performanceState , setPerformanceState] = useState({});
 
-    const [param , setParam] = useState({    shprfnm : "",
-                                                            signgucode : "",
-                                                            prfstate : "",
-                                                            shcate : "",
-                                                        });
+    //페이지네이션
+    const [page,setPage] = useState(1);
 
-    const {data} = useContents(param);
+    /*검색용 파라미터
+    * signgucode : 시도
+    * prfstate : 공연상태
+    * shcate : 공연종류
+    * page : 페이지
+    * */
+    const [param , setParam] = useState({
+        shprfnm : "",
+        signgucode : "",
+        prfstate : "",
+        shcate :  performanceKinds[1],
+        page : 1,
+    });
+
+    // 화면 뿌릴 데이터
+    const {data,isLoading} = useContents(param);
+
+
+    const sortedWord = (unSortedData) => {
+        return unSortedData.sort((a, b) => a.prfnm.localeCompare(b.prfnm));
+    }
+
+    const sortedLatest = (unSortedData) => {
+
+
+        return unSortedData.sort((a, b) =>{
+            a = a.prfpdfrom.split('.').join('');
+            b = b.prfpdfrom.split('.').join('');
+            return  b.localeCompare(a);
+        })
+    }
+
+    //초기데이터 세팅
+    useEffect(() => {
+
+
+        // api에서 1개만 있으면 배열에 안 넣어 주어서 배열처리
+        let originFilterData = data?.dbs?.db ? (Array.isArray(data.dbs.db) ? [...data.dbs.db] : [data.dbs.db]) : [];
+
+        // 공연 상태 필터링
+        if(Object.keys(performanceState).length !== 0){
+
+            originFilterData = originFilterData.filter((performance) => {
+                return performance.prfstate.includes(Object.values(performanceState)[0]);
+            });
+        }
+
+        //정렬
+        if(Object.keys(performanceSort)[0] === "01"){
+            originFilterData = sortedWord(originFilterData);
+        }else if(Object.keys(performanceSort)[0] === "02"){
+            originFilterData = sortedLatest(originFilterData);
+        }else if(Object.keys(performanceSort)[0] === "03"){
+            console.log(originFilterData.prfpdto)
+        }
+
+        //최종데이터 세팅
+        setOriginData(originFilterData);
+
+    }, [param,data,performanceState,performanceSort]);
 
 
     useEffect(() => {
-        if(Array.isArray(data?.dbs.db)) {
-            setOriginData(data?.dbs.db);
-
-        }else{
-            setOriginData([data?.dbs.db]);
-        }
-
-        //getMyLocation();
-    }, [param,data]);
-
-
-    // 테스트용 함수 삭제 예정
-    const onCickTest = (genre) => {
-        setParam({...param, shcate:genre})
-    }
+        setParam({...param, shcate: performanceKinds[1]  ,page : page})
+    }, [page]);
 
 
 
     return (
         <div>
-            <div>
-                <div onClick={()=>onCickTest("GGGA")}>뮤지컬</div>
-                <div onClick={()=>onCickTest("CCCD")}>콘서트</div>
-                <div onClick={()=>onCickTest("BBBC")}>클래식/무용</div>
-                <div onClick={()=>onCickTest("AAAA")}>연극</div>
-                <input type={"text"}/>
-            </div>
-            <Container>
-                <Row>
-                    <Col className="text-center">공공예술</Col>
-                    <Col lg={12} xs={12}>
+            <ContentFiler performanceFilterArray={performanceFilterArray}
+                          performanceState = {performanceState}
+                          setPerformanceState = {setPerformanceState}
+                          performanceSort = {performanceSort}
+                          setPerformanceSort = {setPerformanceSort}
+            />
+            <Container className={"ContentsPage_All_Container"}>
+                <Row className={"ContentsPage_row"}>
+                    <Col className="ContentsPage_text-center">공공예술</Col>
+                    <Col className={"ContentsPage_col-lg-12"} lg={12} xs={12} >
                         <Row>
-                            {originData?.map((content,index) => (
-                                <Col lg={2} xs={12} key = {index}>
-                                    <ContentCard content={content}/>
-                                </Col>
-                            ))}
+                            {isLoading
+                                ?  <Spinner animation="border" variant="dark" />
+                                : originData.length === 0
+                                    ? <h1 className={"ContentsPage_NotFoundText"}>검색 된 결과가 없습니다</h1>
+                                    : originData?.map((content,index) => (
+                                    <Col lg={3} xs={12} key = {index}>
+                                        <ContentCard content={content} index={index}/>
+                                    </Col>
+                                ))
+                            }
                         </Row>
                     </Col>
                 </Row>
             </Container>
+            {originData.length === 0 ? "" : <PageNation page={page} setPage={setPage}/>}
         </div>
     );
 

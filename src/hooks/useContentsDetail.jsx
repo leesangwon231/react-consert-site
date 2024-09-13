@@ -15,7 +15,7 @@ const parseXml = async (xml) => {
 
 const fetchContentsDetailData =  async (param) => {
     try {
-        const response = await api.get(`/${param.queryKey[1]}`, {
+        const response = await api.get(`pblprfr/${param.queryKey[1]}`, {
         });
 
         const xmlData = response.data;
@@ -35,6 +35,7 @@ export const useContentsDetail = (contentId) => {
         queryKey : ["contents-details-all",contentId],
         queryFn :fetchContentsDetailData,
         retry : 1,
-        enabled : !!contentId
+        enabled : !!contentId,
+        staleTime : 600000
     });
 }
