@@ -21,8 +21,8 @@ const VenuesList = ({ regionCode }) => {
   return (
     <div className="row"> {/* 여기는 col-3가 들어가지 않음 */}
       {venues.map((venue) => (
-        <div className="col-3"> {/* 여기만 col-3을 적용 */}
-          <VenueCard key={venue.mt10id} venue={venue} />
+        <div key={venue.mt10id} className="col-3">  {/* 고유한 key 값으로 venue.mt10id 사용 */}
+          <VenueCard venue={venue} />
         </div>
       ))}
     </div>
