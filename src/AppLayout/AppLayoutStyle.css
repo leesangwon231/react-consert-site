@@ -22,12 +22,14 @@
 }
 
 #header {
-  .menu-item-box:first-child {
-    display: none;
-    @media (min-width: 1200px) {
-      display: block;
-    }
+
+  .underline {
+    height: 3px;
+    margin-top: 0.3rem;
+    background-color: var(--highlight-color3);
+    visibility: hidden;
   }
+
   .nav-menu-item {
     font-weight: 600;
     padding-inline: 1.75rem;
@@ -42,23 +44,16 @@
     }
 
     .underline {
-      overflow: hidden;
-      display: block;
-      height: 3px;
-      margin-top: 0.3rem;
-      background-color: var(--highlight-color3);
-      transform: translateX(-120%);
-      visibility: hidden;
       transition: all 0.3s, visibility 0s ease-in-out;
       width: 0;
     }
+
     &.active,
     &:hover {
       color: var(--highlight-color3);
       .underline {
         width: 100%;
         visibility: visible;
-        transform: translateX(0);
       }
     }
   }
@@ -70,7 +65,7 @@
       opacity: 0.8;
       transition: all 0.3s ease-in-out;
       width: 3.8rem;
-      
+
       @media (min-width: 576px) {
         font-size: 1.25rem;
       }
@@ -84,27 +79,17 @@
   }
 
   .mobile-menu {
-    li {
-    }
     li:first-child {
       display: none;
     }
     .mobile-menu-item {
       .underline {
-        overflow: hidden;
-        display: block;
-        height: 3px;
         width: 100%;
-        margin-top: 0.3rem;
-        background-color: var(--highlight-color3);
-        visibility: hidden;
       }
       &.active {
         color: var(--highlight-color3);
         .underline {
-          width: 100%;
           visibility: visible;
-          transform: translateX(0);
         }
       }
     }
