@@ -12,9 +12,8 @@ import {useEffect} from 'react';
 
 const App = () => {
   const location = useLocation();
-  console.log(location);
   useEffect(() => {
-    window.scrollTo({top: 0, behavior: "instant"});
+    window.scrollTo({top: 0, behavior: 'instant'});
   }, [location.pathname, location.search]);
 
   return (
