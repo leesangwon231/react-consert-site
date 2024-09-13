@@ -73,8 +73,8 @@ const ListCulture = ({ data }) => {
                     {totalCulturals > itemsPerPage && (
                         <div className="pagination-container">
                             <ReactPaginate
-                                previousLabel={isMobile ? "<" : "Previous"}
-                                nextLabel={isMobile ? ">" : "Next"}
+                                previousLabel="<"
+                                nextLabel=">"
                                 pageClassName="page-item"
                                 pageLinkClassName="page-link"
                                 previousClassName="page-item"
@@ -85,8 +85,8 @@ const ListCulture = ({ data }) => {
                                 breakClassName="page-item"
                                 breakLinkClassName="page-link"
                                 pageCount={pageCount}
-                                marginPagesDisplayed={isMobile ? 1 : 2}
-                                pageRangeDisplayed={isMobile ? 3 : 5}
+                                marginPagesDisplayed={2}
+                                pageRangeDisplayed={5}
                                 onPageChange={handlePageClick}
                                 containerClassName="pagination"
                                 activeClassName="active"

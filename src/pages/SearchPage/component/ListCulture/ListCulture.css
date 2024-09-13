@@ -159,6 +159,10 @@
         .list-detail {
             margin-left: 0;
         }
+        
+        .pagination-container .pagination .page-link {
+            padding: 0.25rem 0.5rem;  
+        }
 
 
     }

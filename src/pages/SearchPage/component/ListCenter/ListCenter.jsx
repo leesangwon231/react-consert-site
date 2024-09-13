@@ -24,8 +24,6 @@ const ListCenter = ({ data }) => {
         setCurrentPage(selected);
     };
 
-    const isMobile = window.innerWidth <= 768;
-
     return (
         <div className="search-center">
             <h3 className='list-title'>시설 ({totalCenters})</h3>
@@ -51,8 +49,8 @@ const ListCenter = ({ data }) => {
                     {totalCenters > itemsPerPage && (
                         <div className="pagination-container">
                             <ReactPaginate
-                                previousLabel={isMobile ? "<" : "Previous"}
-                                nextLabel={isMobile ? ">" : "Next"}
+                                previousLabel="<"
+                                nextLabel=">"
                                 pageClassName="page-item"
                                 pageLinkClassName="page-link"
                                 previousClassName="page-item"
@@ -63,8 +61,8 @@ const ListCenter = ({ data }) => {
                                 breakClassName="page-item"
                                 breakLinkClassName="page-link"
                                 pageCount={pageCount}
-                                marginPagesDisplayed={isMobile ? 1 : 2}
-                                pageRangeDisplayed={isMobile ? 3 : 5}
+                                marginPagesDisplayed={2}
+                                pageRangeDisplayed={5}
                                 onPageChange={handlePageClick}
                                 containerClassName="pagination"
                                 activeClassName="active"
