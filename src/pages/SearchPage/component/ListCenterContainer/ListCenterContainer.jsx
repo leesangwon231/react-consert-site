@@ -23,26 +23,43 @@ const ListCenterContainer = ({ data }) => {
         centerEvents.runwbarrier === 'Y' || 
         centerEvents.elevbarrier === 'Y';
 
+    const shouldHideDetail = 
+        !centerEvents.fcltynm 
+        && !centerEvents.adres 
+        && !centerEvents.telno 
+        && 
+            !(centerEvents.restaurant !== 'N' || 
+            centerEvents.cafe !== 'N' || 
+            centerEvents.store !== 'N' || 
+            hasWheelchair || 
+            centerEvents.parkinglot !== 'N');
+
     return (
         <div className='search-center-detail'>
-                <div className='search-center-container'>
-                    <div className="list-detail">
-                        {centerEvents.fcltynm}
-                        {relateUrl && (
-                            <a href={relateUrl} target="_blank" rel="noopener noreferrer" className="list-detail-link">
-                                <FontAwesomeIcon icon={faHouse} />
-                            </a>
-                        )}
-                    </div>
-                <div className="list-detail">{centerEvents.adres}</div>
-                <div className="list-detail">{centerEvents.telno}</div>
-                <div className="list-detail">
-                    {centerEvents.restaurant !== 'N' && <FontAwesomeIcon icon={faUtensils} />}
-                    {centerEvents.cafe !== 'N' && <FontAwesomeIcon icon={faMugSaucer} />}
-                    {centerEvents.store !== 'N' && <FontAwesomeIcon icon={faStore} />}
-                    {hasWheelchair && <FontAwesomeIcon icon={faWheelchair} />}
-                    {centerEvents.parkinglot !== 'N' && <FontAwesomeIcon icon={faSquareParking} />}
+            <div className='search-center-container'>
+                <div className={`list-detail ${shouldHideDetail ? 'hidden' : ''}`}>
+                    {centerEvents.fcltynm}
+                    {relateUrl && (
+                        <a href={relateUrl} target="_blank" rel="noopener noreferrer" className="list-detail-link">
+                            <FontAwesomeIcon icon={faHouse} />
+                        </a>
+                    )}
                 </div>
+                <div className={`list-detail ${!centerEvents.adres ? 'hidden' : ''}`}>
+                    {centerEvents.adres}
+                </div>
+                <div className={`list-detail ${!centerEvents.telno ? 'hidden' : ''}`}>
+                    {centerEvents.telno}
+                </div>
+                {!(centerEvents.restaurant === 'N' && centerEvents.cafe === 'N' && centerEvents.store === 'N' && !hasWheelchair && centerEvents.parkinglot === 'N') && (
+                    <div className={`list-detail ${shouldHideDetail ? 'hidden' : ''}`}>
+                        {centerEvents.restaurant !== 'N' && <FontAwesomeIcon icon={faUtensils} />}
+                        {centerEvents.cafe !== 'N' && <FontAwesomeIcon icon={faMugSaucer} />}
+                        {centerEvents.store !== 'N' && <FontAwesomeIcon icon={faStore} />}
+                        {hasWheelchair && <FontAwesomeIcon icon={faWheelchair} />}
+                        {centerEvents.parkinglot !== 'N' && <FontAwesomeIcon icon={faSquareParking} />}
+                    </div>
+                )}
             </div>
         </div>
     );

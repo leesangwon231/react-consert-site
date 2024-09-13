@@ -19,7 +19,7 @@
     .list-titles{
         display: flex;              
         flex-wrap: wrap;            
-        gap: 1rem;                  
+        gap: 3%;                  
         padding: 1rem;             
         align-items: center;       
         width: 100%;  
@@ -84,6 +84,14 @@
         background-color: var(--highlight-color3) !important;
         color: var(--bs-light) !important;
       }
+
+
+      @media (max-width: 768px) {
+        .list-titles {
+            display: none;
+        }
+    }
+    
 }
 
 

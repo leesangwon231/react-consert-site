@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Badge } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
+import { useNavigate } from "react-router-dom"
 import "./ListCulture.css";
 
 const ListCulture = ({ data }) => {
@@ -23,6 +24,12 @@ const ListCulture = ({ data }) => {
         setCurrentPage(selected);
     };
 
+    const navigate = useNavigate(); 
+    const handleClick = (id) => {
+        navigate(`/contents/${id}`);
+    };
+    
+
     const isMobile = window.innerWidth <= 768;
 
     return (
@@ -33,7 +40,10 @@ const ListCulture = ({ data }) => {
                     {totalCulturals > 0 ? (
                         displayedEvents.map((event) => (
                             <Row key={event.mt20id} className="mb-4 list-container">
-                                <div className="list-item">
+                                <div className="list-item"
+                                    onClick={() => handleClick(event.mt20id)}
+                                    style={{ cursor: 'pointer' }}
+                                >
                                     <img 
                                         className="list-img"
                                         src={event.poster}
@@ -49,7 +59,7 @@ const ListCulture = ({ data }) => {
                                             }>
                                                 {event.prfstate}
                                             </Badge>
-                                            <div>{event.prfnm}</div>
+                                            <div className="list-detail-title">{event.prfnm}</div>
                                         </div>
                                         <div className="list-detail">{event.fcltynm}</div>
                                         <div className="list-detail">{event.prfpdfrom} ~ {event.prfpdto}</div>
