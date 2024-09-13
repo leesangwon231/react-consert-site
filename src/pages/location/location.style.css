@@ -76,3 +76,9 @@
   background-color: #e0e0e0;
   border-radius: 8px;
 }
+
+.pagination-controls {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}

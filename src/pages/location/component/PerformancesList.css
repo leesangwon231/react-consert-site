@@ -1,84 +1,106 @@
 .performances-list {
-    display: flex;
-    flex-direction: column; /* 카드를 세로로 배치 */
-    gap: 20px; /* 카드 간의 간격 */
-    margin-top: 20px;
+  display: flex;
+  flex-direction: column; /* 카드를 세로로 배치 */
+  gap: 20px; /* 카드 간의 간격 */
+  margin-top: 20px;
 }
 
 .performance-card {
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #ddd;
-    padding: 20px 0;
-    width: 100%;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding: 20px 0;
+  width: 100%;
 }
 
 /* 포스터 이미지를 세로 정렬 */
 .poster {
-    flex: 1;
+  flex: 1;
 }
 
 .poster img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
 }
 
 /* 공연 정보 세로 정렬 */
 .performance-details {
-    flex: 3;
-    padding-left: 20px;
+  flex: 3;
+  padding-left: 20px;
 }
 
 /* 공연 제목 스타일 */
 .performance-details h3 {
-    margin: 0;
-    font-size: 1.2rem;
-    font-weight: bold;
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 
 /* 공연 설명 텍스트 스타일 */
 .performance-details p {
-    margin: 0.5rem 0;
-    font-size: 0.9rem;
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
 }
 
 /* 공연 장르별 색상 구분을 위한 태그 */
 .performance-details .genre-tag {
-    display: inline-block;
-    background-color: #eee;
-    padding: 5px;
-    border-radius: 4px;
-    font-size: 0.8rem;
+  display: inline-block;
+  background-color: #eee;
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 0.8rem;
 }
 .pagination-controls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-  }
-  
-  .pagination-button {
-    padding: 10px 15px;
-    margin: 0 10px;
-    background-color: #f0f0f0;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .pagination-button:hover {
-    background-color: #ddd;
-  }
-  
-  .pagination-button:disabled {
-    background-color: #e0e0e0;
-    cursor: not-allowed;
-  }
-  
-  .pagination-info {
-    font-size: 1.1rem;
-    margin: 0 15px;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination-button {
+  padding: 10px 15px;
+  margin: 0 10px;
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination-button:hover {
+  background-color: #ddd;
+}
+
+.pagination-button:disabled {
+  background-color: #e0e0e0;
+  cursor: not-allowed;
+}
+
+.pagination-info {
+  font-size: 1.1rem;
+  margin: 0 15px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.pagination .page-link {
+  color: var(--highlight-color3) !important; /* 숫자 색상을 --highlight-color3로 변경 */
+}
+
+.pagination .page-item.active .page-link {
+  background-color: var(--highlight-color3) !important; /* 활성화된 페이지 배경색 */
+  border-color: var(--highlight-color3) !important;
+}
+
+.pagination .page-link:hover {
+  color: var(--highlight-color3) !important; /* 마우스 호버 시 색상 */
+}
+
+.pagination .page-item.disabled .page-link {
+  color: #e0e0e0 !important; /* 비활성화된 링크 색상 */
+}

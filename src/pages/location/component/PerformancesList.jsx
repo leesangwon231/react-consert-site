@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { usePerformances } from "../../../hooks/usePerformances";
 import PerformanceCard from "./PerformanceCard";
-import { Spinner } from 'react-bootstrap'; // Spinner 컴포넌트 임포트
+import { Spinner, Pagination } from 'react-bootstrap'; // Pagination 추가
 
 const PerformancesList = ({ regionCode }) => {
   const [page, setPage] = useState(1); // 현재 페이지 번호 상태 관리
@@ -29,6 +29,8 @@ const PerformancesList = ({ regionCode }) => {
     }
   };
 
+  const totalPages = 10; // 전체 페이지 수를 미리 설정하거나 API 응답에서 받아옴
+
   return (
     <div>
       <div className="row"> {/* 행(row)로 감싸서 한 줄에 4개씩 나오게 설정 */}
@@ -37,13 +39,23 @@ const PerformancesList = ({ regionCode }) => {
         ))}
       </div>
 
-      {/* 페이지네이션 버튼 */}
+      {/* Bootstrap Pagination */}
       <div className="pagination-controls">
-        <button disabled={page === 1} onClick={handlePreviousPage} className="pagination-button">
-          이전 페이지
-        </button>
-        <span className="pagination-info">현재 페이지: {page}</span>
-        <button onClick={handleNextPage} className="pagination-button">다음 페이지</button>
+        <Pagination>
+          <Pagination.First onClick={() => setPage(1)} />
+          <Pagination.Prev onClick={handlePreviousPage} disabled={page === 1} />
+          {Array.from({ length: totalPages }, (_, i) => (
+            <Pagination.Item
+              key={i + 1}
+              active={i + 1 === page}
+              onClick={() => setPage(i + 1)}
+            >
+              {i + 1}
+            </Pagination.Item>
+          ))}
+          <Pagination.Next onClick={handleNextPage} disabled={page === totalPages} />
+          <Pagination.Last onClick={() => setPage(totalPages)} />
+        </Pagination>
       </div>
     </div>
   );
