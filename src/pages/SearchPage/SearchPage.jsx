@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useContents } from '../../hooks/useCultures';
 import { Form, Container, Row, Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import "./SearchPage.css";

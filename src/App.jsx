@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import {Routes, Route} from 'react-router-dom';
-=======
 import { Routes, Route } from 'react-router-dom';
->>>>>>> SearchPage
 import AppLayout from './AppLayout/AppLayout';
 import HomePage from './pages/HomePage/HomePage';
 import SearchPage from './pages/SearchPage/SearchPage';
@@ -28,22 +24,12 @@ const App = () => {
         </Route>
         <Route path="/location" element={<LocationPage />} />
         {/* <Route path="/hall">
-<<<<<<< HEAD
-          <Route path=":id" element={<HallDetailPage />} />
-        </Route> */}
-        <Route path="*" element={<NotFoundPage />}></Route>
-=======
             <Route path=":id" element={<HallDetailPage />} />
           </Route> */}
         <Route path="*" element={<NotFoundPage />} />
->>>>>>> SearchPage
       </Route>
     </Routes>
   );
 };
 
-<<<<<<< HEAD
 export default App;
-=======
-export default App;
->>>>>>> SearchPage

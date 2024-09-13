@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 const HomePage = () => {
   return (
@@ -7,12 +6,3 @@ const HomePage = () => {
 }
 
 export default HomePage
-=======
-const HomePage = () => {
-    return (
-      <div>HomePage</div>
-    )
-  }
-  
-  export default HomePage
->>>>>>> SearchPage

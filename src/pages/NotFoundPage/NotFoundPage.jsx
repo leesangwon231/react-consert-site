@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -27,13 +26,3 @@ const NotFoundPage = () => {
 };
 
 export default NotFoundPage;
-=======
-
-const NotFoundPage = () => {
-    return (
-      <div>NotFoundPage</div>
-    )
-  }
-  
-  export default NotFoundPage
->>>>>>> SearchPage

@@ -26,13 +26,8 @@
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.4",
     "react-dom": "^18.3.1",
-<<<<<<< HEAD
-    "react-paginate": "^8.2.0",
-    "react-leaflet": "^4.2.1",
-=======
     "react-leaflet": "^4.2.1",
     "react-paginate": "^8.2.0",
->>>>>>> SearchPage
     "react-router-dom": "^6.26.1",
     "react-slick": "^0.30.2",
     "slick-carousel": "^1.8.1",
