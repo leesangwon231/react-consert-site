@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import {Routes, Route, useLocation} from 'react-router-dom';
 import AppLayout from './AppLayout/AppLayout';
 import HomePage from './pages/HomePage/HomePage';
 import SearchPage from './pages/SearchPage/SearchPage';
@@ -6,10 +6,17 @@ import ContentsPage from './pages/ContentsPage/ContentsPage';
 import ContentsDetailPage from './pages/ContentsDetailPage/ContentsDetailPage';
 import LocationPage from './pages/location/LocationPage';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
+import {useEffect} from 'react';
 
 // 앱 레이아웃 - 헤더랑 푸터
 
 const App = () => {
+  const location = useLocation();
+  console.log(location);
+  useEffect(() => {
+    window.scrollTo({top: 0, behavior: "instant"});
+  }, [location.pathname, location.search]);
+
   return (
     <Routes>
       <Route path="/" element={<AppLayout />}>
