@@ -4,6 +4,7 @@ import React from "react";
 import AllContents from "./component/AllContents/AllContents.jsx";
 import MyLocationContents from "./component/MyLocationContents/MyLocationContents.jsx";
 import {useParams} from "react-router-dom";
+import Slider from "./component/common/Slider/Slider.jsx";
 const ContentsPage = () => {
     let params = useParams();
 
@@ -50,6 +51,7 @@ const ContentsPage = () => {
 
     return (
         <div className={"ContentsPage_Container"}>
+            <Slider/>
             <AllContents performanceFilterArray = {performanceFilterArray} performanceKinds={performanceKinds}/>
             <MyLocationContents ctprvn ={ctprvn} performanceKinds = {performanceKinds}/>
         </div>

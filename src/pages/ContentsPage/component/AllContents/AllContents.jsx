@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import {useContents} from "../../../../hooks/useContents.jsx";
-import ContentCard from "../ContentCard/ContentCard.jsx";
+import ContentCard from "../common/ContentCard/ContentCard.jsx";
 import "./AllContents.css"
 import ContentFiler from "../ContentFilter/ContentFilter.jsx";
 import {Spinner} from "react-bootstrap";

@@ -3,7 +3,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import axios from "axios";
-import ContentCard from "../ContentCard/ContentCard.jsx";
+import ContentCard from "../common/ContentCard/ContentCard.jsx";
 import "./MyLocationContents.css"
 import {useLocationContents} from "../../../../hooks/useContentsLocation.jsx";
 import {Spinner} from "react-bootstrap";
