@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useContentsDetail } from "../../hooks/useContentsDetail";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHouse } from "@fortawesome/free-solid-svg-icons";
 import {
   Container,
   Row,
@@ -18,6 +21,7 @@ const ContentsDetailPage = () => {
   const [activeTab, setActiveTab] = useState(null);
 
   const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     if (isLoading) {
@@ -38,6 +42,13 @@ const ContentsDetailPage = () => {
   const handleModalOpen = () => setShowModal(true);
   const handleModalClose = () => setShowModal(false);
 
+  const handleVenueClick = () => {
+    const venueId = contentDetail?.mt10id; 
+    if (venueId) {
+      navigate(`/hall/${venueId}`);
+    }
+  };
+
   if (isLoading) {
     return (
       <div
@@ -56,7 +67,7 @@ const ContentsDetailPage = () => {
   return (
     <Container
       className="detail-page-container mt-3"
-      style={{ backgroundColor: "#f8f9fa" }}
+      style={{ backgroundColor: "#f8f9fa", fontSize: "20px" }}
     >
       <Row>
         <Col xs={12}>
@@ -65,7 +76,7 @@ const ContentsDetailPage = () => {
               backgroundColor: "#383554",
               height: "3px",
               border: "none",
-              borderRadius : "3px"
+              borderRadius: "3px",
             }}
           />
         </Col>
@@ -82,12 +93,12 @@ const ContentsDetailPage = () => {
           <Card style={{ backgroundColor: "#f8f9fa", border: "none" }}>
             <Card.Body>
               <Card.Title>
-                <h2>{contentDetail?.prfnm || "공연 제목"}</h2>
+                <h1>{contentDetail?.prfnm || "공연 제목"}</h1>
               </Card.Title>
               <Card.Subtitle className="mb-2">
                 {contentDetail?.prfpdfrom} - {contentDetail?.prfpdto}
               </Card.Subtitle>
-              <Card.Text>
+              <Card.Text className="mt-3">
                 <strong>공연 상태</strong>
                 : {contentDetail?.prfstate || "정보 없음"}
               </Card.Text>
@@ -100,11 +111,11 @@ const ContentsDetailPage = () => {
                 : {contentDetail?.prfage || "정보 없음"}
               </Card.Text>
               <Card.Text>
-              <strong>런타임</strong>
+                <strong>런타임</strong>
                 : {contentDetail?.prfruntime || "정보 없음"}
               </Card.Text>
               <Card.Text>
-              <strong>가격</strong>
+                <strong>가격</strong>
                 : {contentDetail?.pcseguidance || "정보 없음"}
               </Card.Text>
               <hr
@@ -112,17 +123,18 @@ const ContentsDetailPage = () => {
                   backgroundColor: "#383554",
                   height: "3px",
                   border: "none",
-                  borderRadius : "3px"
+                  borderRadius: "3px",
                 }}
               />
-              <Card.Subtitle><strong>공연 시간</strong></Card.Subtitle>
+              <strong>공연 시간</strong>
               <Card.Text>
-              <br/>
+                <br />
                 {contentDetail?.dtguidance
                   ? contentDetail.dtguidance.split(",").map((item, index) => (
-                      <span key={index} >
+                      <span key={index}>
                         {item.trim()}
-                        <br/><br />
+                        <br />
+                        <br />
                       </span>
                     ))
                   : "정보 정보가 없습니다."}
@@ -177,7 +189,9 @@ const ContentsDetailPage = () => {
             <Card>
               <Card.Body>
                 <Card.Title>
-                  {contentDetail?.relates?.relate.relatenm || "정보없음"}
+                  <strong>
+                    {contentDetail?.relates?.relate.relatenm || "정보없음"}
+                  </strong>
                 </Card.Title>
                 <Card.Text>
                   {contentDetail?.relates?.relate && (
@@ -203,7 +217,9 @@ const ContentsDetailPage = () => {
           <Col>
             <Card>
               <Card.Body>
-                <Card.Title>상세 정보</Card.Title>
+                <Card.Title>
+                  <strong>상세 정보</strong>
+                </Card.Title>
                 <Card.Text>
                   줄거리: {contentDetail?.sty || "정보 없음"}
                 </Card.Text>
@@ -254,9 +270,17 @@ const ContentsDetailPage = () => {
           <Col>
             <Card>
               <Card.Body>
-                <Card.Title>공연장 정보</Card.Title>
+                <Card.Title>
+                  <strong>공연장 정보</strong>
+                </Card.Title>
                 <Card.Text>
                   {contentDetail?.fcltynm || "정보 정보가 없습니다."}
+                  <FontAwesomeIcon
+                    icon={faHouse}
+                    className="icon"
+                    onClick={handleVenueClick} 
+                    style={{ cursor: "pointer" }} 
+                  />
                 </Card.Text>
               </Card.Body>
             </Card>
