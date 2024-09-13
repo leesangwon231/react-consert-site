@@ -19,11 +19,12 @@
 .ContentsPage_container {
    /*animation: fadeIn 0.4s ease-in both;*/
     .ContentsPage_card-box {
-        /* width: 30%; */
+        background-color: white;
         cursor: pointer;
         transition: all 0.3s;
         &:hover {
             transform: scale(1.05);
+            border-radius: 10px;
         }
         img {
             width: 100%;
@@ -36,11 +37,17 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        background-color: white;
+
+
         span{
             margin-top: 10px;
         }
     }
 }
+
+
+
 
 @keyframes fadeIn {
     from {

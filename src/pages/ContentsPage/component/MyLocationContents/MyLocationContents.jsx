@@ -60,7 +60,7 @@ const MyLocationContents = ({ctprvn,performanceKinds}) => {
     <div className={"ContentsPage_LocationContainer"}>
         <Container>
             <Row className={"ContentsPage_row"}>
-                <Col className="ContentsPage_text-center">{myLocation?.name} 에서 {performanceKinds[0]} 보는건 어때?</Col>
+                <Col className="ContentsPage_text-center_location"><span className={"ContentsPage_text-center_span"}>{myLocation?.name}</span>  에서  <span className={"ContentsPage_text-center_span"}>{performanceKinds[0]}</span>  보는건 어때?</Col>
                 <Col className={"ContentsPage_col-lg-12"} lg={12} xs={12}>
                     <Row>
                         {isLoading

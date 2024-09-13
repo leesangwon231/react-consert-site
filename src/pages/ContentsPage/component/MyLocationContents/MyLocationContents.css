@@ -2,3 +2,22 @@
     margin-top: 50px;
 }
 
+.ContentsPage_text-center_span{
+    color: var(--highlight-color1);
+    font-size: 60px;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+
+.ContentsPage_text-center_location{
+    color: black;
+    margin-bottom: 50px;
+    font-family: 'SUITE Variable', sans-serif;
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    letter-spacing: 10px;
+}

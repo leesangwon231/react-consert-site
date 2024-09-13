@@ -39,7 +39,7 @@ const ContentFiler = ({performanceFilterArray,performanceState,setPerformanceSta
                     <div className={`ContentsPage_Filter_Button ${visibleFlag ? "active" : ""}`} onClick={onClickVisible}>{visibleFlag ? "닫기" : "필터"}</div>
                 </div>
             </div>
-            <div className={"ContentsPage_FilterArea_Container"}>
+            <div className={visibleFlag ? "ContentsPage_FilterArea_Container_active" : ""}>
                 <div
                     className={visibleFlag ? "ContentsPage_FilterArea_Wrapper" : "ContentsPage_FilterArea_Wrapper_UnVisible"}>
                     <div className={"ContentsPage_FilterArea_PerState"}>

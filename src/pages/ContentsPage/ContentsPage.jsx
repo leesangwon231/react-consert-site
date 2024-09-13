@@ -51,7 +51,7 @@ const ContentsPage = () => {
 
     return (
         <div className={"ContentsPage_Container"}>
-            <Slider/>
+            <Slider performanceKinds={performanceKinds}/>
             <AllContents performanceFilterArray = {performanceFilterArray} performanceKinds={performanceKinds}/>
             <MyLocationContents ctprvn ={ctprvn} performanceKinds = {performanceKinds}/>
         </div>

@@ -8,6 +8,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
 }
 
 .ContentsPage_Filter_ButtonArea{
@@ -19,9 +20,9 @@
 
 
 .ContentsPage_Filter_Button{
-    border : 1px solid black;
+    border : 2px solid black;
     width: 100%;
-    max-width: 50px;
+    max-width: 55px;
     height: 100%;
     max-height: 100px;
     display: flex;
@@ -29,16 +30,20 @@
     align-items: center;
     padding: 10px;
     border-radius: 10px;
-
+    margin-bottom: 10px;
+    font-weight : bold;
     &.active{
-        background-color: black;
+        background-color: var(--highlight-color1);
         color: white;
+        font-weight : bold;
+        border : 2px solid var(--highlight-color1);
+
     }
 }
 
 
 
-.ContentsPage_FilterArea_Container{
+.ContentsPage_FilterArea_Container_active{
     font-family: 'SUITE Variable', sans-serif;
     width: 100%;
     display: flex;
@@ -46,22 +51,25 @@
     justify-content: center;
     align-items: center;
     padding: 10px;
-
+    background-color: var(--highlight-color1);
+    color: white;
+    margin-bottom: 50px;
 }
 
 .ContentsPage_FilterArea_Wrapper{
     display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
     max-width: 1320px;
     width: 100%;
     gap: 90px;
     opacity: 1;
-    margin-bottom: 2rem;
     transition: max-height 1s ease, opacity 1s ease;
     justify-content: center;
     align-items: center;
     height: auto;
     overflow: hidden;
-    min-height: 300px;
+    min-height: 100px;
 }
 
 .ContentsPage_FilterArea_Wrapper_UnVisible{
@@ -77,6 +85,11 @@
 
 .ContentsPage_FilterArea_PerState{
     max-width: 660px;
+}
+
+.ContentsPage_FilterArea_PerState > p{
+    font-weight : bold;
+
 }
 
 .ContentsPage_FilterArea_PerState>span{
@@ -107,6 +120,7 @@
     font-family: 'SUITE Variable', sans-serif;
     border: 1px solid;
     width: 100%;
+    font-weight : bold;
     max-width: 200px;
     min-width: 100px;
     min-height: 40px;
@@ -117,6 +131,8 @@
     border-radius: 20px;
     cursor: pointer;
     transition: 0.3s;
+    background-color: white;
+    color:  var(--highlight-color1);
 }
 
 .ContentsPage_FilterArea_Flag:hover{
@@ -127,7 +143,7 @@
 
 .ContentsPage_FilterArea_Flag_active{
     font-family: 'SUITE Variable', sans-serif;
-    border: 1px solid;
+    border: 2px solid white;
     width: 100%;
     max-width: 200px;
     min-width: 120px;
@@ -135,11 +151,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: black;
+    background-color:  var(--highlight-color1);
+    font-weight : bold;
     color: white;
     flex: 1 1 0;
     border-radius: 20px;
     cursor: pointer;
+
 }
 
 
