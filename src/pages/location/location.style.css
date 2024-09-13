@@ -61,4 +61,18 @@
     border-radius: 10px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   }
-  
+  /* 로딩 스피너를 가운데에 배치 */
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px; /* 적절한 높이 설정 */
+}
+
+/* venue-map-placeholder와 크기 맞춤 */
+.venue-map-placeholder {
+  height: 200px;
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: 8px;
+}

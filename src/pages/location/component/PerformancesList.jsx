@@ -1,12 +1,20 @@
 import React, { useState } from "react";
 import { usePerformances } from "../../../hooks/usePerformances";
 import PerformanceCard from "./PerformanceCard";
+import { Spinner } from 'react-bootstrap'; // Spinner 컴포넌트 임포트
 
 const PerformancesList = ({ regionCode }) => {
   const [page, setPage] = useState(1); // 현재 페이지 번호 상태 관리
   const { data, error, isLoading } = usePerformances(regionCode, page); // 페이지 번호 전달
 
-  if (isLoading) return <p>로딩 중...</p>;
+  if (isLoading) return (
+    <div className="loading-spinner">
+      <Spinner animation="border" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </Spinner>
+    </div>
+  ); // 로딩 중일 때 스피너 표시
+
   if (error) return <p>오류 발생: {error.message}</p>;
 
   const performances = data?.dbs?.db || [];
