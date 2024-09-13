@@ -17,8 +17,7 @@ const Sliser = ({performanceKinds}) => {
     const {data} =  useContents(param);
 
    const idArray = data?.dbs.db.map((data)=> {
-        const a = fetch("http://www.kopis.or.kr/openApi/restful/PF249119");
-       console.log(a);
+       console.log(a);g
        return data.mt20id;
     });
 
