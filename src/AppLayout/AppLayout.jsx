@@ -28,4 +28,8 @@ const AppLayout = () => {
   );
 };
 
+<<<<<<< HEAD
 export default AppLayout;
+=======
+export default AppLayout;
+>>>>>>> SearchPage

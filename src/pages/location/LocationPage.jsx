@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+<<<<<<< HEAD
 import './Location.style.css';
 import { useState, useEffect } from 'react';
 import PerformancesList from "./component/PerformancesList";
@@ -24,6 +25,11 @@ const regions = [
   { code: "50", name: "제주" }
 ];
 
+=======
+import "./Location.style.css"
+import {useEffect, useState} from "react";
+import axios from "axios";
+>>>>>>> SearchPage
 const LocationPage = () => {
   const [selectedRegion, setSelectedRegion] = useState(null);  // 선택한 지역
   const [viewMode, setViewMode] = useState("performances");    // "공연" 또는 "공연장"을 선택하는 스위치 상태
@@ -32,9 +38,19 @@ const LocationPage = () => {
     console.log(`클릭된 대분류 지역 코드: ${selectedRegion}`);
   }, [selectedRegion]);
 
+<<<<<<< HEAD
   const handleRegionClick = (regionCode) => {
     setSelectedRegion(regionCode);
   };
+=======
+    return (
+        <div>
+            {/* <AllContents/>
+            <MyLocationContents/> */}
+        </div>
+    )
+}
+>>>>>>> SearchPage
 
   const handleViewModeChange = (mode) => {
     setViewMode(mode);   // 공연/공연장 모드 전환

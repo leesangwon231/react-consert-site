@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState } from 'react';
 import { useContents } from '../../hooks/useCultures';
 import { Form, Container, Row, Button } from 'react-bootstrap';
@@ -7,10 +8,23 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import "./SearchPage.css";
 import ListCulture from '../component/ListCulture/ListCulture';
 import ListCenter from '../component/ListCenter/ListCenter';
+=======
+import React, { useState, useEffect } from 'react';
+import { useSearchCultures } from '../../hooks/useSearchCultures';
+import { useSearchCenters } from '../../hooks/useSearchCenter';
+import { Form, Container, Row, Button } from 'react-bootstrap';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import "./SearchPage.css";
+import ListCulture from './component/ListCulture/ListCulture';
+import ListCenter from './component/ListCenter/ListCenter';
+>>>>>>> SearchPage
 
 const SearchPage = () => {
   const [inputValue, setInputValue] = useState(""); 
   const [keyword, setKeyword] = useState(""); 
+<<<<<<< HEAD
   const [activeButton, setActiveButton] = useState("all"); // State to track which button is active
   const navigate = useNavigate(); 
   const { data: cultureData, error, isLoading } = useContents();
@@ -21,13 +35,41 @@ const SearchPage = () => {
 
   if (error) {
       return <div>Error: {error.message}</div>;
+=======
+  const [activeButton, setActiveButton] = useState("all");
+  const navigate = useNavigate(); 
+  const location = useLocation();
+
+  const { data: cultureData, error: cultureError, isLoading: cultureLoading } = useSearchCultures({ shprfnm: keyword });
+  const { data: centerData, error: centerError, isLoading: centerLoading } = useSearchCenters({ shprfnmfct: keyword });
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const queryKeyword = queryParams.get('q');
+    
+    if (queryKeyword) {
+      setKeyword(queryKeyword);
+    }
+  }, [location.search]);
+
+  if (cultureLoading || centerLoading) {
+      return <div>Loading...</div>;
+  }
+
+  if (cultureError || centerError) {
+      return <div>Error: {cultureError?.message || centerError?.message}</div>;
+>>>>>>> SearchPage
   }
 
   const searchByKeyword = (event) => {
     event.preventDefault();
     if (inputValue !== "") {
       setKeyword(inputValue); 
+<<<<<<< HEAD
       navigate(`/Search?q=${inputValue}`);
+=======
+      navigate(`/search?q=${inputValue}`);
+>>>>>>> SearchPage
       setInputValue(""); 
     } else {
       alert("검색어를 입력해 주세요");
@@ -39,6 +81,7 @@ const SearchPage = () => {
   };
 
   return (
+<<<<<<< HEAD
     <div>
       <Container>
         <Row>
@@ -54,6 +97,25 @@ const SearchPage = () => {
                 value={inputValue} 
                 onChange={(event) => setInputValue(event.target.value)} 
               />
+=======
+    <div className="search-container">
+      <Container>
+        <Row>
+          <div className="search-box">
+            <h1>
+              <span className="keyword">' {keyword} ' </span>에 대한 검색 결과 입니다.
+            </h1>
+            <Form className="d-flex search-form" onSubmit={searchByKeyword}>
+              <div className="input-container">
+                <Form.Control
+                  type="search"
+                  className="me-2"
+                  aria-label="Search"
+                  value={inputValue}
+                  onChange={(event) => setInputValue(event.target.value)}
+                />
+              </div>
+>>>>>>> SearchPage
               <a 
                 href="#"
                 onClick={searchByKeyword}
@@ -62,7 +124,12 @@ const SearchPage = () => {
               >
                 <FontAwesomeIcon icon={faSearch} />
               </a>
+<<<<<<< HEAD
             </Form>
+=======
+          </Form>
+
+>>>>>>> SearchPage
           </div>
           <div className="button-group">
             <Button 
@@ -84,8 +151,13 @@ const SearchPage = () => {
               시설
             </Button>
           </div>
+<<<<<<< HEAD
           {activeButton === "all" || activeButton === "culture" ? <ListCulture data={cultureData}/> : null}
           {activeButton === "all" || activeButton === "center" ? <ListCenter/> : null}
+=======
+          {keyword && activeButton === "all" || activeButton === "culture" ? <ListCulture data={cultureData}/> : null}
+          {keyword && activeButton === "all" || activeButton === "center" ? <ListCenter data={centerData}/> : null}
+>>>>>>> SearchPage
         </Row>
       </Container>
     </div>

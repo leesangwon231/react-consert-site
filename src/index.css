@@ -1,5 +1,8 @@
 @import url('https://cdn.jsdelivr.net/gh/sun-typeface/SUITE@2/fonts/variable/woff2/SUITE-Variable.css');
+<<<<<<< HEAD
 @import 'leaflet/dist/leaflet.css';
+=======
+>>>>>>> SearchPage
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {line-height: 1;}
