@@ -1,12 +1,29 @@
-import React from 'react';
-import { Container, Row } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Container, Row, Badge } from 'react-bootstrap';
+import ReactPaginate from 'react-paginate';
 import "./ListCulture.css";
 
 const ListCulture = ({ data }) => {
-    //console.log("Received data:", data); 
+    //console.log("ddd",data);
 
     const culturalEvents = data?.dbs?.db || [];
     const totalCulturals = culturalEvents.length;
+
+    const [currentPage, setCurrentPage] = useState(0);
+    const itemsPerPage = 5; 
+
+    const pageCount = Math.ceil(totalCulturals / itemsPerPage);
+
+    const displayedEvents = culturalEvents.slice(
+        currentPage * itemsPerPage,
+        (currentPage + 1) * itemsPerPage
+    );
+
+    const handlePageClick = ({ selected }) => {
+        setCurrentPage(selected);
+    };
+
+    const isMobile = window.innerWidth <= 768;
 
     return (
         <div className="search-culture">
@@ -14,8 +31,7 @@ const ListCulture = ({ data }) => {
             <div className='list-itemarea'>
                 <Container fluid>
                     {totalCulturals > 0 ? (
-                    //{culturalEvents.length > 0 ? (
-                        culturalEvents.map((event) => (
+                        displayedEvents.map((event) => (
                             <Row key={event.mt20id} className="mb-4 list-container">
                                 <div className="list-item">
                                     <img 
@@ -25,7 +41,14 @@ const ListCulture = ({ data }) => {
                                     />
                                     <div className="list-details">
                                         <div className="list-detail-group">
-                                            <div>{event.prfstate}</div>
+                                            <Badge className={
+                                                `badge-status
+                                                ${event.prfstate === '공연예정' 
+                                                ? 'pending' : event.prfstate === '공연중'
+                                                ? 'ongoing' : 'completed'}`
+                                            }>
+                                                {event.prfstate}
+                                            </Badge>
                                             <div>{event.prfnm}</div>
                                         </div>
                                         <div className="list-detail">{event.fcltynm}</div>
@@ -37,7 +60,32 @@ const ListCulture = ({ data }) => {
                     ) : (
                         <h4 className="no-results">검색 결과가 없습니다</h4>
                     )}
+                    {totalCulturals > itemsPerPage && (
+                        <div className="pagination-container">
+                            <ReactPaginate
+                                previousLabel={isMobile ? "<" : "Previous"}
+                                nextLabel={isMobile ? ">" : "Next"}
+                                pageClassName="page-item"
+                                pageLinkClassName="page-link"
+                                previousClassName="page-item"
+                                previousLinkClassName="page-link"
+                                nextClassName="page-item"
+                                nextLinkClassName="page-link"
+                                breakLabel="..."
+                                breakClassName="page-item"
+                                breakLinkClassName="page-link"
+                                pageCount={pageCount}
+                                marginPagesDisplayed={isMobile ? 1 : 2}
+                                pageRangeDisplayed={isMobile ? 3 : 5}
+                                onPageChange={handlePageClick}
+                                containerClassName="pagination"
+                                activeClassName="active"
+                                forcePage={currentPage}
+                            />
+                        </div>
+                    )}
                 </Container>
+                
             </div>
         </div>
     );

@@ -1,13 +1,30 @@
 import React, { useState } from 'react';
 import { Container, Row } from 'react-bootstrap';
+import ReactPaginate from 'react-paginate';
 import "./ListCenter.css";
-import ListCenterContainer from '../ListCenterContainer/ListCenterContainer'; 
+import ListCenterContainer from '../ListCenterContainer/ListCenterContainer';
 
-const ListCenter = ({ data }) => {  
-    //console.log("Received data:", data); 
+const ListCenter = ({ data }) => {
+    //console.log("ddd",data);
 
-    const centerEvents = data?.dbs?.db || []; 
+    const centerEvents = data?.dbs?.db || [];
     const totalCenters = centerEvents.length;
+
+    const [currentPage, setCurrentPage] = useState(0);
+    const itemsPerPage = 5; 
+
+    const pageCount = Math.ceil(totalCenters / itemsPerPage);
+
+    const displayedEvents = centerEvents.slice(
+        currentPage * itemsPerPage,
+        (currentPage + 1) * itemsPerPage
+    );
+
+    const handlePageClick = ({ selected }) => {
+        setCurrentPage(selected);
+    };
+
+    const isMobile = window.innerWidth <= 768;
 
     return (
         <div className="search-center">
@@ -22,7 +39,7 @@ const ListCenter = ({ data }) => {
                                 <div className="list-detail">전화번호</div>
                                 <div className="list-detail">주요시설</div>
                             </div>
-                            {centerEvents.map((event) => (
+                            {displayedEvents.map((event) => (
                                 <Row key={event.mt10id} className="mb-4 list-container">
                                     <ListCenterContainer data={event.mt10id} />
                                 </Row>
@@ -31,11 +48,34 @@ const ListCenter = ({ data }) => {
                     ) : (
                         <h4 className="no-results">검색 결과가 없습니다</h4>
                     )}
+                    {totalCenters > itemsPerPage && (
+                        <div className="pagination-container">
+                            <ReactPaginate
+                                previousLabel={isMobile ? "<" : "Previous"}
+                                nextLabel={isMobile ? ">" : "Next"}
+                                pageClassName="page-item"
+                                pageLinkClassName="page-link"
+                                previousClassName="page-item"
+                                previousLinkClassName="page-link"
+                                nextClassName="page-item"
+                                nextLinkClassName="page-link"
+                                breakLabel="..."
+                                breakClassName="page-item"
+                                breakLinkClassName="page-link"
+                                pageCount={pageCount}
+                                marginPagesDisplayed={isMobile ? 1 : 2}
+                                pageRangeDisplayed={isMobile ? 3 : 5}
+                                onPageChange={handlePageClick}
+                                containerClassName="pagination"
+                                activeClassName="active"
+                                forcePage={currentPage}
+                            />
+                        </div>
+                    )}
                 </Container>
             </div>
         </div>
     );
 };
-
 
 export default ListCenter;

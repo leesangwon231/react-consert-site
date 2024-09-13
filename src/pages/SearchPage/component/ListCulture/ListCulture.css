@@ -66,12 +66,67 @@
     .list-detail:last-child {
         flex: 0 0 35%; 
     }
+    .badge-status {
+        font-size: 0.9rem;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.2rem;
+        display: inline-block;
+        text-align: center;
+        width: 4.2rem;
+        height: 1.45rem;
+        margin-bottom: 2%;
+    }
+    
+    .badge-status.pending {
+        border: 1px solid var(--highlight-color3) !important;
+        background: transparent !important ;
+        color: var(--highlight-color3) !important;
+    }
+    
+    .badge-status.ongoing {
+        background: var(--highlight-color3) !important;
+        color: white !important;
+        border: 1px solid var(--highlight-color3) !important;
+    }
+    
+    .badge-status.completed {
+        border: 1px solid var(--highlight-color1) !important;
+        background: transparent !important;
+        color: var(--highlight-color1) !important;
+    }
 
     .no-results{
-        font-weight: bold;
         text-align: center;
         margin-top: 5%;
         margin-bottom: 6%;
-        color: var(--highlight-color3);
     }
+
+    .pagination-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 5%; 
+        margin-bottom: 5%; 
+    }
+    .pagination {
+        display: flex;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+    
+      .pagination-container .pagination .page-link {
+        background-color: transparent !important;
+        border: 2px solid var(--gray-color2) !important;
+        color: var(--main-font-color) !important;
+      }
+      
+      .pagination-container .pagination .page-link:hover {
+        background-color: var(--highlight-color4) !important;
+        color: var(--bs-light) !important;
+      }
+      
+      .pagination-container .pagination .active .page-link {
+        background-color: var(--highlight-color3) !important;
+        color: var(--bs-light) !important;
+      }
 }

@@ -25,8 +25,8 @@ const fetchAllSearchCentersData = async (param) => {
             const response = await api.get('prfplc', { 
                 params: {
                     shprfnmfct,
-                    cpage: cpage.toString(),
-                    rows: '5'
+                    cpage: param.queryKey[1].page,
+                    rows: '12'
                 }
             });
 
@@ -51,13 +51,10 @@ const fetchAllSearchCentersData = async (param) => {
         return { dbs: { db: allResults } }; 
 
     } catch (error) {
-        console.error('데이터 가져오기 오류:', error);
+         console.error('데이터 가져오기 오류:', error);
         throw error;
     }
 };
-
-
-
 
 export const useSearchCenters = (param) => {
     return useQuery({
