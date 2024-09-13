@@ -1,0 +1,15 @@
+.homepage-container {
+  .card-box {
+    /* width: 30%; */
+    cursor: pointer;
+    transition: all 0.3s;
+    &:hover {
+      transform: scale(1.04);
+    }
+    img {
+      width: 100%;
+      object-fit: cover;
+      aspect-ratio: 2/3;
+    }
+  }
+}

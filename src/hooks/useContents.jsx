@@ -22,7 +22,7 @@ const fetchContentsData =  async (param) => {
                 signgucode : param.queryKey[1].signgucode,
                 prfstate : param.queryKey[1].prfstate,
                 shprfnm : param.queryKey[1].shprfnm,
-                stdate: '20240601',
+                stdate: '20240101',
                 eddate: '20241231',
                 cpage: param.queryKey[1].page,
                 rows: '12'

@@ -1,29 +1,21 @@
-import {Link, Outlet} from 'react-router-dom';
+import './AppLayoutStyle.css';
+import {Outlet} from 'react-router-dom';
+import Header from './components/Header/Header';
+
 const AppLayout = () => {
+  // 뮤지컬, 콘서트, 클래식/무용, 연극
+  // navigate(/search?q=${inputValue});
+
   return (
-    <div>
-      <header>
-        <nav>
-          <ul className="flex">
-            <li>
-              <Link to="/">홈</Link>
-            </li>
-            <li>
-              <Link to="/search">검색</Link>
-            </li>
-            <li>
-              <Link to="/contents">콘텐츠</Link>
-            </li>
-            <li>
-              <Link to="/location">지역</Link>
-            </li>
-          </ul>
-        </nav>
-      </header>
-      <main className="pb-14">
+    <div className="min-vh-100 d-flex flex-column">
+      <Header />
+      <main className="pb-4">
         <Outlet />
       </main>
-      <footer>여기는 푸터</footer>
+      <div className="flex-grow-1"></div>
+      <footer id="footer" className="bg-light-subtle">
+        여기는 푸터
+      </footer>
     </div>
   );
 };
