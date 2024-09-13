@@ -7,6 +7,7 @@ import {useContents} from "../../../../../hooks/useContents.jsx";
 const Sliser = ({performanceKinds}) => {
 
 
+/*
     const [param , setParam] = useState({
         shprfnm : "",
         signgucode : "",
@@ -20,6 +21,7 @@ const Sliser = ({performanceKinds}) => {
        console.log(a);g
        return data.mt20id;
     });
+*/
 
 
 
