@@ -12,46 +12,39 @@ const parseXml = async (xml) => {
     }
 };
 
-
-
-const fetchAllSearchCentersData = async (param) => {
-    const { shprfnmfct = '' } = param.queryKey[1] || {};
+const fetchAllSearchCentersData = async ({ queryKey }) => {
+    const { shprfnmfct = '', page = 1 } = queryKey[1] || {};
     let allResults = [];
-    let cpage = 1;
     let hasMoreData = true;
 
     try {
-        while (hasMoreData) {
-            const response = await api.get('prfplc', { 
-                params: {
-                    shprfnmfct,
-                    cpage: param.queryKey[1].page,
-                    rows: '12'
-                }
-            });
+        const response = await api.get('prfplc', { 
+            params: {
+                shprfnmfct,
+                cpage: page.toString(), 
+                rows: '5' 
+            }
+        });
 
-            const xmlData = response.data;
-            const jsonData = await parseXml(xmlData);
+        const xmlData = response.data;
+        const jsonData = await parseXml(xmlData);
 
-            if (jsonData.dbs && jsonData.dbs.db) {
-                const currentResults = jsonData.dbs.db;
-                
-                if (Array.isArray(currentResults) && currentResults.length > 0) {
-                    allResults = [...allResults, ...currentResults];
-                } else {
-                    hasMoreData = false;
-                }
+        if (jsonData.dbs && jsonData.dbs.db) {
+            const currentResults = jsonData.dbs.db;
+
+            if (Array.isArray(currentResults) && currentResults.length > 0) {
+                allResults = currentResults;
             } else {
                 hasMoreData = false;
             }
-
-            cpage++;
+        } else {
+            hasMoreData = false;
         }
 
-        return { dbs: { db: allResults } }; 
+        return { dbs: { db: allResults }, total_pages: jsonData.total_pages || 0, current_page: page };
 
     } catch (error) {
-         console.error('데이터 가져오기 오류:', error);
+        console.error('데이터 가져오기 오류:', error);
         throw error;
     }
 };
