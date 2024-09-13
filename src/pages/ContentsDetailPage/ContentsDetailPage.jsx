@@ -18,7 +18,7 @@ import {
 const ContentsDetailPage = () => {
   const { id } = useParams();
   const { data, isLoading, error } = useContentsDetail(id);
-  const [activeTab, setActiveTab] = useState(null);
+  const [activeTab, setActiveTab] = useState("details");
 
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate(); 
@@ -49,6 +49,31 @@ const ContentsDetailPage = () => {
     }
   };
 
+  const priceInfo = contentDetail?.pcseguidance
+    ? contentDetail.pcseguidance
+        .split(/(원)/)
+        .reduce((acc, curr, idx) => {
+          if (curr === "원") {
+            acc[acc.length - 1] += curr;
+          } else {
+            acc.push(curr);
+          }
+          return acc;
+        }, [])
+        .filter((price) => price.trim() !== "")
+    : [];
+
+  // 가격 정보를 한 줄에 두 개씩 출력
+  const formattedPriceInfo = [];
+  for (let i = 0; i < priceInfo.length; i += 2) {
+    formattedPriceInfo.push(
+      <div key={i}>
+        <span>{priceInfo[i]}</span>
+        {priceInfo[i + 1] && <span>, {priceInfo[i + 1]}</span>}
+      </div>
+    );
+  }
+
   if (isLoading) {
     return (
       <div
@@ -67,10 +92,14 @@ const ContentsDetailPage = () => {
   return (
     <Container
       className="detail-page-container mt-3"
-      style={{ backgroundColor: "#f8f9fa", fontSize: "20px" }}
+      style={{ backgroundColor: "white", fontSize: "20px", padding: "20px", borderRadius:"10px"}}
     >
       <Row>
         <Col xs={12}>
+        <Card.Text>
+                <strong>&gt;&gt; </strong>
+                {contentDetail?.genrenm || "정보 없음"}
+              </Card.Text>
           <hr
             style={{
               backgroundColor: "#383554",
@@ -86,11 +115,11 @@ const ContentsDetailPage = () => {
           <img
             src={contentDetail?.poster || "not poster"}
             alt="포스터"
-            style={{ width: "100%", maxWidth: "400px" }}
+            style={{ width: "100%", maxWidth: "400px", borderRadius: "5px"}}
           />
         </Col>
         <Col md={6} xs={12}>
-          <Card style={{ backgroundColor: "#f8f9fa", border: "none" }}>
+          <Card style={{ backgroundColor: "white", border: "none"}}>
             <Card.Body>
               <Card.Title>
                 <h1>{contentDetail?.prfnm || "공연 제목"}</h1>
@@ -98,29 +127,28 @@ const ContentsDetailPage = () => {
               <Card.Subtitle className="mb-2">
                 {contentDetail?.prfpdfrom} - {contentDetail?.prfpdto}
               </Card.Subtitle>
-              <Card.Text className="mt-3">
+              <Card.Text className="mt-3 mb-4">
                 <strong>공연 상태</strong>
-                : {contentDetail?.prfstate || "정보 없음"}
+                : &nbsp;&nbsp;{contentDetail?.prfstate || "정보 없음"}
               </Card.Text>
-              <Card.Text>
-                <strong>장르</strong>
-                : {contentDetail?.genrenm || "정보 없음"}
-              </Card.Text>
-              <Card.Text>
+              
+              <Card.Text className="mb-4">
                 <strong>등급</strong>
-                : {contentDetail?.prfage || "정보 없음"}
+                : &nbsp;&nbsp;{contentDetail?.prfage || "정보 없음"}
               </Card.Text>
-              <Card.Text>
+              <Card.Text className="mb-4">
                 <strong>런타임</strong>
-                : {contentDetail?.prfruntime || "정보 없음"}
+                : &nbsp;&nbsp;{contentDetail?.prfruntime || "정보 없음"}
               </Card.Text>
-              <Card.Text>
+              <Card.Text className="mb-4 price">
                 <strong>가격</strong>
-                : {contentDetail?.pcseguidance || "정보 없음"}
+                <div style={{ backgroundColor: "#e2e2e2", padding:"10px" }}>
+                  {formattedPriceInfo}
+                </div>
               </Card.Text>
               <hr
                 style={{
-                  backgroundColor: "#383554",
+                  backgroundColor: "#cea6c0",
                   height: "3px",
                   border: "none",
                   borderRadius: "3px",
@@ -233,34 +261,15 @@ const ContentsDetailPage = () => {
                   기획/제작사: {contentDetail?.entrpsnm || "정보 없음"}
                 </Card.Text>
 
-                <Button
-                  style={{ backgroundColor: "#cea6c0", border: "none" }}
-                  onClick={handleModalOpen}
-                >
-                  상세 이미지 보기
-                </Button>
-
-                <Modal show={showModal} onHide={handleModalClose} centered>
-                  <Modal.Header closeButton>
-                    <Modal.Title>상세 이미지</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-                    {contentDetail?.styurls?.styurl ? (
-                      <img
-                        src={contentDetail.styurls.styurl}
-                        alt="소개 이미지"
-                        style={{ width: "100%" }}
-                      />
-                    ) : (
-                      <p>상세 이미지가 없습니다.</p>
-                    )}
-                  </Modal.Body>
-                  <Modal.Footer>
-                    <Button variant="secondary" onClick={handleModalClose}>
-                      닫기
-                    </Button>
-                  </Modal.Footer>
-                </Modal>
+                {contentDetail?.styurls?.styurl && (
+                <Card.Text className="mt-4">
+                  <img
+                    src={contentDetail.styurls.styurl}
+                    alt="상세 이미지"
+                    style={{ width: "100%", marginTop: "10px", borderRadius: "5px" }}
+                  />
+                </Card.Text>
+              )}
               </Card.Body>
             </Card>
           </Col>
