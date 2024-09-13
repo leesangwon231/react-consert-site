@@ -112,7 +112,7 @@ const  AllContents = ({performanceFilterArray,performanceKinds}) => {
                                     ? <h1 className={"ContentsPage_NotFoundText"}>검색 된 결과가 없습니다</h1>
                                     : originData?.map((content,index) => (
                                     <Col lg={3} xs={12} key = {index}>
-                                        <ContentCard content={content}/>
+                                        <ContentCard content={content} index={index}/>
                                     </Col>
                                 ))
                             }

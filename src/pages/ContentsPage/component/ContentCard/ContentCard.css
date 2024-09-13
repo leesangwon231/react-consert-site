@@ -16,9 +16,9 @@
 }
 
 
-.homepage-container {
-    animation: fadeIn 0.4s ease-in both;
-    .card-box {
+.ContentsPage_container {
+   /*animation: fadeIn 0.4s ease-in both;*/
+    .ContentsPage_card-box {
         /* width: 30%; */
         cursor: pointer;
         transition: all 0.3s;
@@ -31,7 +31,7 @@
             object-fit: cover;
         }
     }
-    .text-box{
+    .ContentsPage_text-box{
         display: flex;
         flex-direction: column;
         justify-content: center;

@@ -7,6 +7,8 @@ import ContentCard from "../ContentCard/ContentCard.jsx";
 import "./MyLocationContents.css"
 import {useLocationContents} from "../../../../hooks/useContentsLocation.jsx";
 import {Spinner} from "react-bootstrap";
+import AOS from "aos";
+import 'aos/dist/aos.css';
 
 const MyLocationContents = ({ctprvn,performanceKinds}) => {
     //진척도
@@ -33,6 +35,11 @@ const MyLocationContents = ({ctprvn,performanceKinds}) => {
     };
 
     useEffect(() => {
+        AOS.init();
+    }, []);
+
+    useEffect(() => {
+
         const fetchLocation = async () => {
             const city = await getMyLocation();
             setMyLocation({...myLocation, name: city, signgucode: ctprvn[city] , shcate: performanceKinds[1]});
@@ -55,12 +62,12 @@ const MyLocationContents = ({ctprvn,performanceKinds}) => {
             <Row className={"ContentsPage_row"}>
                 <Col className="ContentsPage_text-center">{myLocation?.name} 에서 {performanceKinds[0]} 보는건 어때?</Col>
                 <Col className={"ContentsPage_col-lg-12"} lg={12} xs={12}>
-                    <Row >
+                    <Row>
                         {isLoading
-                            ?  <Spinner animation="border" variant="dark" />
-                            :   locationContents?.map((content,index) => (
-                                <Col lg={3} xs={12} key = {index}>
-                                    <ContentCard content={content}/>
+                            ? <Spinner animation="border" variant="dark"/>
+                            : locationContents?.map((content, index) => (
+                                <Col lg={3} xs={12} key={index}>
+                                    <ContentCard content={content} index={index}/>
                                 </Col>
                             ))
                         }
