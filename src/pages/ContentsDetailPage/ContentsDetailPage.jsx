@@ -19,20 +19,6 @@ const ContentsDetailPage = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  useEffect(() => {
-    if (isLoading) {
-      console.log("상세 정보를 불러오는 중입니다...");
-    }
-
-    if (error) {
-      console.error("상세 정보를 불러오는 중 오류 발생:", error);
-    }
-
-    if (data) {
-      console.log("불러온 상세 정보:", data);
-    }
-  }, [data, isLoading, error]);
-
   const contentDetail = data?.dbs?.db;
 
   const handleVenueClick = () => {
@@ -63,7 +49,7 @@ const ContentsDetailPage = () => {
   if (isLoading) {
     return (
       <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
-        <LoadingSpinner /> {/* 커스텀 로딩 스피너 사용 */}
+        <LoadingSpinner /> 
       </div>
     );
   }
