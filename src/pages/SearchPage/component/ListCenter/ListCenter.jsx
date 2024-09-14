@@ -42,7 +42,7 @@ const ListCenter = ({ data }) => {
                             </div>
                             {displayedEvents.map((event) => (
                                 <Row key={event.mt10id} className="mb-4 list-container">
-                                    <ListCenterContainer data={event.mt10id} />
+                                    <ListCenterContainer data={event} />
                                 </Row>
                             ))}
                         </>
@@ -52,10 +52,10 @@ const ListCenter = ({ data }) => {
                     {totalCenters > itemsPerPage && (
                         <div className='pagination-container'>
                             <Pagination 
-                            pageCount={pageCount}
-                            currentPage={currentPage}
-                            handlePageClick={handlePageClick}
-                            isMobile={isMobile}
+                                pageCount={pageCount}
+                                currentPage={currentPage}
+                                handlePageClick={handlePageClick}
+                                isMobile={isMobile}
                             />
                         </div>
                     )}
