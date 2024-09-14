@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/api': {
+      '/api/': {
         target: 'http://www.kopis.or.kr/openApi/restful/',
         changeOrigin: true,
         secure: false,
