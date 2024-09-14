@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 import "./ListCulture.css";
 
 const ListCulture = ({ data }) => {
-    //console.log("ddd",data);
+    console.log("ddd",data);
 
     const culturalEvents = data?.dbs?.db || [];
     const totalCulturals = culturalEvents.length;
