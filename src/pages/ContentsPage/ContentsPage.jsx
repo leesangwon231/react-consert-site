@@ -44,7 +44,7 @@ const ContentsPage = () => {
     });
 
     // 화면 뿌릴 데이터
-    const { data, isLoading } = useContents(param);
+    const { data, isLoading ,isError} = useContents(param);
 
     // 초기데이터 세팅
     useEffect(() => {
@@ -131,6 +131,7 @@ const ContentsPage = () => {
                          originData={originData}
                          page={page}
                          setPage={setPage}
+                         isError={isError}
             />
             <MyLocationContents ctprvn={ctprvn} performanceKinds={performanceKinds} />
         </div>

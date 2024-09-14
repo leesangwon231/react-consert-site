@@ -9,6 +9,7 @@ import { useLocationContents } from "../../../../hooks/useContentsLocation.jsx";
 import { Spinner } from "react-bootstrap";
 import AOS from "aos";
 import 'aos/dist/aos.css';
+import LoadingSpinner from "../../../../common/LoadingSpinner/LoadingSpinner.jsx";
 
 const MyLocationContents = ({ ctprvn, performanceKinds }) => {
     const [myLocation, setMyLocation] = useState({ name: "", signgucode: "", shcate: "" });
@@ -63,12 +64,14 @@ const MyLocationContents = ({ ctprvn, performanceKinds }) => {
                     <Col className={"ContentsPage_col-lg-12"} lg={12} xs={12}>
                         <Row>
                             {isLoading
-                                ? <Spinner animation="border" variant="dark" />
-                                : locationContents?.map((content, index) => (
-                                    <Col lg={3} xs={12} key={index}>
-                                        <ContentCard content={content} index={index} />
-                                    </Col>
-                                ))
+                                ? <LoadingSpinner/>
+                                : locationContents?.length===0
+                                    ? <h1 className={"ContentsPage_NotFoundText"}>검색 결과가 없습니다</h1>
+                                    : locationContents?.map((content, index) => (
+                                        <Col lg={3} xs={12} key={index}>
+                                            <ContentCard content={content} index={index} />
+                                        </Col>
+                                    ))
                             }
                         </Row>
                     </Col>
