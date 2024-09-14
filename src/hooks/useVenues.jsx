@@ -15,12 +15,12 @@ const parseXml = async (xml) => {
 
 // 공연장 데이터를 가져오는 함수
 const fetchVenuesData = async ({ queryKey }) => {
-  const [_, regionCode] = queryKey;
+  const [_, regionCode, page] = queryKey; // 페이지 번호 추가
 
   // API 요청 파라미터 설정
   const params = {
     service: import.meta.env.VITE_API_KEY, // 인증키
-    cpage: 1,  // 페이지 번호
+    cpage: page,  // 페이지 번호
     rows: 20,  // 페이지당 20개
   };
 
@@ -34,15 +34,13 @@ const fetchVenuesData = async ({ queryKey }) => {
   const xmlData = response.data;
   const jsonData = await parseXml(xmlData);
 
-  console.log(jsonData); // 데이터 확인
-
   return jsonData;
 };
 
 // React Query를 이용한 데이터 호출
-export const useVenues = (regionCode) => {
+export const useVenues = (regionCode, page) => {
   return useQuery({
-    queryKey: ["venues", regionCode || "all"], // regionCode가 없을 경우 "all"로 설정
+    queryKey: ["venues", regionCode || "all", page], // 페이지 번호를 추가하여 쿼리 키에 포함
     queryFn: fetchVenuesData,
     retry: 1,
     keepPreviousData: true, // 페이지 이동 시 이전 데이터 유지
