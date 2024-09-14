@@ -82,7 +82,7 @@
                 .ContentsPage_text-box {
                     .fw-bold {
                         font-size: 9px; /* 조정된 폰트 크기 */
-                        max-width: 220px;
+                        max-width: 150px;
                     }
                     .text-center {
                         font-size: 8px; /* 조정된 폰트 크기 */
