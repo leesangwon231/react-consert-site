@@ -14,7 +14,7 @@ const MyLocationContents = ({ ctprvn, performanceKinds }) => {
     const [myLocation, setMyLocation] = useState({ name: "", signgucode: "", shcate: "" });
     const [locationContents, setLocationContents] = useState([]);
     const { data, isLoading } = useLocationContents(myLocation);
-    console.log("location")
+
     const getMyLocation = async () => {
         try {
             const position = await new Promise((resolve, reject) => {
