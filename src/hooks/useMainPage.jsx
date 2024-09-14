@@ -15,7 +15,7 @@ const parseXml = async (xml) => {
 export const useContentsList = ({itemNum, genreCode, kidState, performanceState}) => {
   const fetchContentsList = async () => {
     try {
-      const response = await api.get('/pblprfr', {
+      const response = await api.get('pblprfr', {
         params: {
           stdate: '20240101',
           eddate: '20241231',
@@ -36,7 +36,7 @@ export const useContentsList = ({itemNum, genreCode, kidState, performanceState}
     queryKey: ['contents-list', itemNum, genreCode, kidState, performanceState],
     queryFn: fetchContentsList,
     select: (result) => result.dbs.db,
-    retry: 1,
+    retry: 3,
     staleTime: 600000,
   });
 };

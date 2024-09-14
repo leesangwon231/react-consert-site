@@ -11,6 +11,7 @@ const Banner = () => {
     performanceState: '01',
   };
   const {data, isLoading, isError, error} = useContentsList(bannerParams);
+  console.log(data);
 
   if (isLoading) {
     return <div className="loading">Loading...</div>;
@@ -18,6 +19,7 @@ const Banner = () => {
   if (isError) {
     return <ErrorBox error={error} />;
   }
+
   return (
     <div className="banner-container global-mx py-4">
       {data?.map((item, i) => (

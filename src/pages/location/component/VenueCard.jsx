@@ -2,11 +2,13 @@ import React from "react";
 import { useNavigate } from "react-router-dom"; // useNavigate 사용
 import './VenueCard.style.css'; // CSS 파일 연결
 
-const VenueCard = ({ venue }) => {
+const VenueCard = ({ venue, selectedRegion }) => {
   const navigate = useNavigate(); // React Router의 useNavigate 훅 사용
 
   const handleClick = () => {
-    navigate(`/hall/${venue.mt10id}`); // 공연장 상세페이지로 이동
+    navigate(`/hall/${venue.mt10id}`, {
+      state: { selectedRegion } // 현재 선택된 지역을 상태로 전달
+    }); 
   };
 
   return (

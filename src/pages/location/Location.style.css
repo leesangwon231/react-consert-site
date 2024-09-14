@@ -1,0 +1,123 @@
+/* 기본 레이아웃 */
+.region-list {
+  display: flex;
+  flex-wrap: wrap; /* 화면 크기에 맞게 줄이 바뀌도록 설정 */
+  justify-content: center;
+  align-items: center;
+  gap: 10px; /* 각 지역 선택 아이템 사이의 간격 */
+  padding: 20px;
+  border-bottom: 2px solid #ddd;
+}
+
+/* 각 지역 선택 아이템 */
+.region-item {
+  padding: 10px 20px;
+  margin: 0 5px;
+  cursor: pointer;
+  text-align: center;
+  border-bottom: 3px solid transparent;
+  transition: border-color 0.3s, background-color 0.3s;
+  color: #333;
+  white-space: nowrap; /* 아이템이 한 줄에 표시되도록 설정 */
+}
+
+.region-item:hover {
+  background-color: #f0f0f0;
+}
+
+.region-item.active {
+  border-bottom: 3px solid var(--highlight-color3);
+  background-color: #fafafa;
+  color: var(--highlight-color3);
+}
+
+/* 스위치 버튼 스타일 */
+.view-mode-switch {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.switch-btn {
+  padding: 10px 20px;
+  margin: 0 10px;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.switch-btn.active {
+  background-color: var(--highlight-color3);
+  color: white;
+}
+
+.switch-btn:hover {
+  background-color: #ddd;
+}
+
+/* 반응형 - 작은 화면에서는 버튼 크기 조정 */
+@media (max-width: 768px) {
+  .switch-btn {
+      padding: 8px 16px;
+      font-size: 0.875rem;
+  }
+}
+
+/* 공연장 카드 스타일 */
+.venue-card {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 로딩 스피너 스타일 */
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+/* 반응형 조정 - 작은 화면에서는 높이 조정 */
+@media (max-width: 768px) {
+  .loading-spinner {
+    height: 150px;
+  }
+}
+
+/* 공연장 카드를 반응형으로 조정 */
+@media (max-width: 992px) {
+  .col-3 {
+    max-width: 50%; /* 중간 화면에서는 50% 크기 */
+  }
+}
+
+@media (max-width: 768px) {
+  .col-3 {
+    max-width: 100%; /* 작은 화면에서는 100% 크기 */
+  }
+}
+
+/* 공연 카드 사이에 간격을 추가 */
+.pagination-controls {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+/* 반응형 - 작은 화면일 때 아이템이 줄바꿈 되도록 */
+@media (max-width: 992px) {
+  .region-list {
+    justify-content: flex-start; /* 작은 화면에서 아이템이 왼쪽에서 시작 */
+  }
+}
+
+@media (max-width: 768px) {
+  .region-list {
+    flex-wrap: wrap; /* 작은 화면에서 줄바꿈 */
+    justify-content: flex-start; /* 작은 화면에서 아이템이 왼쪽에서 시작 */
+  }
+}

@@ -1,12 +1,14 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Location.style.css';
 import { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom'; // useNavigate와 useLocation 추가
+import { useNavigate, useLocation } from 'react-router-dom';
 import PerformancesList from "./component/PerformancesList";
 import VenuesList from "./component/VenuesList";  // 공연장 리스트 컴포넌트 추가
 import queryString from 'query-string'; // URL 쿼리 파라미터를 파싱하기 위한 라이브러리
 
 const regions = [
+
+  { code: "all", name: "전체" },  // "전체" 항목 추가
   { code: "11", name: "서울" },
   { code: "26", name: "부산" },
   { code: "27", name: "대구" },
@@ -31,20 +33,26 @@ const LocationPage = () => {
   const location = useLocation();
   const parsedQuery = queryString.parse(location.search); // URL에서 쿼리 파라미터 읽기
 
-  const [selectedRegion, setSelectedRegion] = useState(parsedQuery.region || null);  // 선택한 지역 초기화, URL에서 지역 코드 불러옴
-  const [viewMode, setViewMode] = useState("performances");    // "공연" 또는 "공연장"을 선택하는 스위치 상태
+  // URL 쿼리에서 viewMode와 region 읽기, 없을 경우 기본값으로 설정
+  const [selectedRegion, setSelectedRegion] = useState(parsedQuery.region || "all");
+  const [viewMode, setViewMode] = useState(parsedQuery.viewMode || "performances");
 
+  // 초기 로드 시 "전체" 데이터를 가져오도록 설정
   useEffect(() => {
-    console.log(`클릭된 대분류 지역 코드: ${selectedRegion}`);
-  }, [selectedRegion]);
+    if (!parsedQuery.region || !parsedQuery.viewMode) {
+      navigate(`/location?region=all&viewMode=performances`);
+    }
+  }, [navigate, parsedQuery.region, parsedQuery.viewMode]);
 
   const handleRegionClick = (regionCode) => {
     setSelectedRegion(regionCode);
-    navigate(`/location?region=${regionCode}`); // URL에 지역 코드 추가
+    navigate(`/location?region=${regionCode}&viewMode=${viewMode}`); // URL에 지역 코드 추가
   };
 
   const handleViewModeChange = (mode) => {
-    setViewMode(mode);   // 공연/공연장 모드 전환
+    setViewMode(mode);  // 공연/공연장 모드 전환
+    setSelectedRegion("all"); // 모드가 바뀔 때마다 지역을 "전체"로 설정
+    navigate(`/location?region=all&viewMode=${mode}`); // URL에 viewMode와 region 반영
   };
 
   return (
@@ -70,7 +78,7 @@ const LocationPage = () => {
           <div
             key={region.code}
             className={`region-item ${region.code === selectedRegion ? 'active' : ''}`}
-            onClick={() => handleRegionClick(region.code)} // 지역 클릭 시 URL에 반영
+            onClick={() => handleRegionClick(region.code)}
           >
             <span>{region.name}</span>
           </div>
