@@ -18,7 +18,7 @@ const Banner = () => {
     return <div className="error-box">{error}</div>;
   }
   return (
-    <div className="banner-container global-mx">
+    <div className="banner-container global-mx py-4">
       {data?.map((item, i) => (
         <PosterCard key={i} item={item} gridArea={`card${i}`} />
       ))}

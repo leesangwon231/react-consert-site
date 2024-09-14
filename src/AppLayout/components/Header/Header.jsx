@@ -33,7 +33,7 @@ const Header = () => {
     },
   ];
   const navigate = useNavigate();
-  const [keyword, setKeyword] = useState();
+  const [keyword, setKeyword] = useState('');
   const searchByKeyword = (event) => {
     event.preventDefault();
     // change API URL with keywords
@@ -61,7 +61,7 @@ const Header = () => {
           </ul>
         </nav>
         <Form className="input-box fs-5 d-flex" onSubmit={searchByKeyword}>
-          <Form.Control type="text" placeholder="검색어를 입력하세요" className="me-2 w-75" onChange={(event) => setKeyword(event.target.value)} />
+          <Form.Control type="search" placeholder="검색어를 입력하세요" className="me-2 w-75" value={keyword} onChange={(event) => setKeyword(event.target.value)} />
           <Button variant="primary" type="submit" className="input-button">
             검색
           </Button>

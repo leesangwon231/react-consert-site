@@ -8,7 +8,7 @@ import ListCulture from './component/ListCulture/ListCulture';
 import ListCenter from './component/ListCenter/ListCenter';
 import { useSearchCenters } from '../../hooks/useSearchCenter';
 import { useSearchCultures } from '../../hooks/useSearchCultures';
-import LoadingSpinner from "../../common/LoadingSpinner/LoadingSpinner";
+// import LoadingSpinner from "../../common/LoadingSpinner/LoadingSpinner";
 
 
 
@@ -33,7 +33,8 @@ const SearchPage = () => {
   const { data: centerData, error: centerError, isLoading: centerLoading } = useSearchCenters({ shprfnmfct: keyword });
 
   if (keyword && (cultureLoading || centerLoading)) {
-    return <LoadingSpinner/>;
+    // return <LoadingSpinner/>;
+    return <div>Loading...</div>
   }
 
   if (keyword && (cultureError || centerError)) {
