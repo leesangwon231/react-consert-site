@@ -50,12 +50,14 @@ const ListCenter = ({ data }) => {
                         <h4 className="no-results">검색 결과가 없습니다</h4>
                     )}
                     {totalCenters > itemsPerPage && (
-                        <Pagination 
-                        pageCount={pageCount}
-                        currentPage={currentPage}
-                        handlePageClick={handlePageClick}
-                        isMobile={isMobile}
-                    />
+                        <div className='pagination-container'>
+                            <Pagination 
+                            pageCount={pageCount}
+                            currentPage={currentPage}
+                            handlePageClick={handlePageClick}
+                            isMobile={isMobile}
+                            />
+                        </div>
                     )}
                 </Container>
             </div>
