@@ -19,7 +19,7 @@ const genreMapping = {
 
 const PerformancesList = ({ regionCode }) => {
   const [page, setPage] = useState(1); // 현재 페이지 번호 상태 관리
-  const { data, error, isLoading } = usePerformances(regionCode, page); // 페이지 번호 전달
+  const { data, error, isLoading } = usePerformances(regionCode === "all" ? null : regionCode, page); // "전체"일 때는 null로 전달
 
   if (isLoading) return (
     <div className="loading-spinner">

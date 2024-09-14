@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom"; 
 import { useSearchCenterDeatils } from "../../hooks/useSearchCenterDetail";
 import { Spinner } from "react-bootstrap";
 import './VenueDetailPage.css'; 
@@ -43,7 +43,8 @@ const loadKakaoMap = (latitude, longitude, address, name) => {
 
 const VenueDetailPage = () => {
   const { id } = useParams();
-  console.log(`공연장 ID: ${id}`);
+  const { state } = useLocation();  // 이전 페이지에서 전달된 상태 받기
+  const navigate = useNavigate();
   const { data, error, isLoading } = useSearchCenterDeatils(id);
 
   useEffect(() => {
@@ -77,7 +78,7 @@ const VenueDetailPage = () => {
 
   if (error) {
     console.error(`오류 발생: ${error.message}`);
-    return <p>오류 발생: {error.message}</p>;
+    return <p>오류 발생; {error.message}</p>;
   }
 
   const venueDetails = data?.dbs?.db || {};
