@@ -31,5 +31,6 @@ export const useContentsDetail = (id) => {
         queryKey: ["detail", id],
         queryFn: () => fetchContentsDetailData(id),
         retry: 1,
+        enabled: !!id
     });
 };

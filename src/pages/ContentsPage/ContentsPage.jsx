@@ -1,12 +1,10 @@
-import React, { useEffect } from "react";
-import {Navigate, useNavigate} from "react-router-dom";  // useNavigate 추가
-import { useContents } from "../../hooks/useContents";
+import React from "react";
+import {Navigate} from "react-router-dom";  // useNavigate 추가
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./ContentsPage.css"
 import AllContents from "./component/AllContents/AllContents.jsx";
 import MyLocationContents from "./component/MyLocationContents/MyLocationContents.jsx";
 import {useParams} from "react-router-dom";
-import Slider from "./component/common/Slider/Slider.jsx";
 const ContentsPage = () => {
     let params = useParams();
 
