@@ -50,7 +50,6 @@ const VenueDetailPage = () => {
     console.log("공연장 데이터 로딩 중...");
     console.log("데이터 상태 확인:", data);
 
-    // 데이터가 dbs.db 안에 들어있는 것을 반영하여 수정
     const venueDetails = data?.dbs?.db;
 
     if (venueDetails) {
@@ -81,7 +80,6 @@ const VenueDetailPage = () => {
     return <p>오류 발생: {error.message}</p>;
   }
 
-  // 데이터를 dbs.db로 변경
   const venueDetails = data?.dbs?.db || {};
   console.log("공연장 세부 정보:", venueDetails);
 
@@ -91,10 +89,10 @@ const VenueDetailPage = () => {
       <p className="venue-address">{venueDetails.adres || "정보 없음"}</p>
       <p><strong>전화번호:</strong> {venueDetails.telno || "정보 없음"}</p>
       <p><strong>좌석 수:</strong> {venueDetails.seatscale || "정보 없음"}</p>
+      
       <p><strong>관련 URL:</strong> <a href={venueDetails.relateurl} target="_blank" rel="noopener noreferrer">{venueDetails.relateurl || "정보 없음"}</a></p>
 
       <div className="venue-icons">
-        {/* Icons for amenities */}
         <div className="icon-box">
           <p>식당: {venueDetails.restaurant === 'Y' ? '있음' : '없음'}</p>
         </div>
@@ -106,11 +104,10 @@ const VenueDetailPage = () => {
         </div>
       </div>
 
-      {/* Kakao Map */}
       <div id="map" className="venue-map"></div>
 
       {/* 하위 공연장 정보 */}
-      {venueDetails.mt13s?.mt13 && (
+      {Array.isArray(venueDetails.mt13s?.mt13) ? (
         <div className="sub-venues">
           <h3>하위 공연장 목록</h3>
           {venueDetails.mt13s.mt13.map((subVenue) => (
@@ -121,9 +118,12 @@ const VenueDetailPage = () => {
             </div>
           ))}
         </div>
+      ) : (
+        <p>하위 공연장 정보가 없습니다.</p>
       )}
     </div>
   );
 };
 
 export default VenueDetailPage;
+
