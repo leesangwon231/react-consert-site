@@ -6,10 +6,10 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://www.kopis.or.kr/openApi/restful/',
+        target: 'https://www.kopis.or.kr/openApi/restful/',
         changeOrigin: true,
         secure: false,
-        // rewrite: (path) => path.replace(/^\/api/, ''),
+        rewrite: (path) => path.replace(/^\/api/, ''),
       },
     },
   },
