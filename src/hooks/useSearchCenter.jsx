@@ -16,35 +16,40 @@ const fetchAllSearchCentersData = async ({ queryKey }) => {
     const { shprfnmfct = '', page = 1 } = queryKey[1] || {};
     let allResults = [];
     let hasMoreData = true;
+    let currentPage = page; 
 
     try {
-        const response = await api.get('prfplc', { 
-            params: {
-                shprfnmfct,
-                cpage: page.toString(), 
-                rows: '5' 
-            }
-        });
+        while (hasMoreData) {
+            const response = await api.get('prfplc', { 
+                params: {
+                    shprfnmfct,
+                    cpage: currentPage.toString(), 
+                    rows: '5' 
+                }
+            });
 
-        const xmlData = response.data;
-        const jsonData = await parseXml(xmlData);
+            const xmlData = response.data;
+            const jsonData = await parseXml(xmlData);
 
-        if (jsonData.dbs && jsonData.dbs.db) {
-            const currentResults = jsonData.dbs.db;
+            if (jsonData.dbs && jsonData.dbs.db) {
+                const currentResults = jsonData.dbs.db;
 
-            if (Array.isArray(currentResults) && currentResults.length > 0) {
-                allResults = currentResults;
+                if (Array.isArray(currentResults) && currentResults.length > 0) {
+                    allResults = [...allResults, ...currentResults]; 
+                } else {
+                    hasMoreData = false;
+                }
             } else {
                 hasMoreData = false;
             }
-        } else {
-            hasMoreData = false;
+
+            currentPage++;
         }
 
-        return { dbs: { db: allResults }, total_pages: jsonData.total_pages || 0, current_page: page };
+        return { dbs: { db: allResults } };
 
     } catch (error) {
-        console.error('데이터 가져오기 오류:', error);
+        console.error('데이터 가져오기 오류:', error.response ? error.response.data : error.message);
         throw error;
     }
 };

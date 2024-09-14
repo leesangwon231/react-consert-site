@@ -8,9 +8,7 @@ import ListCulture from './component/ListCulture/ListCulture';
 import ListCenter from './component/ListCenter/ListCenter';
 import { useSearchCenters } from '../../hooks/useSearchCenter';
 import { useSearchCultures } from '../../hooks/useSearchCultures';
-
-
-
+import LoadingSpinner from "../../common/LoadingSpinner/LoadingSpinner";
 
 const SearchPage = () => {
   const [inputValue, setInputValue] = useState("");
@@ -32,7 +30,7 @@ const SearchPage = () => {
   const { data: centerData, error: centerError, isLoading: centerLoading } = useSearchCenters({ shprfnmfct: keyword });
 
   if (keyword && (cultureLoading || centerLoading)) {
-    return <div> Loding... </div>;
+    return <LoadingSpinner/>;
   }
 
   if (keyword && (cultureError || centerError)) {
@@ -42,9 +40,9 @@ const SearchPage = () => {
   const searchByKeyword = (event) => {
     event.preventDefault();
     if (inputValue.trim() !== "") {
-      setKeyword(inputValue.trim());
+      setKeyword(inputValue.trim()); 
       navigate(`/search?q=${inputValue.trim()}`);
-      setInputValue("");
+      setInputValue(""); 
     } else {
       alert("검색어를 입력해 주세요");
     }
@@ -55,63 +53,63 @@ const SearchPage = () => {
   };
 
   return (
-      <div className="search-container">
-        <Container>
-          <Row>
-            <div className="search-box">
-              <h1>
-                {keyword ? (
-                    <span className="keyword">' {keyword} ' </span>
-                ) : (
-                    "검색어를 입력하세요"
-                )}
-                {keyword ? '에 대한 검색 결과 입니다.' : ""}
-              </h1>
-              <Form className="d-flex search-form" onSubmit={searchByKeyword}>
-                <div className="input-container">
-                  <Form.Control
-                      type="search"
-                      className="me-2"
-                      aria-label="Search"
-                      value={inputValue}
-                      onChange={(event) => setInputValue(event.target.value)}
-                  />
-                </div>
-                <a
-                    href="#"
-                    onClick={searchByKeyword}
-                    className="btn-srch"
-                    aria-label="Search"
-                >
-                  <FontAwesomeIcon icon={faSearch} />
-                </a>
-              </Form>
-            </div>
-            <div className="button-group">
-              <Button
-                  className={`btn ${activeButton === "all" ? "active" : ""}`}
-                  onClick={() => handleButtonClick("all")}
+    <div className="search-container">
+      <Container>
+        <Row>
+          <div className="search-box">
+            <h1>
+              {keyword ? (
+                <span className="keyword">' {keyword} ' </span>
+              ) : (
+                "검색어를 입력하세요"
+              )} 
+              {keyword ? '에 대한 검색 결과 입니다.' : ""}
+            </h1>
+            <Form className="d-flex search-form" onSubmit={searchByKeyword}>
+              <div className="input-container">
+                <Form.Control
+                  type="search"
+                  className="me-2"
+                  aria-label="Search"
+                  value={inputValue}
+                  onChange={(event) => setInputValue(event.target.value)}
+                />
+              </div>
+              <a 
+                href="#"
+                onClick={searchByKeyword}
+                className="btn-srch"
+                aria-label="Search"
               >
-                통합검색
-              </Button>
-              <Button
-                  className={`btn ${activeButton === "culture" ? "active" : ""}`}
-                  onClick={() => handleButtonClick("culture")}
-              >
-                공연
-              </Button>
-              <Button
-                  className={`btn ${activeButton === "center" ? "active" : ""}`}
-                  onClick={() => handleButtonClick("center")}
-              >
-                시설
-              </Button>
-            </div>
-            {keyword && activeButton === "all" || activeButton === "culture" ? <ListCulture data={cultureData}/> : null}
-            {keyword && activeButton === "all" || activeButton === "center" ? <ListCenter data={centerData}/> : null}
-          </Row>
-        </Container>
-      </div>
+                <FontAwesomeIcon icon={faSearch} />
+              </a>
+            </Form>
+          </div>
+          <div className="button-group">
+            <Button 
+              className={`btn ${activeButton === "all" ? "active" : ""}`}
+              onClick={() => handleButtonClick("all")}
+            >
+              통합검색
+            </Button>
+            <Button 
+              className={`btn ${activeButton === "culture" ? "active" : ""}`}
+              onClick={() => handleButtonClick("culture")}
+            >
+              공연
+            </Button>
+            <Button 
+              className={`btn ${activeButton === "center" ? "active" : ""}`}
+              onClick={() => handleButtonClick("center")}
+            >
+              시설
+            </Button>
+          </div>
+          {keyword && activeButton === "all" || activeButton === "culture" ? <ListCulture data={cultureData}/> : null}
+          {keyword && activeButton === "all" || activeButton === "center" ? <ListCenter data={centerData}/> : null}
+        </Row>
+      </Container>
+    </div>
   );
 };
 

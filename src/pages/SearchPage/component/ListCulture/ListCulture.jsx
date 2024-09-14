@@ -1,18 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Container, Row, Badge } from 'react-bootstrap';
-import ReactPaginate from 'react-paginate';
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import { genreList } from '../../../../constants/constants'; 
 import "./ListCulture.css";
+import Pagination from '../../../../common/Pagination/Pagination'; 
 
 const ListCulture = ({ data }) => {
-    //console.log("ddd",data);
-
     const culturalEvents = data?.dbs?.db || [];
     const totalCulturals = culturalEvents.length;
 
     const [currentPage, setCurrentPage] = useState(0);
     const itemsPerPage = 5; 
-
     const pageCount = Math.ceil(totalCulturals / itemsPerPage);
 
     const displayedEvents = culturalEvents.slice(
@@ -25,10 +23,15 @@ const ListCulture = ({ data }) => {
     };
 
     const navigate = useNavigate(); 
-    const handleClick = (id) => {
-        navigate(`/contents/${id}`);
+
+    const getGenreAddress = (genrenm) => {
+        const matchedGenre = genreList.find((genre) => genre.genreName === genrenm);
+        return matchedGenre ? matchedGenre.genreAddress : 'unknown';
     };
-    
+
+    const handleClick = (id, genreAddress) => {
+        navigate(`/contents/${genreAddress}/${id}`);
+    };
 
     const isMobile = window.innerWidth <= 768;
 
@@ -38,64 +41,55 @@ const ListCulture = ({ data }) => {
             <div className='list-itemarea'>
                 <Container fluid>
                     {totalCulturals > 0 ? (
-                        displayedEvents.map((event) => (
-                            <Row key={event.mt20id} className="mb-4 list-container">
-                                <div className="list-item"
-                                    onClick={() => handleClick(event.mt20id)}
-                                    style={{ cursor: 'pointer' }}
-                                >
-                                    <img 
-                                        className="list-img"
-                                        src={event.poster}
-                                        alt={event.prfnm}
-                                    />
-                                    <div className="list-details">
-                                        <div className="list-detail-group">
-                                            <Badge className={
-                                                `badge-status
-                                                ${event.prfstate === '공연예정' 
-                                                ? 'pending' : event.prfstate === '공연중'
-                                                ? 'ongoing' : 'completed'}`
-                                            }>
-                                                {event.prfstate}
-                                            </Badge>
-                                            <div className="list-detail-title">{event.prfnm}</div>
+                        displayedEvents.map((event) => {
+                            const genreAddress = getGenreAddress(event.genrenm);
+                            return (
+                                <Row key={event.mt20id} className="mb-4 list-container">
+                                    <div className="list-item"
+                                        onClick={() => handleClick(event.mt20id, genreAddress)}
+                                        style={{ cursor: 'pointer' }}
+                                    >
+                                        <img 
+                                            className="list-img"
+                                            src={event.poster}
+                                            alt={event.prfnm}
+                                        />
+                                        <div className="list-details">
+                                            <div className="list-detail-group">
+                                                <Badge className={`
+                                                    badge-status
+                                                    ${event.prfstate === '공연예정' 
+                                                        ? 'pending' 
+                                                        : event.prfstate === '공연중' 
+                                                        ? 'ongoing' 
+                                                        : 'completed'}` }
+                                                >
+                                                    {event.prfstate}
+                                                </Badge>
+                                                <div className="list-detail-title">{event.prfnm}</div>
+                                            </div>
+                                            <div className="list-detail">{event.fcltynm}</div>
+                                            <div className="list-detail">{event.prfpdfrom} ~ {event.prfpdto}</div>
                                         </div>
-                                        <div className="list-detail">{event.fcltynm}</div>
-                                        <div className="list-detail">{event.prfpdfrom} ~ {event.prfpdto}</div>
                                     </div>
-                                </div>
-                            </Row>
-                        ))
+                                </Row>
+                            );
+                        })
                     ) : (
                         <h4 className="no-results">검색 결과가 없습니다</h4>
                     )}
                     {totalCulturals > itemsPerPage && (
-                        <div className="pagination-container">
-                            <ReactPaginate
-                                previousLabel="<"
-                                nextLabel=">"
-                                pageClassName="page-item"
-                                pageLinkClassName="page-link"
-                                previousClassName="page-item"
-                                previousLinkClassName="page-link"
-                                nextClassName="page-item"
-                                nextLinkClassName="page-link"
-                                breakLabel="..."
-                                breakClassName="page-item"
-                                breakLinkClassName="page-link"
-                                pageCount={pageCount}
-                                marginPagesDisplayed={2}
-                                pageRangeDisplayed={5}
-                                onPageChange={handlePageClick}
-                                containerClassName="pagination"
-                                activeClassName="active"
-                                forcePage={currentPage}
+                        <div className='pagination-container'>
+                            <Pagination 
+                            pageCount={pageCount}
+                            currentPage={currentPage}
+                            handlePageClick={handlePageClick}
+                            isMobile={isMobile}
                             />
                         </div>
+                        
                     )}
                 </Container>
-                
             </div>
         </div>
     );
