@@ -16,10 +16,10 @@ const Banner = () => {
     return <div className="loading">Loading...</div>;
   }
   if (error) {
-    console.log(error);
-    return <div className="error-box">{error}</div>;
+    console.log('error:', error);
+    return <div className="error-box">Error {error}</div>;
   }
-  
+
   return (
     <div className="banner-container global-mx py-4">
       {data?.map((item, i) => (
