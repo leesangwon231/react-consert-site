@@ -4,6 +4,7 @@ import PerformanceCard from "./PerformanceCard";
 import LoadingSpinner from "../../../common/LoadingSpinner/LoadingSpinner";
 import { Pagination } from 'react-bootstrap';
 import { genreList } from "../../../constants/constants"; 
+import './PerformancesList.css'; 
 
 const PerformancesList = ({ regionCode }) => {
   const [page, setPage] = useState(1); // 현재 페이지 상태

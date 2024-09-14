@@ -3,6 +3,7 @@ import { useVenues } from "../../../hooks/useVenues";
 import VenueCard from "./VenueCard";  
 import LoadingSpinner from "../../../common/LoadingSpinner/LoadingSpinner"; // 경로에 맞게 로딩 스피너 불러오기
 import { Pagination } from 'react-bootstrap'; // Pagination 추가
+import './VenuesList.style.css'; // CSS 파일 연결
 
 const VenuesList = ({ regionCode }) => {
   const [page, setPage] = useState(1); // 현재 페이지 상태
