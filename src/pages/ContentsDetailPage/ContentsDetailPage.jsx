@@ -120,6 +120,7 @@ const ContentsDetailPage = () => {
                   style={{
                     backgroundColor: "#e2e2e2",
                     padding: "20px",
+                    paddingRight: "35%",
                     display: "inline-block",
                     width: "auto",
                   }}
