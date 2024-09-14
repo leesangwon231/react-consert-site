@@ -1,17 +1,17 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import './PerformanceCard.css'; // CSS 파일 연결
+import './PerformanceCard.css';
 
-const PerformanceCard = ({ performance }) => {
-  const navigate = useNavigate(); // 상세 페이지로 이동할 수 있게 하는 React Router 훅
+const PerformanceCard = ({ performance, category }) => {
+  const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/contents/${performance.mt20id}`); // 공연 ID를 경로에 포함해 이동
+    navigate(`/contents/${category}/${performance.mt20id}`);
   };
 
   return (
-    <div className="col-3" onClick={handleClick} style={{ cursor: 'pointer' }}> {/* 카드 클릭하면 상세페이지 이동 */}
-      <div className="performance-card d-flex"> {/* Flexbox의 레이아웃, 좌우 배치 */}
+    <div className="col-3" onClick={handleClick} style={{ cursor: 'pointer' }}>
+      <div className="performance-card d-flex">
         <div className="poster">
           <img
             src={performance.poster}

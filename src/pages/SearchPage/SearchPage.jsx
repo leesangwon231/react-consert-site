@@ -5,8 +5,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import "./SearchPage.css";
-import ListCulture from '../component/ListCulture/ListCulture';
-import ListCenter from '../component/ListCenter/ListCenter';
+// import ListCulture from '../component/ListCulture/ListCulture';
+// import ListCenter from '../component/ListCenter/ListCenter';
 
 const SearchPage = () => {
   const [inputValue, setInputValue] = useState(""); 
@@ -99,8 +99,8 @@ const SearchPage = () => {
               시설
             </Button>
           </div>
-          {keyword && activeButton === "all" || activeButton === "culture" ? <ListCulture data={cultureData}/> : null}
-          {keyword && activeButton === "all" || activeButton === "center" ? <ListCenter data={centerData}/> : null}
+          {/* {keyword && activeButton === "all" || activeButton === "culture" ? <ListCulture data={cultureData}/> : null}
+          {keyword && activeButton === "all" || activeButton === "center" ? <ListCenter data={centerData}/> : null} */}
         </Row>
       </Container>
     </div>
