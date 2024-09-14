@@ -1,5 +1,5 @@
 [[redirects]]
 from = "/proxy/*"
-  to = "https://www.kopis.or.kr/openApi/restful/"
+  to = "https://www.kopis.or.kr/openApi/restful/:splat"
   status = 200
   force = true
