@@ -42,7 +42,7 @@ const MainContentsLine = ({title, genreCode, kidState}) => {
     kidState: kidState,
   };
   const colorNum = Math.floor(Math.random() * 4 + 1);
-  console.log(colorNum);
+  // console.log(colorNum);
 
   const {data, isLoading, isError, error} = useContentsList(contentsLineParams);
   // console.log(data);

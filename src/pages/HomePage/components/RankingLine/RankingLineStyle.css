@@ -1,0 +1,14 @@
+.ranking-line-container {
+  margin-bottom: 2rem;
+  .ranking-card-container {
+    display: grid;
+    column-gap: 1rem;
+    grid-auto-rows: 0;
+    grid-template-rows: repeat(1, minmax(0, 1fr));
+    overflow: hidden;
+    grid-template-columns: repeat(2, minmax(10rem, 1fr));
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    }
+  }
+}
