@@ -4,8 +4,7 @@ const API_KEY = import.meta.env.VITE_API_KEY;
 
 const api = axios.create({
   // baseURL: '/api',
-  baseURL: 'http://www.kopis.or.kr/openApi/restful/',
-  method: 'GET',
+  baseURL: '/api',
   params: {
     service: API_KEY,
   },
