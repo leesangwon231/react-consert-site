@@ -5,7 +5,9 @@ import { useContentsDetail } from "../../hooks/useContentsDetail";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse } from "@fortawesome/free-solid-svg-icons";
-import { Container, Row, Col, Spinner, Card, Button } from "react-bootstrap";
+import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import LoadingSpinner from "../../common/LoadingSpinner/LoadingSpinner";
+
 
 const ContentsDetailPage = () => {
   const { id } = useParams();
@@ -16,20 +18,6 @@ const ContentsDetailPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  useEffect(() => {
-    if (isLoading) {
-      console.log("상세 정보를 불러오는 중입니다...");
-    }
-
-    if (error) {
-      console.error("상세 정보를 불러오는 중 오류 발생:", error);
-    }
-
-    if (data) {
-      console.log("불러온 상세 정보:", data);
-    }
-  }, [data, isLoading, error]);
 
   const contentDetail = data?.dbs?.db;
 
@@ -60,11 +48,8 @@ const ContentsDetailPage = () => {
 
   if (isLoading) {
     return (
-      <div
-        className="d-flex justify-content-center align-items-center"
-        style={{ height: "100vh" }}
-      >
-        <Spinner animation="border" variant="primary" />
+      <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
+        <LoadingSpinner /> 
       </div>
     );
   }
@@ -135,6 +120,7 @@ const ContentsDetailPage = () => {
                   style={{
                     backgroundColor: "#e2e2e2",
                     padding: "20px",
+                    paddingRight: "35%",
                     display: "inline-block",
                     width: "auto",
                   }}
