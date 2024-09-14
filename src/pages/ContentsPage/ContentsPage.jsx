@@ -8,9 +8,9 @@ import { useParams } from "react-router-dom";
 import { useContents } from "../../hooks/useContents.jsx";
 
 const ContentsPage = () => {
+
     let params = useParams();
-    console.log("a")
-    // performanceKinds를 useEffect 훅 위로 이동
+
     let performanceKinds = ["콘서트", "CCCD"];
     if (params.category === "musical") {
         performanceKinds = ["뮤지컬", "GGGA"];

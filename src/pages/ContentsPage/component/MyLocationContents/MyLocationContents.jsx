@@ -20,7 +20,6 @@ const MyLocationContents = ({ctprvn,performanceKinds}) => {
     //내 위치 찾기
     const getMyLocation = async () => {
         try {
-            console.log("b")
             const position = await new Promise((resolve, reject) => {
                 navigator.geolocation.getCurrentPosition(resolve, reject);
             });
