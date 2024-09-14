@@ -8,7 +8,6 @@ import { useParams } from "react-router-dom";
 import { useContents } from "../../hooks/useContents.jsx";
 
 const ContentsPage = () => {
-
     let params = useParams();
 
     let performanceKinds = ["콘서트", "CCCD"];
