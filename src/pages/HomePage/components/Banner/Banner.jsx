@@ -10,6 +10,7 @@ const Banner = () => {
     performanceState: '01',
   };
   const {data, isLoading, isError, error} = useContentsList(bannerParams);
+  console.log(data);
 
   if (isLoading) {
     return <div className="loading">Loading...</div>;
