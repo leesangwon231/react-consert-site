@@ -55,6 +55,24 @@
     margin-top: 30px; /* 하위 공연장 목록과 카드 사이의 간격 추가 */
 }
 
+/* 반응형 조정 - 태블릿 및 작은 화면 */
+@media (max-width: 992px) {
+    .sub-venues-list {
+        grid-template-columns: repeat(3, 1fr); /* 중간 화면에서는 한 줄에 3개의 카드 */
+    }
+}
+
+@media (max-width: 768px) {
+    .sub-venues-list {
+        grid-template-columns: repeat(2, 1fr); /* 작은 화면에서는 한 줄에 2개의 카드 */
+    }
+}
+
+@media (max-width: 576px) {
+    .sub-venues-list {
+        grid-template-columns: 1fr; /* 가장 작은 화면에서는 한 줄에 1개의 카드 */
+    }
+}
 
 .sub-venue-card {
     background: #fff;
@@ -130,3 +148,24 @@ h4 {
     margin-top: 40px;
   }
   
+/* 반응형 조정 - 태블릿 및 작은 화면 */
+@media (max-width: 992px) {
+    .venue-map {
+        width: 90%; /* 중간 화면에서는 90% 너비로 설정 */
+        height: 350px; /* 지도의 높이도 적절하게 줄임 */
+    }
+}
+
+@media (max-width: 768px) {
+    .venue-map {
+        width: 100%; /* 작은 화면에서는 화면의 100% 너비로 설정 */
+        height: 300px; /* 지도의 높이도 더 작게 줄임 */
+    }
+}
+
+@media (max-width: 576px) {
+    .venue-map {
+        width: 100%; /* 가장 작은 화면에서도 100% 너비 */
+        height: 250px; /* 지도의 높이 더 작게 */
+    }
+}
