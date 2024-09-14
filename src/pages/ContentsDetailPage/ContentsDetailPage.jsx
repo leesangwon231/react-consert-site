@@ -5,7 +5,9 @@ import { useContentsDetail } from "../../hooks/useContentsDetail";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse } from "@fortawesome/free-solid-svg-icons";
-import { Container, Row, Col, Spinner, Card, Button } from "react-bootstrap";
+import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import LoadingSpinner from "../../common/LoadingSpinner/LoadingSpinner";
+
 
 const ContentsDetailPage = () => {
   const { id } = useParams();
@@ -60,11 +62,8 @@ const ContentsDetailPage = () => {
 
   if (isLoading) {
     return (
-      <div
-        className="d-flex justify-content-center align-items-center"
-        style={{ height: "100vh" }}
-      >
-        <Spinner animation="border" variant="primary" />
+      <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
+        <LoadingSpinner /> {/* 커스텀 로딩 스피너 사용 */}
       </div>
     );
   }
