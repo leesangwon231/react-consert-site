@@ -1,3 +1,4 @@
+import ErrorBox from '../../../../common/ErrorBox/ErrorBox';
 import {useContentsList} from '../../../../hooks/useMainPage';
 import PosterCard from '../PosterCard/PosterCard';
 import './BannerStyle.css';
@@ -15,7 +16,7 @@ const Banner = () => {
     return <div className="loading">Loading...</div>;
   }
   if (isError) {
-    return <div className="error-box">{error}</div>;
+    return <ErrorBox error={error} />;
   }
   return (
     <div className="banner-container global-mx py-4">
