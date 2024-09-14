@@ -1,18 +1,12 @@
 import React from "react";
 import { useVenues } from "../../../hooks/useVenues";  
 import VenueCard from "./VenueCard";  
-import { Spinner } from 'react-bootstrap'; 
+import LoadingSpinner from "../../../common/LoadingSpinner/LoadingSpinner"; // 경로에 맞게 로딩 스피너 불러오기
 
 const VenuesList = ({ regionCode }) => {
   const { data, error, isLoading } = useVenues(regionCode === "all" ? null : regionCode);
 
-  if (isLoading) return (
-    <div className="loading-spinner">
-      <Spinner animation="border" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </Spinner>
-    </div>
-  );
+  if (isLoading) return <LoadingSpinner />; // 로딩 시 커스텀 스피너 표시
   
   if (error) return <p>오류 발생: {error.message}</p>;
 
@@ -22,7 +16,7 @@ const VenuesList = ({ regionCode }) => {
     <div className="row">
       {venues.map((venue) => (
         <div key={venue.mt10id} className="col-3">
-          <VenueCard venue={venue} selectedRegion={regionCode} /> {/* 지역 코드 전달 */}
+          <VenueCard venue={venue} selectedRegion={regionCode} />
         </div>
       ))}
     </div>

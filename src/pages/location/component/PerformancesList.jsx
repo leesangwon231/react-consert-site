@@ -1,63 +1,49 @@
 import React, { useState } from "react";
 import { usePerformances } from "../../../hooks/usePerformances";
 import PerformanceCard from "./PerformanceCard";
-import { Spinner, Pagination } from 'react-bootstrap'; // Pagination 추가
-
-// 장르 이름과 장르 코드 매핑
-const genreMapping = {
-  "연극": "AAAA",
-  "서양무용": "BBBC",
-  "한국무용": "BBBC",
-  "대중무용": "BBBE",
-  "서양음악(클래식)": "CCCA",
-  "한국음악(국악)": "CCCC",
-  "대중음악": "CCCD",
-  "복합": "EEEA",
-  "서커스/마술": "EEEB",
-  "뮤지컬": "GGGA"
-};
+import { Pagination } from 'react-bootstrap';
+import LoadingSpinner from "../../../common/LoadingSpinner/LoadingSpinner";
+import { genreList } from "../../../constants/constants"; 
 
 const PerformancesList = ({ regionCode }) => {
-  const [page, setPage] = useState(1); // 현재 페이지 번호 상태 관리
-  const { data, error, isLoading } = usePerformances(regionCode === "all" ? null : regionCode, page); // "전체"일 때는 null로 전달
+  const [page, setPage] = useState(1);
+  const { data, error, isLoading } = usePerformances(regionCode === "all" ? null : regionCode, page);
 
-  if (isLoading) return (
-    <div className="loading-spinner">
-      <Spinner animation="border" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </Spinner>
-    </div>
-  ); // 로딩 중일 때 스피너 표시
+  // Loading 상태일 때 커스텀 스피너 표시
+  if (isLoading) return <LoadingSpinner />;
 
   if (error) return <p>오류 발생: {error.message}</p>;
 
   const performances = data?.dbs?.db || [];
 
+  const getGenreAddress = (genrenm) => {
+    const genre = genreList.find(g => g.genreName === genrenm);
+    return genre ? genre.genreAddress : "unknown";
+  };
+
   const handleNextPage = () => {
-    setPage((prevPage) => prevPage + 1); // 다음 페이지로 이동
+    setPage((prevPage) => prevPage + 1);
   };
 
   const handlePreviousPage = () => {
     if (page > 1) {
-      setPage((prevPage) => prevPage - 1); // 이전 페이지로 이동
+      setPage((prevPage) => prevPage - 1);
     }
   };
 
-  const totalPages = 10; // 전체 페이지 수를 미리 설정하거나 API 응답에서 받아옴
+  const totalPages = 10;
 
   return (
     <div>
-      <div className="row"> {/* 행(row)로 감싸서 한 줄에 4개씩 나오게 설정 */}
+      <div className="row">
         {performances.map((performance) => {
-          // 공연 장르를 매핑
-          const category = genreMapping[performance.genrenm] || "unknown";
+          const category = getGenreAddress(performance.genrenm);
           return (
             <PerformanceCard key={performance.mt20id} performance={performance} category={category} />
           );
         })}
       </div>
 
-      {/* Bootstrap Pagination */}
       <div className="pagination-controls">
         <Pagination>
           <Pagination.First onClick={() => setPage(1)} />
