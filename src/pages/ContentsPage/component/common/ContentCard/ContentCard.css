@@ -1,36 +1,63 @@
 @import url('https://cdn.jsdelivr.net/gh/sun-typeface/SUITE@2/fonts/variable/woff2/SUITE-Variable.css');
-    .ContentsPage_container {
 
-        .ContentsPage_card-box-container{
-        }
-        /* width: 30%; */
-        cursor: pointer;
-        transition: all 0.3s;
-        &:hover {
-            transform: scale(1.1);
-            border-radius: 10px;
-        }
-        img {
-            width: 100%;
-            object-fit: cover;
-            aspect-ratio: 3/4;
+.ContentsPage_container {
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 10px;
+    .ContentsPage_card-box-container{
+
+
+        .ContentsPage_card-box{
+
+            .ContentsPage_img-box{
+
+            }
+
+            .ContentsPage_text-box{
+                h5{
+                    font-size : 15px;
+                    font-weight: bold;
+                    margin-bottom: 4px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    max-width: 240px;
+                }
+                .text-center{
+                    font-size : 10px
+                }
+            }
         }
 
     }
-
-.ContentsPage_text-box span {
-    margin-bottom: 4px; /* 필요한 간격으로 설정 */
+    &:hover {
+        transform: scale(1.1);
+        border-radius: 10px;
+    }
+    img {
+        width: 100%;
+        object-fit: cover;
+        aspect-ratio: 3/4;
+    }
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translate3d(0, -20%, 0);
-    }
-    to {
-        opacity: 1;
-        transform: translate3d(0, 0, 0);
+
+
+/*.ContentsPage_text-box h5 {
+    font-size: 1rem; !* Adjust as needed *!
+    font-weight: bold;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100px;
+}*/
+
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .ContentsPage_text-box h5 {
+        font-size: 0.9rem; /* Adjust for smaller screens */
     }
 }
-
-
