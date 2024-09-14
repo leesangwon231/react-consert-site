@@ -56,7 +56,7 @@ const LocationPage = () => {
   };
 
   return (
-    <div className="location-page">
+    <div className="location-page global-mx">
       <div className="view-mode-switch">
         <button 
           className={`switch-btn ${viewMode === "performances" ? 'active' : ''}`}
