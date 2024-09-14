@@ -1,0 +1,66 @@
+.ContentsPage_LocationContainer{
+    margin-top: 50px;
+}
+
+.ContentsPage_text-center_span{
+    color: var(--highlight-color4);
+    font-size: 60px;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+
+.ContentsPage_text-center_location{
+    color: black;
+    margin-bottom: 50px;
+    font-family: 'SUITE Variable', sans-serif;
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    letter-spacing: 10px;
+}
+
+@media only screen and (max-width: 1200px) {
+    .ContentsPage_text-center_span{
+        font-size: 60px;
+        white-space: nowrap;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 10px;
+    }
+
+    .ContentsPage_text-center_location {
+        font-family: 'SUITE Variable', sans-serif;
+        font-size: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        white-space: nowrap;
+        justify-content: center;
+    }
+}
+
+
+@media only screen and (max-width: 500px) {
+    .ContentsPage_text-center_span{
+        font-size: 30px;
+        white-space: nowrap;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 10px;
+    }
+
+    .ContentsPage_text-center_location {
+        font-family: 'SUITE Variable', sans-serif;
+        font-size: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        white-space: nowrap;
+        justify-content: center;
+    }
+}

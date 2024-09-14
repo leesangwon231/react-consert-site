@@ -1,0 +1,13 @@
+{
+  "routes": [{"src": "/[^.]+", "dest": "/", "status": 200}],
+  "rewrites": [
+    {
+      "source": "/proxy/:path*",
+      "destination": "http://www.kopis.or.kr/openApi/restful/:path*"
+    },
+    {
+      "source": "/proxy/:path*/",
+      "destination": "http://www.kopis.or.kr/openApi/restful/:path*/"
+    }
+  ]
+}

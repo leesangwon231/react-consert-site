@@ -1,0 +1,186 @@
+@import url('https://cdn.jsdelivr.net/gh/sun-typeface/SUITE@2/fonts/variable/woff2/SUITE-Variable.css');
+
+.ContentsPage_ContentsPage_FilterArea{
+
+}
+
+.ContentsPage_Filter_Wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.ContentsPage_Filter_ButtonArea{
+    max-width: 1320px;
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+
+.ContentsPage_Filter_Button{
+    border : 2px solid var(--highlight-color4);
+    width: 100%;
+    max-width: 55px;
+    height: 100%;
+    max-height: 100px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    font-weight : bold;
+    color: var(--highlight-color4);;
+    &.active{
+        background-color: var(--highlight-color4);
+        color: white;
+        font-weight : bold;
+        border : 2px solid var(--highlight-color4);
+
+    }
+}
+
+
+
+.ContentsPage_FilterArea_Container_active{
+    font-family: 'SUITE Variable', sans-serif;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-color: var(--highlight-color4);
+    color: white;
+    margin-bottom: 50px;
+}
+
+.ContentsPage_FilterArea_Wrapper{
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 1320px;
+    width: 100%;
+    gap: 90px;
+    opacity: 1;
+    transition: max-height 1s ease, opacity 1s ease;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    overflow: hidden;
+    min-height: 100px;
+}
+
+.ContentsPage_FilterArea_Wrapper_UnVisible{
+    display: flex;
+    height: 0;
+    max-width: 1320px;
+    gap: 90px;
+    opacity: 0;
+    transition: height 1s ease;
+}
+
+
+
+.ContentsPage_FilterArea_PerState{
+    max-width: 660px;
+}
+
+.ContentsPage_FilterArea_PerState > p{
+    font-weight : bold;
+
+}
+
+.ContentsPage_FilterArea_PerState>span{
+    margin-top: 40px;
+}
+
+.ContentsPage_FilterArea_StateInfoWrapper{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    justify-content: start;
+    margin-bottom: 10px;
+    gap: 10px;
+}
+
+
+
+
+.ContentsPage_FilterArea_InfoWrapper{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+
+}
+
+
+.ContentsPage_FilterArea_Flag{
+    font-family: 'SUITE Variable', sans-serif;
+    border: 1px solid ;
+    width: 100%;
+    font-weight : bold;
+    max-width: 200px;
+    min-width: 100px;
+    min-height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1 1 0;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    background-color: white;
+    color:  var(--highlight-color4);
+}
+
+.ContentsPage_FilterArea_Flag:hover{
+    background-color: var(--highlight-color4);
+    color: white;
+    transition: 1s;
+}
+
+.ContentsPage_FilterArea_Flag_active{
+    font-family: 'SUITE Variable', sans-serif;
+    border: 2px solid white;
+    width: 100%;
+    max-width: 200px;
+    min-width: 120px;
+    min-height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:  var(--highlight-color4);
+    font-weight : bold;
+    color: white;
+    flex: 1 1 0;
+    border-radius: 20px;
+    cursor: pointer;
+
+}
+
+
+@media only screen and (max-width: 1000px) {
+    .ContentsPage_FilterArea_Wrapper{
+        display: flex;
+        max-width: 1320px;
+        gap: 30px;
+    }
+}
+
+
+
+@media only screen and (max-width: 600px) {
+    .ContentsPage_FilterArea_Wrapper {
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+    }
+
+    .ContentsPage_FilterArea_Wrapper{
+
+    }
+}

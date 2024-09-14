@@ -1,0 +1,2 @@
+/api/* http://www.kopis.or.kr/openApi/restful/:splat 200
+/* /index.html 200
