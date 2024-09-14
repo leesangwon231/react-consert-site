@@ -1,23 +1,20 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import axios from "axios";
 import ContentCard from "../common/ContentCard/ContentCard.jsx";
-import "./MyLocationContents.css"
-import {useLocationContents} from "../../../../hooks/useContentsLocation.jsx";
-import {Spinner} from "react-bootstrap";
+import "./MyLocationContents.css";
+import { useLocationContents } from "../../../../hooks/useContentsLocation.jsx";
+import { Spinner } from "react-bootstrap";
 import AOS from "aos";
 import 'aos/dist/aos.css';
 
-const MyLocationContents = ({ctprvn,performanceKinds}) => {
-    //진척도
-    const [myLocation , setMyLocation] = useState({name : "" , signgucode : "", shcate : ""});
-    const [locationContents,SetLocationContents] = useState([]);
+const MyLocationContents = ({ ctprvn, performanceKinds }) => {
+    const [myLocation, setMyLocation] = useState({ name: "", signgucode: "", shcate: "" });
+    const [locationContents, setLocationContents] = useState([]);
+    const { data, isLoading } = useLocationContents(myLocation);
 
-    const {data,isLoading} = useLocationContents(myLocation);
-
-    //내 위치 찾기
     const getMyLocation = async () => {
         try {
             const position = await new Promise((resolve, reject) => {
@@ -34,49 +31,51 @@ const MyLocationContents = ({ctprvn,performanceKinds}) => {
         }
     };
 
+
     useEffect(() => {
         AOS.init();
-    }, []);
-
-    useEffect(() => {
-
         const fetchLocation = async () => {
+
             const city = await getMyLocation();
-            setMyLocation({...myLocation, name: city, signgucode: ctprvn[city] , shcate: performanceKinds[1]});
+            if (city) {
+                setMyLocation({ name: city, signgucode: ctprvn[city], shcate: performanceKinds[1] });
+            }
         };
 
         fetchLocation();
+    }, [ctprvn, performanceKinds]); // 위치와 관련된 상태가 변경될 때만 호출
 
-        if(Array.isArray(data?.dbs.db)){
-            SetLocationContents(data?.dbs.db)
-        }else{
-            SetLocationContents([data?.dbs.db])
+    useEffect(() => {
+        if (Array.isArray(data?.dbs.db)) {
+            setLocationContents(data?.dbs.db);
+        } else if (data?.dbs.db) {
+            setLocationContents([data?.dbs.db]);
         }
     }, [data]);
 
-
-
-  return (
-    <div className={"ContentsPage_LocationContainer"}>
-        <Container>
-            <Row className={"ContentsPage_row"}>
-                <Col className="ContentsPage_text-center_location"><span className={"ContentsPage_text-center_span"}>{myLocation?.name}</span>  에서  <span className={"ContentsPage_text-center_span"}>{performanceKinds[0]}</span>  보는건 어때?</Col>
-                <Col className={"ContentsPage_col-lg-12"} lg={12} xs={12}>
-                    <Row>
-                        {isLoading
-                            ? <Spinner animation="border" variant="dark"/>
-                            : locationContents?.map((content, index) => (
-                                <Col lg={3} xs={12} key={index}>
-                                    <ContentCard content={content} index={index}/>
-                                </Col>
-                            ))
-                        }
-                    </Row>
-                </Col>
-            </Row>
-        </Container>
-    </div>
-  );
-}
+    return (
+        <div className={"ContentsPage_LocationContainer"}>
+            <Container>
+                <Row className={"ContentsPage_row"}>
+                    <Col className="ContentsPage_text-center_location">
+                        <span className={"ContentsPage_text-center_span"}>{myLocation?.name}</span> 에서 <span className={"ContentsPage_text-center_span"}>{performanceKinds[0]}</span> 보는건 어때?
+                    </Col>
+                    <Col className={"ContentsPage_col-lg-12"} lg={12} xs={12}>
+                        <Row>
+                            {isLoading
+                                ? <Spinner animation="border" variant="dark" />
+                                : locationContents?.map((content, index) => (
+                                    <Col lg={3} xs={12} key={index}>
+                                        <ContentCard content={content} index={index} />
+                                    </Col>
+                                ))
+                            }
+                        </Row>
+                    </Col>
+                </Row>
+            </Container>
+        </div>
+    );
+};
 
 export default MyLocationContents;

@@ -35,7 +35,6 @@ const fetchSearchContentsData = async (param) => {
 
             if (jsonData.dbs && jsonData.dbs.db) {
                 const currentResults = jsonData.dbs.db;
-                
                 if (Array.isArray(currentResults) && currentResults.length > 0) {
                     allResults = [...allResults, ...currentResults];
                 } else {
