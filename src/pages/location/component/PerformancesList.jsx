@@ -1,21 +1,8 @@
 import React, { useState } from "react";
 import { usePerformances } from "../../../hooks/usePerformances";
 import PerformanceCard from "./PerformanceCard";
-import { Spinner, Pagination } from 'react-bootstrap'; // Pagination 추가
-
-// 장르 이름과 장르 코드 매핑
-const genreMapping = {
-  "연극": "AAAA",
-  "서양무용": "BBBC",
-  "한국무용": "BBBC",
-  "대중무용": "BBBE",
-  "서양음악(클래식)": "CCCA",
-  "한국음악(국악)": "CCCC",
-  "대중음악": "CCCD",
-  "복합": "EEEA",
-  "서커스/마술": "EEEB",
-  "뮤지컬": "GGGA"
-};
+import { Spinner, Pagination } from 'react-bootstrap';
+import { genreList } from "../../../constants/constants"; // Import the genre list
 
 const PerformancesList = ({ regionCode }) => {
   const [page, setPage] = useState(1); // 현재 페이지 번호 상태 관리
@@ -33,6 +20,12 @@ const PerformancesList = ({ regionCode }) => {
 
   const performances = data?.dbs?.db || [];
 
+  // Helper function to map `genrenm` to `genreAddress`
+  const getGenreAddress = (genrenm) => {
+    const genre = genreList.find(g => g.genreName === genrenm);
+    return genre ? genre.genreAddress : "unknown";
+  };
+
   const handleNextPage = () => {
     setPage((prevPage) => prevPage + 1); // 다음 페이지로 이동
   };
@@ -49,8 +42,8 @@ const PerformancesList = ({ regionCode }) => {
     <div>
       <div className="row"> {/* 행(row)로 감싸서 한 줄에 4개씩 나오게 설정 */}
         {performances.map((performance) => {
-          // 공연 장르를 매핑
-          const category = genreMapping[performance.genrenm] || "unknown";
+          // Get the genre address instead of genre code
+          const category = getGenreAddress(performance.genrenm);
           return (
             <PerformanceCard key={performance.mt20id} performance={performance} category={category} />
           );

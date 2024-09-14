@@ -48,25 +48,19 @@ const VenueDetailPage = () => {
   const { data, error, isLoading } = useSearchCenterDeatils(id);
 
   useEffect(() => {
-    console.log("공연장 데이터 로딩 중...");
-    console.log("데이터 상태 확인:", data);
 
     const venueDetails = data?.dbs?.db;
 
     if (venueDetails) {
-      console.log("파싱된 공연장 데이터:", venueDetails);
       if (venueDetails.la && venueDetails.lo) {
-        console.log("위도, 경도가 제공되어 지도 설정 중...");
         loadKakaoMap(venueDetails.la, venueDetails.lo, venueDetails.adres, venueDetails.fcltynm);
       } else if (venueDetails.adres) {
-        console.log("위도, 경도가 없어 주소로 지도 설정 중...");
         loadKakaoMap(null, null, venueDetails.adres, venueDetails.fcltynm);
       }
     }
   }, [data]);
 
   if (isLoading) {
-    console.log("데이터 로딩 중...");
     return (
       <div className="loading-spinner">
         <Spinner animation="border" role="status">
@@ -82,7 +76,6 @@ const VenueDetailPage = () => {
   }
 
   const venueDetails = data?.dbs?.db || {};
-  console.log("공연장 세부 정보:", venueDetails);
 
   return (
     <div className="venue-detail-container">
@@ -127,4 +120,3 @@ const VenueDetailPage = () => {
 };
 
 export default VenueDetailPage;
-
