@@ -1,3 +1,13 @@
-#footer {
+  @media (min-width: 576px) {
+    .cus-line{
+        border-bottom: 2px solid #dfdfdfaa;
+    }
+  }
+  @media (min-width: 768px) {
+    .cus-line{
+        border-right: 2px solid #dfdfdfaa;
+        border-bottom: none;
+    }
+  }
   
-}
+
