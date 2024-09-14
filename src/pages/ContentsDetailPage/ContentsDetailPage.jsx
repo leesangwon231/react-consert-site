@@ -154,7 +154,7 @@ const ContentsDetailPage = () => {
               <Card.Text>
                 <br />
                 {contentDetail?.dtguidance
-                  ? contentDetail.dtguidance.split(",").map((item, index) => (
+                  ? contentDetail.dtguidance.split(", ").map((item, index) => (
                       <span key={index}>
                         {item.trim()}
                         <br />
