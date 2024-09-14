@@ -1,3 +1,5 @@
+import ErrorBox from '../../../../common/ErrorBox/ErrorBox';
+import LoadingSpinner from '../../../../common/LoadingSpinner/LoadingSpinner';
 import {useContentsList} from '../../../../hooks/useMainPage';
 import PosterCard from '../PosterCard/PosterCard';
 import './BannerStyle.css';
@@ -6,18 +8,18 @@ const Banner = () => {
   const bannerParams = {
     itemNum: 12,
     genreCode: '',
+    signgucode: 11,
     kidState: 'N',
     performanceState: '01',
   };
   const {data, isLoading, isError, error} = useContentsList(bannerParams);
-  console.log(data);
+  // console.log(data);
 
   if (isLoading) {
-    return <div className="loading">Loading...</div>;
+    return <LoadingSpinner />;
   }
-  if (error) {
-    console.log('home error:', error);
-    return <div className="error-box">home Error {error}</div>;
+  if (isError) {
+    return <ErrorBox error={error} />;
   }
 
   return (

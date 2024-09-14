@@ -9,6 +9,10 @@ const HomePage = () => {
       <Banner />
       <Container>
         <MainContentsLine title="콘서트" genreCode="CCCD" kidState="N"/>
+        <MainContentsLine title="뮤지컬" genreCode="GGGA" kidState="N"/>
+        <MainContentsLine title="연극" genreCode="AAAA" kidState="N"/>
+        <MainContentsLine title="아동/가족" genreCode="" kidState="Y"/>
+        <MainContentsLine title="클래식" genreCode="CCCA" kidState="N"/>
       </Container>
     </div>
   );
