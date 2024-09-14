@@ -13,21 +13,26 @@ const parseXml = async (xml) => {
 };
 
 const fetchSearchCenterDeatilsData = async ({ queryKey }) => {
-    const { id } = queryKey[1] || {};  
+    const { id } = queryKey[1] || {};
 
     if (!id) {
         throw new Error('ID가 제공되지 않았습니다.');
     }
 
     try {
-        const response = await api.get(`prfplc/${id}`, {
-            params: {
-                mt10id: id,  
-            }
-        });
+        // 공연장 ID를 URL에 직접 포함하여 요청
+        const response = await api.get(`prfplc/${id}`);
 
         const xmlData = response.data;
-        const jsonData = await parseXml(xmlData);
+
+        // XML 응답 확인을 위해 로깅
+        console.log('API 응답:', xmlData);
+    
+        const jsonData = await parseXml(xmlData);  // XML을 JSON으로 변환
+    
+        // 변환된 JSON 데이터 확인을 위해 로깅
+        console.log('파싱된 데이터:', jsonData);
+    
         return jsonData;
 
     } catch (error) {

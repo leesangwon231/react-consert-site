@@ -1,0 +1,59 @@
+.venue-detail-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 컨텐츠를 가운데 정렬 */
+}
+
+.venue-name {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center; /* 텍스트 가운데 정렬 */
+}
+
+.venue-address, .venue-icons, .venue-icons p {
+    font-size: 16px;
+    margin-bottom: 20px;
+    text-align: center; /* 텍스트 가운데 정렬 */
+}
+
+.venue-icons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 600px; /* 아이콘이 너무 길게 퍼지지 않도록 최대 너비 설정 */
+}
+
+.icon-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.venue-map {
+    width: 70%;
+    height: 400px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.sub-venues {
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+}
+
+.sub-venue {
+    margin-top: 10px;
+}
+
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* 스피너 높이를 전체 컨테이너에 맞춤 */
+}

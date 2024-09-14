@@ -1,8 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Location.style.css';
 import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom'; // useNavigate와 useLocation 추가
 import PerformancesList from "./component/PerformancesList";
 import VenuesList from "./component/VenuesList";  // 공연장 리스트 컴포넌트 추가
+import queryString from 'query-string'; // URL 쿼리 파라미터를 파싱하기 위한 라이브러리
 
 const regions = [
   { code: "11", name: "서울" },
@@ -25,7 +27,11 @@ const regions = [
 ];
 
 const LocationPage = () => {
-  const [selectedRegion, setSelectedRegion] = useState(null);  // 선택한 지역
+  const navigate = useNavigate();
+  const location = useLocation();
+  const parsedQuery = queryString.parse(location.search); // URL에서 쿼리 파라미터 읽기
+
+  const [selectedRegion, setSelectedRegion] = useState(parsedQuery.region || null);  // 선택한 지역 초기화, URL에서 지역 코드 불러옴
   const [viewMode, setViewMode] = useState("performances");    // "공연" 또는 "공연장"을 선택하는 스위치 상태
 
   useEffect(() => {
@@ -34,6 +40,7 @@ const LocationPage = () => {
 
   const handleRegionClick = (regionCode) => {
     setSelectedRegion(regionCode);
+    navigate(`/location?region=${regionCode}`); // URL에 지역 코드 추가
   };
 
   const handleViewModeChange = (mode) => {
@@ -42,9 +49,6 @@ const LocationPage = () => {
 
   return (
     <div className="location-page">
-      <h1>지역별 공연 정보</h1>
-      
-      {/* 스위치 버튼 */}
       <div className="view-mode-switch">
         <button 
           className={`switch-btn ${viewMode === "performances" ? 'active' : ''}`}
@@ -66,7 +70,7 @@ const LocationPage = () => {
           <div
             key={region.code}
             className={`region-item ${region.code === selectedRegion ? 'active' : ''}`}
-            onClick={() => handleRegionClick(region.code)}
+            onClick={() => handleRegionClick(region.code)} // 지역 클릭 시 URL에 반영
           >
             <span>{region.name}</span>
           </div>
