@@ -17,14 +17,19 @@ const parseXml = async (xml) => {
 const fetchVenuesData = async ({ queryKey }) => {
   const [_, regionCode] = queryKey;
 
-  const response = await api.get('prfplc', {
-    params: {
-      service: import.meta.env.VITE_API_KEY, // 인증키
-      cpage: 1,  // 페이지 번호
-      rows: 20,  // 페이지당 20개
-      signgucode: regionCode,  // 지역 코드
-    }
-  });
+  // API 요청 파라미터 설정
+  const params = {
+    service: import.meta.env.VITE_API_KEY, // 인증키
+    cpage: 1,  // 페이지 번호
+    rows: 20,  // 페이지당 20개
+  };
+
+  // "전체"가 아닌 경우에만 signgucode 파라미터를 추가
+  if (regionCode && regionCode !== "all") {
+    params.signgucode = regionCode;
+  }
+
+  const response = await api.get('prfplc', { params });
 
   const xmlData = response.data;
   const jsonData = await parseXml(xmlData);
@@ -37,9 +42,9 @@ const fetchVenuesData = async ({ queryKey }) => {
 // React Query를 이용한 데이터 호출
 export const useVenues = (regionCode) => {
   return useQuery({
-    queryKey: ["venues", regionCode],
+    queryKey: ["venues", regionCode || "all"], // regionCode가 없을 경우 "all"로 설정
     queryFn: fetchVenuesData,
-    enabled: !!regionCode,  // 조건이 충족될 때만 쿼리 실행
     retry: 1,
+    keepPreviousData: true, // 페이지 이동 시 이전 데이터 유지
   });
 };
