@@ -30,15 +30,17 @@ const ContentCard = ({content,index}) => {
     * */
     return (
         <Container className="ContentsPage_container" onClick={() => navigator(`${content?.mt20id}`)} data-aos="fade-down"  data-aos-delay={delay}>
-            <div className="ContentsPage_card-box-container d-flex gap-3 flex-wrap justify-content-between">
+            <div className="ContentsPage_card-box-container d-flex gap-4 flex-wrap justify-content-between">
                 <div className="ContentsPage_card-box border p-3 shadow-sm rounded-3">
                     <div className="ContentsPage_img-box">
                         <img className={"ContentsPage_Card_Image"} src={detailContent?.poster} alt={""}></img>
                     </div>
                     <div className="ContentsPage_text-box mt-3">
-                        <h5 className="fw-bold mb-3">{content?.prfnm}</h5>
-                        <span className="me-2">{content?.prfpdfrom} ~ {content?.prfpdto}</span>
-                        <span>{content?.fcltynm}</span>
+                        <h5 className="fw-bold mb-2">{content?.prfnm}</h5>
+                        <div className="d-flex flex-column align-items-center gap-2"> {/* flex column 중앙 정렬 */}
+                            <span className="text-center">{content?.prfpdfrom} ~ {content?.prfpdto}</span>
+                            <span className="text-center">{content?.fcltynm}</span>
+                        </div>
                     </div>
                 </div>
             </div>

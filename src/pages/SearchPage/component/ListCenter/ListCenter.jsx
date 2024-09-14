@@ -3,6 +3,7 @@ import { Container, Row } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
 import "./ListCenter.css";
 import ListCenterContainer from '../ListCenterContainer/ListCenterContainer';
+import Pagination from '../../../../common/Pagination/Pagination'; 
 
 const ListCenter = ({ data }) => {
     //console.log("ddd",data);
@@ -19,6 +20,8 @@ const ListCenter = ({ data }) => {
         currentPage * itemsPerPage,
         (currentPage + 1) * itemsPerPage
     );
+
+    const isMobile = window.innerWidth <= 768;
 
     const handlePageClick = ({ selected }) => {
         setCurrentPage(selected);
@@ -47,26 +50,12 @@ const ListCenter = ({ data }) => {
                         <h4 className="no-results">검색 결과가 없습니다</h4>
                     )}
                     {totalCenters > itemsPerPage && (
-                        <div className="pagination-container">
-                            <ReactPaginate
-                                previousLabel="<"
-                                nextLabel=">"
-                                pageClassName="page-item"
-                                pageLinkClassName="page-link"
-                                previousClassName="page-item"
-                                previousLinkClassName="page-link"
-                                nextClassName="page-item"
-                                nextLinkClassName="page-link"
-                                breakLabel="..."
-                                breakClassName="page-item"
-                                breakLinkClassName="page-link"
-                                pageCount={pageCount}
-                                marginPagesDisplayed={2}
-                                pageRangeDisplayed={5}
-                                onPageChange={handlePageClick}
-                                containerClassName="pagination"
-                                activeClassName="active"
-                                forcePage={currentPage}
+                        <div className='pagination-container'>
+                            <Pagination 
+                            pageCount={pageCount}
+                            currentPage={currentPage}
+                            handlePageClick={handlePageClick}
+                            isMobile={isMobile}
                             />
                         </div>
                     )}

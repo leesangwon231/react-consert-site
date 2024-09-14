@@ -5,23 +5,17 @@ import { useContentsDetail } from "../../hooks/useContentsDetail";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse } from "@fortawesome/free-solid-svg-icons";
-import {
-  Container,
-  Row,
-  Col,
-  Spinner,
-  Card,
-  Button,
-  Modal,
-} from "react-bootstrap";
+import { Container, Row, Col, Spinner, Card, Button } from "react-bootstrap";
 
 const ContentsDetailPage = () => {
   const { id } = useParams();
   const { data, isLoading, error } = useContentsDetail(id);
   const [activeTab, setActiveTab] = useState("details");
+  const navigate = useNavigate();
 
-  const [showModal, setShowModal] = useState(false);
-  const navigate = useNavigate(); 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     if (isLoading) {
@@ -39,11 +33,8 @@ const ContentsDetailPage = () => {
 
   const contentDetail = data?.dbs?.db;
 
-  const handleModalOpen = () => setShowModal(true);
-  const handleModalClose = () => setShowModal(false);
-
   const handleVenueClick = () => {
-    const venueId = contentDetail?.mt10id; 
+    const venueId = contentDetail?.mt10id;
     if (venueId) {
       navigate(`/hall/${venueId}`);
     }
@@ -51,28 +42,21 @@ const ContentsDetailPage = () => {
 
   const priceInfo = contentDetail?.pcseguidance
     ? contentDetail.pcseguidance
-        .split(/(원)/)
+        .split(/(원,?)/)
         .reduce((acc, curr, idx) => {
-          if (curr === "원") {
+          if (curr.includes("원")) {
             acc[acc.length - 1] += curr;
           } else {
-            acc.push(curr);
+            acc.push(curr.trim());
           }
           return acc;
         }, [])
         .filter((price) => price.trim() !== "")
     : [];
 
-  // 가격 정보를 한 줄에 두 개씩 출력
-  const formattedPriceInfo = [];
-  for (let i = 0; i < priceInfo.length; i += 2) {
-    formattedPriceInfo.push(
-      <div key={i}>
-        <span>{priceInfo[i]}</span>
-        {priceInfo[i + 1] && <span>, {priceInfo[i + 1]}</span>}
-      </div>
-    );
-  }
+  const formattedPriceInfo = priceInfo.map((price, i) => (
+    <div key={i} style={{ marginBottom: "8px" }}>{price}</div>
+  ));
 
   if (isLoading) {
     return (
@@ -92,14 +76,19 @@ const ContentsDetailPage = () => {
   return (
     <Container
       className="detail-page-container mt-3"
-      style={{ backgroundColor: "white", fontSize: "20px", padding: "20px", borderRadius:"10px"}}
+      style={{
+        backgroundColor: "white",
+        fontSize: "20px",
+        padding: "20px",
+        borderRadius: "10px",
+      }}
     >
       <Row>
         <Col xs={12}>
-        <Card.Text>
-                <strong>&gt;&gt; </strong>
-                {contentDetail?.genrenm || "정보 없음"}
-              </Card.Text>
+          <Card.Text>
+            <strong>&gt;&gt; </strong>
+            {contentDetail?.genrenm || "정보 없음"}
+          </Card.Text>
           <hr
             style={{
               backgroundColor: "#383554",
@@ -115,11 +104,11 @@ const ContentsDetailPage = () => {
           <img
             src={contentDetail?.poster || "not poster"}
             alt="포스터"
-            style={{ width: "100%", maxWidth: "400px", borderRadius: "5px"}}
+            style={{ width: "100%", maxWidth: "400px", borderRadius: "5px" }}
           />
         </Col>
         <Col md={6} xs={12}>
-          <Card style={{ backgroundColor: "white", border: "none"}}>
+          <Card style={{ backgroundColor: "white", border: "none" }}>
             <Card.Body>
               <Card.Title>
                 <h1>{contentDetail?.prfnm || "공연 제목"}</h1>
@@ -128,21 +117,28 @@ const ContentsDetailPage = () => {
                 {contentDetail?.prfpdfrom} - {contentDetail?.prfpdto}
               </Card.Subtitle>
               <Card.Text className="mt-3 mb-4">
-                <strong>공연 상태</strong>
-                : &nbsp;&nbsp;{contentDetail?.prfstate || "정보 없음"}
+                <strong>공연 상태</strong>: &nbsp;&nbsp;
+                {contentDetail?.prfstate || "정보 없음"}
               </Card.Text>
-              
+
               <Card.Text className="mb-4">
-                <strong>등급</strong>
-                : &nbsp;&nbsp;{contentDetail?.prfage || "정보 없음"}
+                <strong>등급</strong>: &nbsp;&nbsp;
+                {contentDetail?.prfage || "정보 없음"}
               </Card.Text>
               <Card.Text className="mb-4">
-                <strong>런타임</strong>
-                : &nbsp;&nbsp;{contentDetail?.prfruntime || "정보 없음"}
+                <strong>런타임</strong>: &nbsp;&nbsp;
+                {contentDetail?.prfruntime || "정보 없음"}
               </Card.Text>
-              <Card.Text className="mb-4 price">
-                <strong>가격</strong>
-                <div style={{ backgroundColor: "#e2e2e2", padding:"10px" }}>
+              <Card.Text className="mb-4 price d-flex align-items-center">
+                <strong className="me-3">가격</strong>
+                <div
+                  style={{
+                    backgroundColor: "#e2e2e2",
+                    padding: "20px",
+                    display: "inline-block",
+                    width: "auto",
+                  }}
+                >
                   {formattedPriceInfo}
                 </div>
               </Card.Text>
@@ -158,7 +154,7 @@ const ContentsDetailPage = () => {
               <Card.Text>
                 <br />
                 {contentDetail?.dtguidance
-                  ? contentDetail.dtguidance.split(",").map((item, index) => (
+                  ? contentDetail.dtguidance.split(", ").map((item, index) => (
                       <span key={index}>
                         {item.trim()}
                         <br />
@@ -176,18 +172,6 @@ const ContentsDetailPage = () => {
         <Col md={12}>
           <Button
             style={
-              activeTab === "reservation"
-                ? { backgroundColor: "#383554", border: "none" }
-                : { backgroundColor: "#aaaaaa", border: "none" }
-            }
-            onClick={() => setActiveTab("reservation")}
-            className="me-2"
-          >
-            예매 정보
-          </Button>
-
-          <Button
-            style={
               activeTab === "details"
                 ? { backgroundColor: "#383554", border: "none" }
                 : { backgroundColor: "#aaaaaa", border: "none" }
@@ -196,6 +180,18 @@ const ContentsDetailPage = () => {
             className="me-2"
           >
             상세정보
+          </Button>
+
+          <Button
+            style={
+              activeTab === "reservation"
+                ? { backgroundColor: "#383554", border: "none" }
+                : { backgroundColor: "#aaaaaa", border: "none" }
+            }
+            onClick={() => setActiveTab("reservation")}
+            className="me-2"
+          >
+            예매 정보
           </Button>
 
           <Button
@@ -213,32 +209,35 @@ const ContentsDetailPage = () => {
 
       <Row className="mt-4">
         {activeTab === "reservation" && (
-          <Col>
-            <Card>
-              <Card.Body>
-                <Card.Title>
-                  <strong>
-                    {contentDetail?.relates?.relate.relatenm || "정보없음"}
-                  </strong>
-                </Card.Title>
-                <Card.Text>
-                  {contentDetail?.relates?.relate && (
-                    <div>
-                      <a
-                        href={
-                          contentDetail.relates.relate.relateurl || "정보없음"
-                        }
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        예매처로 이동
-                      </a>
-                    </div>
-                  )}
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          </Col>
+          <Row>
+            {contentDetail?.relates?.relate &&
+            Array.isArray(contentDetail.relates.relate) ? (
+              contentDetail.relates.relate.map((relateItem, index) => (
+                <Col key={index} md={6} className="mb-4">
+                  <Card>
+                    <Card.Body>
+                      <Card.Title>
+                        <strong>{relateItem.relatenm || "정보없음"}</strong>
+                      </Card.Title>
+                      <Card.Text>
+                        <a
+                          href={relateItem.relateurl || "#"}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          예매처로 이동
+                        </a>
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))
+            ) : (
+              <Col>
+                <span>정보 없음</span>
+              </Col>
+            )}
+          </Row>
         )}
 
         {activeTab === "details" && (
@@ -261,15 +260,33 @@ const ContentsDetailPage = () => {
                   기획/제작사: {contentDetail?.entrpsnm || "정보 없음"}
                 </Card.Text>
 
-                {contentDetail?.styurls?.styurl && (
-                <Card.Text className="mt-4">
-                  <img
-                    src={contentDetail.styurls.styurl}
-                    alt="상세 이미지"
-                    style={{ width: "100%", marginTop: "10px", borderRadius: "5px" }}
-                  />
-                </Card.Text>
-              )}
+                {Array.isArray(contentDetail?.styurls?.styurl) ? (
+                  contentDetail.styurls.styurl.map((url, index) => (
+                    <Card.Text key={index} className="mt-4">
+                      <img
+                        src={url}
+                        alt={`상세 이미지 ${index + 1}`}
+                        style={{
+                          width: "100%",
+                          marginTop: "10px",
+                          borderRadius: "5px",
+                        }}
+                      />
+                    </Card.Text>
+                  ))
+                ) : (
+                  <Card.Text className="mt-4">
+                    <img
+                      src={contentDetail.styurls.styurl}
+                      alt="상세 이미지"
+                      style={{
+                        width: "100%",
+                        marginTop: "10px",
+                        borderRadius: "5px",
+                      }}
+                    />
+                  </Card.Text>
+                )}
               </Card.Body>
             </Card>
           </Col>
@@ -287,8 +304,8 @@ const ContentsDetailPage = () => {
                   <FontAwesomeIcon
                     icon={faHouse}
                     className="icon"
-                    onClick={handleVenueClick} 
-                    style={{ cursor: "pointer" }} 
+                    onClick={handleVenueClick}
+                    style={{ cursor: "pointer" }}
                   />
                 </Card.Text>
               </Card.Body>

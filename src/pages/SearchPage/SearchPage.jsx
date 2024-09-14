@@ -1,50 +1,52 @@
-import React, { useState } from 'react';
-import { useContents } from '../../hooks/useCultures';
+import { useState, useEffect } from 'react';
 import { Form, Container, Row, Button } from 'react-bootstrap';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import "./SearchPage.css";
-// import ListCulture from '../component/ListCulture/ListCulture';
-// import ListCenter from '../component/ListCenter/ListCenter';
+import ListCulture from './component/ListCulture/ListCulture';
+import ListCenter from './component/ListCenter/ListCenter';
+import { useSearchCenters } from '../../hooks/useSearchCenter';
+import { useSearchCultures } from '../../hooks/useSearchCultures';
+import LoadingSpinner from "../../common/LoadingSpinner/LoadingSpinner";
 
 const SearchPage = () => {
-  const [inputValue, setInputValue] = useState(""); 
-  const [keyword, setKeyword] = useState(""); 
+  const [inputValue, setInputValue] = useState("");
+  const [keyword, setKeyword] = useState("");
   const [activeButton, setActiveButton] = useState("all");
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const location = useLocation();
-
-  const { data: cultureData, error: cultureError, isLoading: cultureLoading } = useSearchCultures({ shprfnm: keyword });
-  const { data: centerData, error: centerError, isLoading: centerLoading } = useSearchCenters({ shprfnmfct: keyword });
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     const queryKeyword = queryParams.get('q');
-    
+
     if (queryKeyword) {
       setKeyword(queryKeyword);
     }
   }, [location.search]);
 
-  if (cultureLoading || centerLoading) {
-      return <div>Loading...</div>;
+  const { data: cultureData, error: cultureError, isLoading: cultureLoading } = useSearchCultures({ shprfnm: keyword });
+  const { data: centerData, error: centerError, isLoading: centerLoading } = useSearchCenters({ shprfnmfct: keyword });
+
+  if (keyword && (cultureLoading || centerLoading)) {
+    return <LoadingSpinner/>;
   }
 
-  if (cultureError || centerError) {
-      return <div>Error: {cultureError?.message || centerError?.message}</div>;
+  if (keyword && (cultureError || centerError)) {
+    return <div>Error: {cultureError?.message || centerError?.message}</div>;
   }
 
   const searchByKeyword = (event) => {
     event.preventDefault();
-    if (inputValue !== "") {
-      setKeyword(inputValue); 
-      navigate(`/search?q=${inputValue}`);
+    if (inputValue.trim() !== "") {
+      setKeyword(inputValue.trim()); 
+      navigate(`/search?q=${inputValue.trim()}`);
       setInputValue(""); 
     } else {
       alert("검색어를 입력해 주세요");
     }
-  }
+  };
 
   const handleButtonClick = (buttonType) => {
     setActiveButton(buttonType);
@@ -56,7 +58,12 @@ const SearchPage = () => {
         <Row>
           <div className="search-box">
             <h1>
-              <span className="keyword">' {keyword} ' </span>에 대한 검색 결과 입니다.
+              {keyword ? (
+                <span className="keyword">' {keyword} ' </span>
+              ) : (
+                "검색어를 입력하세요"
+              )} 
+              {keyword ? '에 대한 검색 결과 입니다.' : ""}
             </h1>
             <Form className="d-flex search-form" onSubmit={searchByKeyword}>
               <div className="input-container">
@@ -76,8 +83,7 @@ const SearchPage = () => {
               >
                 <FontAwesomeIcon icon={faSearch} />
               </a>
-          </Form>
-
+            </Form>
           </div>
           <div className="button-group">
             <Button 
@@ -99,8 +105,8 @@ const SearchPage = () => {
               시설
             </Button>
           </div>
-          {/* {keyword && activeButton === "all" || activeButton === "culture" ? <ListCulture data={cultureData}/> : null}
-          {keyword && activeButton === "all" || activeButton === "center" ? <ListCenter data={centerData}/> : null} */}
+          {keyword && activeButton === "all" || activeButton === "culture" ? <ListCulture data={cultureData}/> : null}
+          {keyword && activeButton === "all" || activeButton === "center" ? <ListCenter data={centerData}/> : null}
         </Row>
       </Container>
     </div>
