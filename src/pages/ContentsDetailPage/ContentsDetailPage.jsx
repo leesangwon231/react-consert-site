@@ -14,6 +14,10 @@ const ContentsDetailPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     if (isLoading) {
       console.log("상세 정보를 불러오는 중입니다...");
     }
@@ -166,7 +170,6 @@ const ContentsDetailPage = () => {
 
       <Row className="mt-3">
         <Col md={12}>
-          {/* "상세정보" 버튼이 제일 앞으로 이동 */}
           <Button
             style={
               activeTab === "details"

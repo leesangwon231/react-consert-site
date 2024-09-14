@@ -14,13 +14,13 @@ const NotFoundPage = () => {
 
   return (
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
-      <h1><strong>404 - Page Not Found</strong></h1>
-      <p><h4>Sorry, the page you are looking for does not exist.</h4></p>
+      <h1><strong>404 - 페이지를 찾을 수 없습니다</strong></h1>
+      <p><h4>죄송합니다, 찾으시는 페이지가 존재하지 않습니다.</h4></p>
       
       <button onClick={() => navigate(-1)} style={{ padding: '10px 20px', marginTop: '20px', borderRadius:"8px" }}>
-        Go Back
+        뒤로 가기
       </button>
-      <p><h5>You will be redirected in 5 seconds...</h5></p>
+      <p><h5>5초 후에 자동으로 이전 페이지로 이동합니다...</h5></p>
     </div>
   );
 };
