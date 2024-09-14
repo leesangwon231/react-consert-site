@@ -5,7 +5,7 @@ import "./ListCenter.css";
 import ListCenterContainer from '../ListCenterContainer/ListCenterContainer';
 
 const ListCenter = ({ data }) => {
-    console.log("ddd",data);
+    //console.log("ddd",data);
 
     const centerEvents = data?.dbs?.db || [];
     const totalCenters = centerEvents.length;
