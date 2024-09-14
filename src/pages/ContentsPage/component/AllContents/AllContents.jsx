@@ -8,12 +8,18 @@ import "./AllContents.css"
 import ContentFiler from "../ContentFilter/ContentFilter.jsx";
 import {Spinner} from "react-bootstrap";
 import PageNation from "../PageNation/PageNation.jsx";
+import Slider from "../common/Slider/Slider.jsx";
+import {useParams, useSearchParams} from "react-router-dom";
 
 const  AllContents = ({performanceFilterArray,performanceKinds}) => {
 
+    let urlParam = useParams();
+    let [query,setQuery ] = useSearchParams()
 
     //필터링을 위한 데이터
     const [originData , setOriginData] = useState([]);
+
+    const [idArray, setIdArray] = useState([]);
 
     //정렬 값
     const [sortWordFlag, setSortWordFlag] = useState(false);
@@ -29,6 +35,7 @@ const  AllContents = ({performanceFilterArray,performanceKinds}) => {
     * signgucode : 시도
     * prfstate : 공연상태
     * shcate : 공연종류
+    * shprfnm
     * page : 페이지
     * */
     const [param , setParam] = useState({
@@ -64,6 +71,7 @@ const  AllContents = ({performanceFilterArray,performanceKinds}) => {
         // api에서 1개만 있으면 배열에 안 넣어 주어서 배열처리
         let originFilterData = data?.dbs?.db ? (Array.isArray(data.dbs.db) ? [...data.dbs.db] : [data.dbs.db]) : [];
 
+        setIdArray(data?.dbs?.db)
         // 공연 상태 필터링
         if(Object.keys(performanceState).length !== 0){
 
@@ -89,12 +97,12 @@ const  AllContents = ({performanceFilterArray,performanceKinds}) => {
 
     useEffect(() => {
         setParam({...param, shcate: performanceKinds[1]  ,page : page})
-    }, [page]);
-
+    }, [page,urlParam]);
 
 
     return (
         <div>
+            <Slider idArray={idArray}/>
             <ContentFiler performanceFilterArray={performanceFilterArray}
                           performanceState = {performanceState}
                           setPerformanceState = {setPerformanceState}
@@ -111,10 +119,10 @@ const  AllContents = ({performanceFilterArray,performanceKinds}) => {
                                 : originData.length === 0
                                     ? <h1 className={"ContentsPage_NotFoundText"}>검색 된 결과가 없습니다</h1>
                                     : originData?.map((content,index) => (
-                                    <Col lg={3} xs={12} key = {index}>
-                                        <ContentCard content={content} index={index}/>
-                                    </Col>
-                                ))
+                                        <Col lg={3} xs={12} key = {index}>
+                                            <ContentCard content={content} index={index}/>
+                                        </Col>
+                                    ))
                             }
                         </Row>
                     </Col>
@@ -127,6 +135,3 @@ const  AllContents = ({performanceFilterArray,performanceKinds}) => {
 }
 
 export default AllContents;
-
-
-

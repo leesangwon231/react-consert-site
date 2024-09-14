@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";  // useNavigate 추가
+import {Navigate, useNavigate} from "react-router-dom";  // useNavigate 추가
 import { useContents } from "../../hooks/useContents";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./ContentsPage.css"
@@ -19,6 +19,11 @@ const ContentsPage = () => {
         performanceKinds = ["클래식/무용" , "BBBC"]
     }else if(params.category === "play"){
         performanceKinds = ["연극", "AAAA"]
+    }else if(params.category === "concert"){
+        performanceKinds = ["콘서트", "CCCD"];
+    } else{
+        performanceKinds = ["콘서트", "CCCD"];
+        return <Navigate to ="/contents/concert" />
     }
 
     const ctprvn = {
@@ -53,7 +58,6 @@ const ContentsPage = () => {
 
     return (
         <div className={"ContentsPage_Container"}>
-            <Slider performanceKinds={performanceKinds}/>
             <AllContents performanceFilterArray = {performanceFilterArray} performanceKinds={performanceKinds}/>
             <MyLocationContents ctprvn ={ctprvn} performanceKinds = {performanceKinds}/>
         </div>
