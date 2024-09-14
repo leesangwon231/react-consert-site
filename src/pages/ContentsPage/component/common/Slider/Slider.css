@@ -17,6 +17,7 @@
         justify-content: center;
         align-items: center;
         div{
+            cursor: pointer;
             width: calc(100% - 20px);
             height: calc(90vh - 300px);
             img{
