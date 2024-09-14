@@ -4,19 +4,32 @@ import { useParams } from "react-router-dom";
 import { useContentsDetail } from "../../hooks/useContentsDetail";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHouse } from "@fortawesome/free-solid-svg-icons";
+import { faHouse, faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import LoadingSpinner from "../../common/LoadingSpinner/LoadingSpinner";
-
 
 const ContentsDetailPage = () => {
   const { id } = useParams();
   const { data, isLoading, error } = useContentsDetail(id);
   const [activeTab, setActiveTab] = useState("details");
   const navigate = useNavigate();
+  const [showScrollButton, setShowScrollButton] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowScrollButton(true);
+      } else {
+        setShowScrollButton(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const contentDetail = data?.dbs?.db;
@@ -28,10 +41,14 @@ const ContentsDetailPage = () => {
     }
   };
 
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const priceInfo = contentDetail?.pcseguidance
     ? contentDetail.pcseguidance
         .split(/(원,?)/)
-        .reduce((acc, curr, idx) => {
+        .reduce((acc, curr) => {
           if (curr.includes("원")) {
             acc[acc.length - 1] += curr;
           } else {
@@ -43,13 +60,27 @@ const ContentsDetailPage = () => {
     : [];
 
   const formattedPriceInfo = priceInfo.map((price, i) => (
-    <div key={i} style={{ marginBottom: "8px" }}>{price}</div>
+    <div key={i} style={{ marginBottom: "8px" }}>
+      {price.split(/(\d+(?:,\d+)*)(원?)/).map((part, index) => {
+        if (/^\d+(?:,\d+)*$/.test(part)) {
+          return (
+            <span key={index} style={{ color: "#ff0088" }}>
+              {part}
+            </span>
+          );
+        }
+        return <span key={index}>{part}</span>;
+      })}
+    </div>
   ));
 
   if (isLoading) {
     return (
-      <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
-        <LoadingSpinner /> 
+      <div
+        className="d-flex justify-content-center align-items-center"
+        style={{ height: "100vh" }}
+      >
+        <LoadingSpinner />
       </div>
     );
   }
@@ -228,22 +259,26 @@ const ContentsDetailPage = () => {
 
         {activeTab === "details" && (
           <Col>
-            <Card>
+            <Card style={{ lineHeight: "1.5" }}>
               <Card.Body>
                 <Card.Title>
                   <strong>상세 정보</strong>
                 </Card.Title>
                 <Card.Text>
-                  줄거리: {contentDetail?.sty || "정보 없음"}
+                  <strong>줄거리:</strong>&nbsp;&nbsp;
+                  {contentDetail?.sty || "정보 없음"}
                 </Card.Text>
                 <Card.Text>
-                  지역: {contentDetail?.area || "정보 없음"}
+                  <strong>지역:</strong> &nbsp;&nbsp;
+                  {contentDetail?.area || "정보 없음"}
                 </Card.Text>
                 <Card.Text>
-                  출연진: {contentDetail?.prfcast || "정보 없음"}
+                  <strong>출연진:</strong>&nbsp;&nbsp;
+                  {contentDetail?.prfcast || "정보 없음"}
                 </Card.Text>
                 <Card.Text>
-                  기획/제작사: {contentDetail?.entrpsnm || "정보 없음"}
+                  <strong>기획/제작사:</strong>&nbsp;&nbsp;
+                  {contentDetail?.entrpsnm || "정보 없음"}
                 </Card.Text>
 
                 {Array.isArray(contentDetail?.styurls?.styurl) ? (
@@ -299,6 +334,29 @@ const ContentsDetailPage = () => {
           </Col>
         )}
       </Row>
+
+      {showScrollButton && (
+        <Button
+          onClick={handleScrollToTop}
+          style={{
+            position: "fixed",
+            bottom: "40px",
+            right: "40px",
+            width: "50px",
+            height: "50px",
+            borderRadius: "50%",
+            backgroundColor: "rgb(56, 53, 84, 0.7)",
+            color: "white",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 1000,
+            border: "none",
+          }}
+        >
+          <FontAwesomeIcon icon={faArrowUp} />
+        </Button>
+      )}
     </Container>
   );
 };
