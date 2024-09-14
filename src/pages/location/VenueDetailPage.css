@@ -2,20 +2,20 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* 컨텐츠를 가운데 정렬 */
+    align-items: center;
 }
 
 .venue-name {
-    font-size: 28px;
+    font-size: 50px;
     font-weight: bold;
-    margin-bottom: 10px;
-    text-align: center; /* 텍스트 가운데 정렬 */
+    margin-bottom: 30px;
+    text-align: center;
 }
 
-.venue-address, .venue-icons, .venue-icons p {
-    font-size: 16px;
-    margin-bottom: 20px;
-    text-align: center; /* 텍스트 가운데 정렬 */
+.venue-address {
+    font-size: 20px;
+    margin-bottom: 40px;
+    text-align: center;
 }
 
 .venue-icons {
@@ -23,7 +23,7 @@
     justify-content: space-between;
     margin-bottom: 20px;
     width: 100%;
-    max-width: 600px; /* 아이콘이 너무 길게 퍼지지 않도록 최대 너비 설정 */
+    max-width: 600px;
 }
 
 .icon-box {
@@ -37,23 +37,96 @@
     width: 70%;
     height: 400px;
     margin-top: 20px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .sub-venues {
     width: 100%;
-    max-width: 600px;
+    max-width: 1000px; 
     text-align: center;
+    margin-top: 60px; /* 하위 공연장 목록 상단 간격을 더 넓힘 */
+    margin-bottom: 40px; /* 하위 공연장 목록 하단 간격 */
 }
 
-.sub-venue {
-    margin-top: 10px;
+.sub-venues-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 한 줄에 4개의 카드 배치 */
+    gap: 30px; /* 카드 사이의 간격 */
+    justify-content: center;
+    margin-top: 30px; /* 하위 공연장 목록과 카드 사이의 간격 추가 */
 }
 
-.loading-spinner {
+
+.sub-venue-card {
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    max-width: 250px;
+    margin: 10px auto; /* 카드 위아래 간격을 줄임 (기존 값보다 작게 설정) */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sub-venue-card:hover {
+    transform: translateY(-5px); /* 호버 시 카드가 올라오는 효과 */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 강조 */
+}
+
+  .loading-spinner {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%; /* 스피너 높이를 전체 컨테이너에 맞춤 */
+    height: 100%;
 }
+
+.divider-line {
+    width: 60%;
+    margin: 20px auto;
+    border: 0;
+    border-top: 1px solid #8b8b8b;
+    margin-bottom: 50px;
+}
+
+.venue-details {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 60px;
+    align-items: flex-start;
+    gap: 15px; /* 각 요소 사이의 간격을 추가 */
+    font-size: 18px; /* 전체 글씨 크기를 키움 */
+}
+
+.venue-details p {
+    font-size: 18px; /* 텍스트에 적용되는 글씨 크기 */
+}
+
+.inline-url {
+    display: inline;
+    white-space: nowrap;
+    font-size: 18px; /* URL의 글씨 크기와 일관성 유지 */
+}
+
+.inline-url a {
+    display: inline;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 18px; /* 링크 텍스트의 글씨 크기 조정 */
+}
+h4 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  p {
+    margin: 0;
+    font-size: 18px;
+  }
+  .sub-venues h3 {
+    font-size: 24px; /* 하위 공연장 목록 제목 크기와 일치 */
+    font-weight: bold;
+    text-align: center;
+    margin-top: 40px;
+  }
+  

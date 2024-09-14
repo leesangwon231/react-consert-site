@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate, useLocation, useParams } from "react-router-dom"; 
 import { useSearchCenterDeatils } from "../../hooks/useSearchCenterDetail";
-import { Spinner } from "react-bootstrap";
+import LoadingSpinner from "../../common/LoadingSpinner/LoadingSpinner"; // 경로에 맞게 로딩 스피너 불러오기
 import './VenueDetailPage.css'; 
 
 const loadKakaoMap = (latitude, longitude, address, name) => {
@@ -43,7 +43,7 @@ const loadKakaoMap = (latitude, longitude, address, name) => {
 
 const VenueDetailPage = () => {
   const { id } = useParams();
-  const { state } = useLocation();  // 이전 페이지에서 전달된 상태 받기
+  const { state } = useLocation();  
   const navigate = useNavigate();
   const { data, error, isLoading } = useSearchCenterDeatils(id);
 
@@ -61,13 +61,7 @@ const VenueDetailPage = () => {
   }, [data]);
 
   if (isLoading) {
-    return (
-      <div className="loading-spinner">
-        <Spinner animation="border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
-      </div>
-    );
+    return <LoadingSpinner />; // 로딩 시 커스텀 스피너 표시
   }
 
   if (error) {
@@ -81,11 +75,15 @@ const VenueDetailPage = () => {
     <div className="venue-detail-container">
       <h2 className="venue-name">{venueDetails.fcltynm || "정보 없음"}</h2>
       <p className="venue-address">{venueDetails.adres || "정보 없음"}</p>
-      <p><strong>전화번호:</strong> {venueDetails.telno || "정보 없음"}</p>
-      <p><strong>좌석 수:</strong> {venueDetails.seatscale || "정보 없음"}</p>
-      
-      <p><strong>관련 URL:</strong> <a href={venueDetails.relateurl} target="_blank" rel="noopener noreferrer">{venueDetails.relateurl || "정보 없음"}</a></p>
+      <hr className="divider-line" />
 
+      <div className="venue-details">
+          <p><strong>전화번호 : </strong> {venueDetails.telno || "정보 없음"}</p>
+          <p><strong>좌석 수 : </strong> {venueDetails.seatscale || "정보 없음"}</p>
+          <p className="inline-url">
+            <strong>관련 URL : </strong> <a href="https://www.instagram.com/play_block13/" target="_blank" rel="noopener noreferrer">https://www.instagram.com/play_block13/</a>
+          </p>
+      </div>
       <div className="venue-icons">
         <div className="icon-box">
           <p>식당: {venueDetails.restaurant === 'Y' ? '있음' : '없음'}</p>
@@ -100,20 +98,23 @@ const VenueDetailPage = () => {
 
       <div id="map" className="venue-map"></div>
 
-      {/* 하위 공연장 정보 */}
       {Array.isArray(venueDetails.mt13s?.mt13) ? (
         <div className="sub-venues">
           <h3>하위 공연장 목록</h3>
-          {venueDetails.mt13s.mt13.map((subVenue) => (
-            <div key={subVenue.mt13id} className="sub-venue">
-              <h4>{subVenue.prfplcnm || "정보 없음"}</h4>
-              <p>좌석 수: {subVenue.seatscale || "정보 없음"}</p>
-              <p>무대 연습 가능 여부: {subVenue.stagepracat === 'Y' ? '가능' : '불가능'}</p>
-            </div>
-          ))}
+          <div className="sub-venues-list">
+            {venueDetails.mt13s.mt13.map((subVenue) => (
+              <div key={subVenue.mt13id} className="sub-venue-card">
+                <h4>{subVenue.prfplcnm || `${subVenue.mt13id}관`}</h4>
+                <p>좌석 수: {subVenue.seatscale || "정보 없음"}</p>
+                <p>무대 연습 가능 여부: {subVenue.stagepracat === 'Y' ? '가능' : '불가능'}</p>
+              </div>
+            ))}
+          </div>
         </div>
       ) : (
-        <p>하위 공연장 정보가 없습니다.</p>
+        <div className="sub-venues">
+          <h3>하위 공연장 정보가 없습니다.</h3>
+        </div>
       )}
     </div>
   );
