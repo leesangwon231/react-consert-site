@@ -33,25 +33,26 @@ const LocationPage = () => {
   const location = useLocation();
   const parsedQuery = queryString.parse(location.search); // URL에서 쿼리 파라미터 읽기
 
-  const [selectedRegion, setSelectedRegion] = useState(parsedQuery.region || "all");  
-  const [viewMode, setViewMode] = useState("performances");
+  // URL 쿼리에서 viewMode와 region 읽기, 없을 경우 기본값으로 설정
+  const [selectedRegion, setSelectedRegion] = useState(parsedQuery.region || "all");
+  const [viewMode, setViewMode] = useState(parsedQuery.viewMode || "performances");
 
   // 초기 로드 시 "전체" 데이터를 가져오도록 설정
   useEffect(() => {
-    if (!parsedQuery.region) {
-      navigate("/location?region=all");
+    if (!parsedQuery.region || !parsedQuery.viewMode) {
+      navigate(`/location?region=all&viewMode=performances`);
     }
-  }, [navigate, parsedQuery.region]);
+  }, [navigate, parsedQuery.region, parsedQuery.viewMode]);
 
   const handleRegionClick = (regionCode) => {
     setSelectedRegion(regionCode);
-    navigate(`/location?region=${regionCode}`); // URL에 지역 코드 추가
+    navigate(`/location?region=${regionCode}&viewMode=${viewMode}`); // URL에 지역 코드 추가
   };
 
   const handleViewModeChange = (mode) => {
     setViewMode(mode);  // 공연/공연장 모드 전환
     setSelectedRegion("all"); // 모드가 바뀔 때마다 지역을 "전체"로 설정
-    navigate(`/location?region=all`); // URL에 전체로 반영
+    navigate(`/location?region=all&viewMode=${mode}`); // URL에 viewMode와 region 반영
   };
 
   return (
