@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import Carousel from 'react-multi-carousel';
 import {useContentsList} from '../../../../hooks/useMainPage';
 import LoadingSpinner from '../../../../common/LoadingSpinner/LoadingSpinner';
