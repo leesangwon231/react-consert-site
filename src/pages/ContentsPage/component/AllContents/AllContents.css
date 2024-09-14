@@ -13,6 +13,7 @@
     justify-content: center;
     font-weight: bold;
     letter-spacing: 10px;
+    color: var(--highlight-color4);;
 }
 
 .ContentsPage_row {

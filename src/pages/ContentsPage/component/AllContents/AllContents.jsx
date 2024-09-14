@@ -111,7 +111,7 @@ const  AllContents = ({performanceFilterArray,performanceKinds}) => {
             />
             <Container className={"ContentsPage_All_Container"}>
                 <Row className={"ContentsPage_row"}>
-                    <Col className="ContentsPage_text-center">공공예술</Col>
+                    <Col className="ContentsPage_text-center">{performanceKinds[0]}</Col>
                     <Col className={"ContentsPage_col-lg-12"} lg={12} xs={12} >
                         <Row>
                             {isLoading

@@ -20,7 +20,7 @@
 
 
 .ContentsPage_Filter_Button{
-    border : 2px solid black;
+    border : 2px solid var(--highlight-color4);
     width: 100%;
     max-width: 55px;
     height: 100%;
@@ -32,11 +32,12 @@
     border-radius: 10px;
     margin-bottom: 10px;
     font-weight : bold;
+    color: var(--highlight-color4);;
     &.active{
-        background-color: var(--highlight-color1);
+        background-color: var(--highlight-color4);
         color: white;
         font-weight : bold;
-        border : 2px solid var(--highlight-color1);
+        border : 2px solid var(--highlight-color4);
 
     }
 }
@@ -51,7 +52,7 @@
     justify-content: center;
     align-items: center;
     padding: 10px;
-    background-color: var(--highlight-color1);
+    background-color: var(--highlight-color4);
     color: white;
     margin-bottom: 50px;
 }
@@ -118,7 +119,7 @@
 
 .ContentsPage_FilterArea_Flag{
     font-family: 'SUITE Variable', sans-serif;
-    border: 1px solid;
+    border: 1px solid ;
     width: 100%;
     font-weight : bold;
     max-width: 200px;
@@ -132,11 +133,11 @@
     cursor: pointer;
     transition: 0.3s;
     background-color: white;
-    color:  var(--highlight-color1);
+    color:  var(--highlight-color4);
 }
 
 .ContentsPage_FilterArea_Flag:hover{
-    background-color: black;
+    background-color: var(--highlight-color4);
     color: white;
     transition: 1s;
 }
@@ -151,7 +152,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color:  var(--highlight-color1);
+    background-color:  var(--highlight-color4);
     font-weight : bold;
     color: white;
     flex: 1 1 0;
