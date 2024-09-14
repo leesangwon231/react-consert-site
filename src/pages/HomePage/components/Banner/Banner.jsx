@@ -15,6 +15,8 @@ const Banner = () => {
     return <div className="loading">Loading...</div>;
   }
   if (isError) {
+    console.log(error);
+
     return <div className="error-box">{error}</div>;
   }
   return (
