@@ -4,13 +4,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faUtensils, faMugSaucer, faStore, faWheelchair, faSquareParking } from '@fortawesome/free-solid-svg-icons';
 import "./ListCenterContainer.css";
 import { useNavigate } from 'react-router-dom';
+import TextLoadingSpinner from '../../../../common/TextLoadingSpinner/TextLoadingSpinner';
+import ErrorBox from '../../../../common/ErrorBox/ErrorBox';
 
 const ListCenterContainer = ({ data }) => {
-    const { data: centerData, error, isLoading } = useSearchCenterDeatils(data.mt10id);
+    const { data: centerData, error, isLoading, isError } = useSearchCenterDeatils(data.mt10id);
     const navigate = useNavigate();
 
-    if (isLoading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error.message}</div>;
+    if (isLoading) return <TextLoadingSpinner />;
+    if (isError) return <ErrorBox error={error} />;
 
     const centerEvents = centerData?.dbs?.db || {};
     const relateUrl = centerData?.dbs?.db?.relateurl?.trim();
