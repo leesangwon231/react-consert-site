@@ -33,10 +33,15 @@
 
     @media (max-width: 768px) {
         .pagination-container .pagination .page-link {
-            padding: 0.4rem 0.5rem;
-            width: 30px;
-            height: 30px;
-            font-size: 0.85rem;
+          display: flex;
+          align-items: center; 
+          justify-content: center; 
+          text-align: center;
+          width: 30px; 
+          height: 30px; 
+          font-size: 0.85rem;
+          line-height: 1; 
+          padding: 0; 
         }
     }
 }
