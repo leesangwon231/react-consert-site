@@ -3,10 +3,9 @@
 .ContentsPage_container {
     cursor: pointer;
     transition: all 0.3s;
-    margin-top: 10px;
+    margin-top: 20px;
     .ContentsPage_card-box-container{
-
-
+        transition: all 0.3s;
         .ContentsPage_card-box{
 
             .ContentsPage_img-box{
@@ -28,12 +27,13 @@
                 }
             }
         }
+        &:hover {
+            transform: scale(1.1);
+            border-radius: 10px;
+            z-index: 0;
+        }
+    }
 
-    }
-    &:hover {
-        transform: scale(1.1);
-        border-radius: 10px;
-    }
     img {
         width: 100%;
         object-fit: cover;
