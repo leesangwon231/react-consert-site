@@ -1,8 +1,12 @@
 {
   "rewrites": [
     {
-      "source": "/proxy/:path*",
-      "destination": "http://www.kopis.or.kr/openApi/restful/:path*"
+      "source": "/api/:path*",
+      "destination": "https://www.kopis.or.kr/openApi/restful/:path*"
+    },
+    {
+      "source": "/api/:path*/",
+      "destination": "https://www.kopis.or.kr/openApi/restful/:path*/"
     }
   ]
 }
