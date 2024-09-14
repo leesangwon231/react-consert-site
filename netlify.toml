@@ -1,5 +1,5 @@
 [[redirects]]
-from = "/api/*"
+from = "/proxy/*"
   to = "https://www.kopis.or.kr/openApi/restful/"
   status = 200
   force = true
