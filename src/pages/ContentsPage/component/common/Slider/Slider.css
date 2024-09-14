@@ -21,7 +21,7 @@
             width: calc(100% - 20px);
             height: calc(90vh - 300px);
             img{
-
+                cursor: pointer;
                 height: 100%;
                 width: 100%;
                 gap: 10px;
