@@ -12,7 +12,7 @@ const parseXml = async (xml) => {
   }
 };
 
-export const useContentsList = ({itemNum, genreCode, kidState, performanceState}) => {
+export const useContentsList = ({itemNum, genreCode, signgucode, kidState, performanceState}) => {
   const fetchContentsList = async () => {
     try {
       const response = await api.get('pblprfr', {
@@ -22,6 +22,7 @@ export const useContentsList = ({itemNum, genreCode, kidState, performanceState}
           cpage: 1,
           rows: itemNum,
           shcate: genreCode,
+          signgucode: signgucode,
           kidstate: kidState,
           prfstate: performanceState,
         },

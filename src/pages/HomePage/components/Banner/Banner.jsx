@@ -7,6 +7,7 @@ const Banner = () => {
   const bannerParams = {
     itemNum: 12,
     genreCode: '',
+    signgucode: 11,
     kidState: 'N',
     performanceState: '01',
   };
