@@ -79,14 +79,36 @@
       border-right: none;
   }
 }
-@media (max-width: 768px) {
-  .region-item {
-      flex: 1 0 30%; /* 작은 화면에서는 한 줄에 3개씩 배치 */
-  }
+/* 기본 페이지네이션 스타일 */
+.pagination-controls .pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
 
-@media (max-width: 576px) {
-  .region-item {
-      flex: 1 0 45%; /* 매우 작은 화면에서는 한 줄에 2개씩 배치 */
+.pagination-controls .page-link {
+  padding: 8px 12px; /* 패딩을 추가하여 크기를 조정 */
+  border-radius: 4px; /* 둥근 모서리 */
+  border: 2px solid var(--gray-color2); /* 기본 테두리 색상 */
+  color: var(--main-font-color); /* 기본 글자색 */
+}
+
+.pagination-controls .page-link:hover {
+  background-color: var(--highlight-color4); /* 호버 시 배경 색상 */
+  color: var(--bs-light); /* 호버 시 글자색 */
+}
+
+.pagination-controls .active .page-link {
+  background-color: var(--highlight-color3); /* 활성화된 페이지 배경 색상 */
+  color: var(--bs-light); /* 활성화된 페이지 글자색 */
+  border-color: var(--highlight-color3); /* 활성화된 페이지 테두리 색상 */
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .pagination-controls .page-link {
+    padding: 6px 8px;
+    font-size: 0.875rem;
   }
 }

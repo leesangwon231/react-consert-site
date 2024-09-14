@@ -9,6 +9,7 @@ import ContentFilter from "../ContentFilter/ContentFilter.jsx";
 import { Spinner } from "react-bootstrap";
 import PageNation from "../PageNation/PageNation.jsx";
 import Slider from "../common/Slider/Slider.jsx";
+import LoadingSpinner from "../../../../common/LoadingSpinner/LoadingSpinner.jsx";
 
 const AllContents = ({
                          performanceFilterArray,
@@ -21,12 +22,13 @@ const AllContents = ({
                          isLoading,
                          originData,
                          page,
-                         setPage
+                         setPage,
+                         isError
                      }) => {
 
     return (
         <div>
-            <Slider idArray={idArray} />
+            <Slider idArray={idArray} isLoading={isLoading} />
             <ContentFilter
                 performanceFilterArray={performanceFilterArray}
                 performanceState={performanceState}
@@ -40,9 +42,9 @@ const AllContents = ({
                     <Col className={"ContentsPage_col-lg-12"} lg={12} xs={12}>
                         <Row>
                             {isLoading
-                                ? <Spinner animation="border" variant="dark" />
+                                ? <LoadingSpinner/>
                                 : originData?.length === 0
-                                    ? <h1 className={"ContentsPage_NotFoundText"}>검색 된 결과가 없습니다</h1>
+                                    ? <h1 className={"ContentsPage_NotFoundText"}>검색 결과가 없습니다</h1>
                                     : originData?.map((content, index) => (
                                         <Col lg={3} xs={12} key={index}>
                                             <ContentCard content={content} index={index} />

@@ -8,7 +8,8 @@ import ListCulture from './component/ListCulture/ListCulture';
 import ListCenter from './component/ListCenter/ListCenter';
 import { useSearchCenters } from '../../hooks/useSearchCenter';
 import { useSearchCultures } from '../../hooks/useSearchCultures';
-import LoadingSpinner from "../../common/LoadingSpinner/LoadingSpinner";
+import TextLoadingSpinner from "../../common/TextLoadingSpinner/TextLoadingSpinner";
+import ErrorBox from '../../common/ErrorBox/ErrorBox';
 
 const SearchPage = () => {
   const [inputValue, setInputValue] = useState("");
@@ -21,28 +22,31 @@ const SearchPage = () => {
     const queryParams = new URLSearchParams(location.search);
     const queryKeyword = queryParams.get('q');
 
-    if (queryKeyword) {
-      setKeyword(queryKeyword);
-    }
+    // Set keyword to empty string if queryKeyword is null or empty
+    setKeyword(queryKeyword || '');
   }, [location.search]);
 
-  const { data: cultureData, error: cultureError, isLoading: cultureLoading } = useSearchCultures({ shprfnm: keyword });
-  const { data: centerData, error: centerError, isLoading: centerLoading } = useSearchCenters({ shprfnmfct: keyword });
+  const { data: cultureData, error: cultureError, isLoading: cultureLoading, isError: cultureIsError } = useSearchCultures({ shprfnm: keyword });
+  const { data: centerData, error: centerError, isLoading: centerLoading, isError: centerIsError } = useSearchCenters({ shprfnmfct: keyword });
 
   if (keyword && (cultureLoading || centerLoading)) {
-    return <LoadingSpinner/>;
+    return <TextLoadingSpinner />;
   }
 
-  if (keyword && (cultureError || centerError)) {
-    return <div>Error: {cultureError?.message || centerError?.message}</div>;
+  if (keyword && (cultureIsError || centerIsError)) {
+    return (
+      <ErrorBox message={cultureError?.message || centerError?.message} />
+    );
   }
+
+
 
   const searchByKeyword = (event) => {
     event.preventDefault();
     if (inputValue.trim() !== "") {
-      setKeyword(inputValue.trim()); 
+      setKeyword(inputValue.trim());
       navigate(`/search?q=${inputValue.trim()}`);
-      setInputValue(""); 
+      setInputValue("");
     } else {
       alert("검색어를 입력해 주세요");
     }
@@ -105,8 +109,8 @@ const SearchPage = () => {
               시설
             </Button>
           </div>
-          {keyword && activeButton === "all" || activeButton === "culture" ? <ListCulture data={cultureData}/> : null}
-          {keyword && activeButton === "all" || activeButton === "center" ? <ListCenter data={centerData}/> : null}
+          {keyword && (activeButton === "all" || activeButton === "culture") ? <ListCulture data={cultureData} /> : null}
+          {keyword && (activeButton === "all" || activeButton === "center") ? <ListCenter data={centerData} /> : null}
         </Row>
       </Container>
     </div>

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Container, Row } from 'react-bootstrap';
-import ReactPaginate from 'react-paginate';
 import "./ListCenter.css";
 import ListCenterContainer from '../ListCenterContainer/ListCenterContainer';
 import Pagination from '../../../../common/Pagination/Pagination'; 

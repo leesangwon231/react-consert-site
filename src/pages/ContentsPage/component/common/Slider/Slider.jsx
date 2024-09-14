@@ -5,10 +5,10 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import {useContents} from "../../../../../hooks/useContents.jsx";
 import "./Slider.css"
-import {useQueries} from "@tanstack/react-query";
-import {useContentsDetail} from "../../../../../hooks/useContentsDetail.jsx";
 import {useNavigate} from "react-router-dom";
-const Sliser = ({idArray}) => {
+import LoadingSpinner from "../../../../../common/LoadingSpinner/LoadingSpinner.jsx";
+import ErrorBox from "../../../../../common/ErrorBox/ErrorBox.jsx";
+const Sliser = ({idArray,isLoading,isError}) => {
 
 
     var settings = {
@@ -16,7 +16,7 @@ const Sliser = ({idArray}) => {
         infinite: true,
         speed: 500,
         autoplaySpeed: 2000,
-        autoplay : true,
+        autoplay: true,
         slidesToShow: 4,
         slidesToScroll: 4,
         initialSlide: 0,
@@ -42,12 +42,12 @@ const Sliser = ({idArray}) => {
             {
                 breakpoint: 900,
                 settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
                 }
             },
             {
-                breakpoint: 600,
+                breakpoint: 800,
                 settings: {
                     slidesToShow: 1,
                     slidesToScroll: 1,
@@ -70,6 +70,12 @@ const Sliser = ({idArray}) => {
         navigator(`${cardId}`);
     }
 
+    if (isLoading) {
+        return <LoadingSpinner/>;
+    }
+    if (isError) {
+        return <ErrorBox error={error}/>;
+    }
 
 
     return (
@@ -77,13 +83,14 @@ const Sliser = ({idArray}) => {
         <div className="slider-container">
             <Slider {...settings}>
                 {idArray?.map((posterData, index) => (
-                    <div key={index} onClick={()=>onClickSlider(posterData.mt20id)}>
-                        <img src={posterData?.poster}  alt=""/>
+                    <div key={index} onClick={() => onClickSlider(posterData.mt20id)}>
+                        <img src={posterData?.poster} alt=""/>
                     </div>
                 ))}
             </Slider>
         </div>
-    );
+)
+    ;
 }
 
 export default Sliser;
