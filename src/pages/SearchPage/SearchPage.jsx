@@ -1,110 +1,316 @@
-import React, { useState } from 'react';
-import { useContents } from '../../hooks/useCultures';
-import { Form, Container, Row, Button } from 'react-bootstrap';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import "./SearchPage.css";
-import ListCulture from '../component/ListCulture/ListCulture';
-import ListCenter from '../component/ListCenter/ListCenter';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useContentsDetail } from "../../hooks/useContentsDetail";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHouse } from "@fortawesome/free-solid-svg-icons";
+import { Container, Row, Col, Spinner, Card, Button } from "react-bootstrap";
 
-const SearchPage = () => {
-  const [inputValue, setInputValue] = useState(""); 
-  const [keyword, setKeyword] = useState(""); 
-  const [activeButton, setActiveButton] = useState("all");
-  const navigate = useNavigate(); 
-  const location = useLocation();
-
-  const { data: cultureData, error: cultureError, isLoading: cultureLoading } = useSearchCultures({ shprfnm: keyword });
-  const { data: centerData, error: centerError, isLoading: centerLoading } = useSearchCenters({ shprfnmfct: keyword });
+const ContentsDetailPage = () => {
+  const { id } = useParams();
+  const { data, isLoading, error } = useContentsDetail(id);
+  const [activeTab, setActiveTab] = useState("details");
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const queryParams = new URLSearchParams(location.search);
-    const queryKeyword = queryParams.get('q');
-    
-    if (queryKeyword) {
-      setKeyword(queryKeyword);
+    if (isLoading) {
+      console.log("상세 정보를 불러오는 중입니다...");
     }
-  }, [location.search]);
 
-  if (cultureLoading || centerLoading) {
-      return <div>Loading...</div>;
-  }
-
-  if (cultureError || centerError) {
-      return <div>Error: {cultureError?.message || centerError?.message}</div>;
-  }
-
-  const searchByKeyword = (event) => {
-    event.preventDefault();
-    if (inputValue !== "") {
-      setKeyword(inputValue); 
-      navigate(`/search?q=${inputValue}`);
-      setInputValue(""); 
-    } else {
-      alert("검색어를 입력해 주세요");
+    if (error) {
+      console.error("상세 정보를 불러오는 중 오류 발생:", error);
     }
-  }
 
-  const handleButtonClick = (buttonType) => {
-    setActiveButton(buttonType);
+    if (data) {
+      console.log("불러온 상세 정보:", data);
+    }
+  }, [data, isLoading, error]);
+
+  const contentDetail = data?.dbs?.db;
+
+  const handleVenueClick = () => {
+    const venueId = contentDetail?.mt10id;
+    if (venueId) {
+      navigate(`/hall/${venueId}`);
+    }
   };
 
-  return (
-    <div className="search-container">
-      <Container>
-        <Row>
-          <div className="search-box">
-            <h1>
-              <span className="keyword">' {keyword} ' </span>에 대한 검색 결과 입니다.
-            </h1>
-            <Form className="d-flex search-form" onSubmit={searchByKeyword}>
-              <div className="input-container">
-                <Form.Control
-                  type="search"
-                  className="me-2"
-                  aria-label="Search"
-                  value={inputValue}
-                  onChange={(event) => setInputValue(event.target.value)}
-                />
-              </div>
-              <a 
-                href="#"
-                onClick={searchByKeyword}
-                className="btn-srch"
-                aria-label="Search"
-              >
-                <FontAwesomeIcon icon={faSearch} />
-              </a>
-          </Form>
+  const priceInfo = contentDetail?.pcseguidance
+    ? contentDetail.pcseguidance
+        .split(/(원,?)/)
+        .reduce((acc, curr, idx) => {
+          if (curr.includes("원")) {
+            acc[acc.length - 1] += curr;
+          } else {
+            acc.push(curr.trim());
+          }
+          return acc;
+        }, [])
+        .filter((price) => price.trim() !== "")
+    : [];
 
-          </div>
-          <div className="button-group">
-            <Button 
-              className={`btn ${activeButton === "all" ? "active" : ""}`}
-              onClick={() => handleButtonClick("all")}
-            >
-              통합검색
-            </Button>
-            <Button 
-              className={`btn ${activeButton === "culture" ? "active" : ""}`}
-              onClick={() => handleButtonClick("culture")}
-            >
-              공연
-            </Button>
-            <Button 
-              className={`btn ${activeButton === "center" ? "active" : ""}`}
-              onClick={() => handleButtonClick("center")}
-            >
-              시설
-            </Button>
-          </div>
-          {keyword && activeButton === "all" || activeButton === "culture" ? <ListCulture data={cultureData}/> : null}
-          {keyword && activeButton === "all" || activeButton === "center" ? <ListCenter data={centerData}/> : null}
-        </Row>
-      </Container>
-    </div>
+  const formattedPriceInfo = priceInfo.map((price, i) => (
+    <div key={i} style={{ marginBottom: "8px" }}>{price}</div>
+  ));
+
+  if (isLoading) {
+    return (
+      <div
+        className="d-flex justify-content-center align-items-center"
+        style={{ height: "100vh" }}
+      >
+        <Spinner animation="border" variant="primary" />
+      </div>
+    );
+  }
+
+  if (error) {
+    return <p>오류가 발생했습니다: {error.message}</p>;
+  }
+
+  return (
+    <Container
+      className="detail-page-container mt-3"
+      style={{
+        backgroundColor: "white",
+        fontSize: "20px",
+        padding: "20px",
+        borderRadius: "10px",
+      }}
+    >
+      <Row>
+        <Col xs={12}>
+          <Card.Text>
+            <strong>&gt;&gt; </strong>
+            {contentDetail?.genrenm || "정보 없음"}
+          </Card.Text>
+          <hr
+            style={{
+              backgroundColor: "#383554",
+              height: "3px",
+              border: "none",
+              borderRadius: "3px",
+            }}
+          />
+        </Col>
+      </Row>
+      <Row className="gx-1">
+        <Col md={6} xs={12} className="d-flex justify-content-center mb-4">
+          <img
+            src={contentDetail?.poster || "not poster"}
+            alt="포스터"
+            style={{ width: "100%", maxWidth: "400px", borderRadius: "5px" }}
+          />
+        </Col>
+        <Col md={6} xs={12}>
+          <Card style={{ backgroundColor: "white", border: "none" }}>
+            <Card.Body>
+              <Card.Title>
+                <h1>{contentDetail?.prfnm || "공연 제목"}</h1>
+              </Card.Title>
+              <Card.Subtitle className="mb-2">
+                {contentDetail?.prfpdfrom} - {contentDetail?.prfpdto}
+              </Card.Subtitle>
+              <Card.Text className="mt-3 mb-4">
+                <strong>공연 상태</strong>: &nbsp;&nbsp;
+                {contentDetail?.prfstate || "정보 없음"}
+              </Card.Text>
+
+              <Card.Text className="mb-4">
+                <strong>등급</strong>: &nbsp;&nbsp;
+                {contentDetail?.prfage || "정보 없음"}
+              </Card.Text>
+              <Card.Text className="mb-4">
+                <strong>런타임</strong>: &nbsp;&nbsp;
+                {contentDetail?.prfruntime || "정보 없음"}
+              </Card.Text>
+              <Card.Text className="mb-4 price d-flex align-items-center">
+                <strong className="me-3">가격</strong>
+                <div
+                  style={{
+                    backgroundColor: "#e2e2e2",
+                    padding: "20px",
+                    display: "inline-block",
+                    width: "auto",
+                  }}
+                >
+                  {formattedPriceInfo}
+                </div>
+              </Card.Text>
+              <hr
+                style={{
+                  backgroundColor: "#cea6c0",
+                  height: "3px",
+                  border: "none",
+                  borderRadius: "3px",
+                }}
+              />
+              <strong>공연 시간</strong>
+              <Card.Text>
+                <br />
+                {contentDetail?.dtguidance
+                  ? contentDetail.dtguidance.split(",").map((item, index) => (
+                      <span key={index}>
+                        {item.trim()}
+                        <br />
+                        <br />
+                      </span>
+                    ))
+                  : "정보 정보가 없습니다."}
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+
+      <Row className="mt-3">
+        <Col md={12}>
+          <Button
+            style={
+              activeTab === "details"
+                ? { backgroundColor: "#383554", border: "none" }
+                : { backgroundColor: "#aaaaaa", border: "none" }
+            }
+            onClick={() => setActiveTab("details")}
+            className="me-2"
+          >
+            상세정보
+          </Button>
+
+          <Button
+            style={
+              activeTab === "reservation"
+                ? { backgroundColor: "#383554", border: "none" }
+                : { backgroundColor: "#aaaaaa", border: "none" }
+            }
+            onClick={() => setActiveTab("reservation")}
+            className="me-2"
+          >
+            예매 정보
+          </Button>
+
+          <Button
+            style={
+              activeTab === "imageInfo"
+                ? { backgroundColor: "#383554", border: "none" }
+                : { backgroundColor: "#aaaaaa", border: "none" }
+            }
+            onClick={() => setActiveTab("imageInfo")}
+          >
+            공연장 정보
+          </Button>
+        </Col>
+      </Row>
+
+      <Row className="mt-4">
+        {activeTab === "reservation" && (
+          <Row>
+            {contentDetail?.relates?.relate &&
+            Array.isArray(contentDetail.relates.relate) ? (
+              contentDetail.relates.relate.map((relateItem, index) => (
+                <Col key={index} md={6} className="mb-4">
+                  <Card>
+                    <Card.Body>
+                      <Card.Title>
+                        <strong>{relateItem.relatenm || "정보없음"}</strong>
+                      </Card.Title>
+                      <Card.Text>
+                        <a
+                          href={relateItem.relateurl || "#"}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          예매처로 이동
+                        </a>
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))
+            ) : (
+              <Col>
+                <span>정보 없음</span>
+              </Col>
+            )}
+          </Row>
+        )}
+
+        {activeTab === "details" && (
+          <Col>
+            <Card>
+              <Card.Body>
+                <Card.Title>
+                  <strong>상세 정보</strong>
+                </Card.Title>
+                <Card.Text>
+                  줄거리: {contentDetail?.sty || "정보 없음"}
+                </Card.Text>
+                <Card.Text>
+                  지역: {contentDetail?.area || "정보 없음"}
+                </Card.Text>
+                <Card.Text>
+                  출연진: {contentDetail?.prfcast || "정보 없음"}
+                </Card.Text>
+                <Card.Text>
+                  기획/제작사: {contentDetail?.entrpsnm || "정보 없음"}
+                </Card.Text>
+
+                {Array.isArray(contentDetail?.styurls?.styurl) ? (
+                  contentDetail.styurls.styurl.map((url, index) => (
+                    <Card.Text key={index} className="mt-4">
+                      <img
+                        src={url}
+                        alt={`상세 이미지 ${index + 1}`}
+                        style={{
+                          width: "100%",
+                          marginTop: "10px",
+                          borderRadius: "5px",
+                        }}
+                      />
+                    </Card.Text>
+                  ))
+                ) : (
+                  <Card.Text className="mt-4">
+                    <img
+                      src={contentDetail.styurls.styurl}
+                      alt="상세 이미지"
+                      style={{
+                        width: "100%",
+                        marginTop: "10px",
+                        borderRadius: "5px",
+                      }}
+                    />
+                  </Card.Text>
+                )}
+              </Card.Body>
+            </Card>
+          </Col>
+        )}
+
+        {activeTab === "imageInfo" && (
+          <Col>
+            <Card>
+              <Card.Body>
+                <Card.Title>
+                  <strong>공연장 정보</strong>
+                </Card.Title>
+                <Card.Text>
+                  {contentDetail?.fcltynm || "정보 정보가 없습니다."}
+                  <FontAwesomeIcon
+                    icon={faHouse}
+                    className="icon"
+                    onClick={handleVenueClick}
+                    style={{ cursor: "pointer" }}
+                  />
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+        )}
+      </Row>
+    </Container>
   );
 };
 
-export default SearchPage;
+export default ContentsDetailPage;

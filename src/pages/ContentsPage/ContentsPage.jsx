@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";  // useNavigate 추가
 import { useContents } from "../../hooks/useContents";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./ContentsPage.css"
-import React from "react";
 import AllContents from "./component/AllContents/AllContents.jsx";
 import MyLocationContents from "./component/MyLocationContents/MyLocationContents.jsx";
 import {useParams} from "react-router-dom";
