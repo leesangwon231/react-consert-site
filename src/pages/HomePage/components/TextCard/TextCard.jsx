@@ -1,6 +1,7 @@
-import { useNavigate } from 'react-router-dom';
+/* eslint-disable react/prop-types */
+import {useNavigate} from 'react-router-dom';
 import './TextCardStyle.css';
-import { genreList } from '../../../../constants/constants';
+import {genreList} from '../../../../constants/constants';
 
 const TextCard = ({item}) => {
   const genreAddress = genreList.find((genre) => genre.genreName === item?.genrenm).genreAddress;

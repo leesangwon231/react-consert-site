@@ -2,9 +2,7 @@ import {useState} from 'react';
 import './HeaderStyle.css';
 import {Button, Form} from 'react-bootstrap';
 import {Link, NavLink, useNavigate} from 'react-router-dom';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-
+import Logo from '../../../assets/Logo.png';
 const Header = () => {
   const menuItems = [
     {
@@ -44,15 +42,15 @@ const Header = () => {
     <header id="header" className="global-mx position-sticky top-0 bg-light-subtle py-2 py-lg-0 z-2">
       <div className="big-menu-box d-flex align-items-center">
         <h2>
-          <Link to="/" className="me-4">
-            <div>LOGO</div>
+          <Link to="/">
+            <img className="logo-img" src={Logo} alt="로고" />
           </Link>
         </h2>
-        <nav className="me-auto">
+        <nav className="mx-auto">
           <ul className="d-flex align-items-center my-2 d-none d-lg-flex">
             {menuItems.map(({itemName, itemLink}, i) => (
               <li key={i} className="menu-item-box">
-                <NavLink className="nav-menu-item pb-2 pt-3 fs-5" to={itemLink}>
+                <NavLink className="nav-menu-item pb-2 pt-3 fs-4" to={itemLink}>
                   {itemName}
                   <div className="underline"></div>
                 </NavLink>
@@ -61,7 +59,13 @@ const Header = () => {
           </ul>
         </nav>
         <Form className="input-box fs-5 d-flex" onSubmit={searchByKeyword}>
-          <Form.Control type="search" placeholder="검색어를 입력하세요" className="me-2 w-75" value={keyword} onChange={(event) => setKeyword(event.target.value)} />
+          <Form.Control
+            type="search"
+            placeholder="검색어를 입력하세요"
+            className="me-2 w-75"
+            value={keyword}
+            onChange={(event) => setKeyword(event.target.value)}
+          />
           <Button variant="primary" type="submit" className="input-button">
             검색
           </Button>

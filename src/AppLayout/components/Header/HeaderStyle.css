@@ -1,4 +1,8 @@
 #header {
+  .logo-img {
+    width: 6rem;
+  }
+
   .underline {
     height: 3px;
     margin-top: 0.3rem;
