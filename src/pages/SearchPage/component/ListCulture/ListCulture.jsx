@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Container, Row, Badge } from 'react-bootstrap';
-import ReactPaginate from 'react-paginate';
 import { useNavigate } from "react-router-dom";
-import { genreList } from '../../../../constants/constants'; // Import the genreList
+import { genreList } from '../../../../constants/constants'; 
 import "./ListCulture.css";
+import Pagination from '../../../../common/Pagination/Pagination'; 
 
 const ListCulture = ({ data }) => {
     const culturalEvents = data?.dbs?.db || [];
@@ -62,7 +62,7 @@ const ListCulture = ({ data }) => {
                                                         ? 'pending' 
                                                         : event.prfstate === '공연중' 
                                                         ? 'ongoing' 
-                                                        : 'completed'}`}
+                                                        : 'completed'}` }
                                                 >
                                                     {event.prfstate}
                                                 </Badge>
@@ -79,28 +79,12 @@ const ListCulture = ({ data }) => {
                         <h4 className="no-results">검색 결과가 없습니다</h4>
                     )}
                     {totalCulturals > itemsPerPage && (
-                        <div className="pagination-container">
-                            <ReactPaginate
-                                previousLabel="<"
-                                nextLabel=">"
-                                pageClassName="page-item"
-                                pageLinkClassName="page-link"
-                                previousClassName="page-item"
-                                previousLinkClassName="page-link"
-                                nextClassName="page-item"
-                                nextLinkClassName="page-link"
-                                breakLabel="..."
-                                breakClassName="page-item"
-                                breakLinkClassName="page-link"
-                                pageCount={pageCount}
-                                marginPagesDisplayed={2}
-                                pageRangeDisplayed={isMobile ? 3 : 5}
-                                onPageChange={handlePageClick}
-                                containerClassName="pagination"
-                                activeClassName="active"
-                                forcePage={currentPage}
-                            />
-                        </div>
+                        <Pagination 
+                            pageCount={pageCount}
+                            currentPage={currentPage}
+                            handlePageClick={handlePageClick}
+                            isMobile={isMobile}
+                        />
                     )}
                 </Container>
             </div>
