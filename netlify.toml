@@ -3,3 +3,4 @@ from = "/proxy/*"
   to = "http://www.kopis.or.kr/openApi/restful/:splat"
   status = 200
   force = true
+  headers: {Accept: 'application/xml'}
