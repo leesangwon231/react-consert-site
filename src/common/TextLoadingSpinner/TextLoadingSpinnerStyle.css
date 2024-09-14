@@ -1,4 +1,4 @@
-.spinner-container {
+.text-spinner-container {
   /* position: fixed; */
   /* top: 50%; */
   /* left: 50%; */
@@ -14,7 +14,7 @@
     width: 10rem;
     height: 10rem;
     margin-top: 2rem;
-    color: var(--highlight-color4);
+    color: var(--highlight-color3);
     border-width: 1rem;
   }
   /* .spinner-image {

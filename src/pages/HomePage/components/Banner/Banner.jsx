@@ -1,4 +1,5 @@
 import ErrorBox from '../../../../common/ErrorBox/ErrorBox';
+import LoadingSpinner from '../../../../common/LoadingSpinner/LoadingSpinner';
 import {useContentsList} from '../../../../hooks/useMainPage';
 import PosterCard from '../PosterCard/PosterCard';
 import './BannerStyle.css';
@@ -15,7 +16,7 @@ const Banner = () => {
   console.log(data);
 
   if (isLoading) {
-    return <div className="loading">Loading...</div>;
+    return <LoadingSpinner />;
   }
   if (isError) {
     return <ErrorBox error={error} />;
