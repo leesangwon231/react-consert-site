@@ -10,9 +10,6 @@ import { useSearchCenters } from '../../hooks/useSearchCenter';
 import { useSearchCultures } from '../../hooks/useSearchCultures';
 import LoadingSpinner from "../../common/LoadingSpinner/LoadingSpinner";
 
-
-
-
 const SearchPage = () => {
   const [inputValue, setInputValue] = useState(""); 
   const [keyword, setKeyword] = useState(""); 
