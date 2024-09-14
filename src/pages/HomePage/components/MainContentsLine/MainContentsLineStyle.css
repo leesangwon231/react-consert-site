@@ -1,0 +1,9 @@
+.main-contents-line-container {
+  .react-multi-carousel-track {
+    padding: 1rem 0;
+  }
+  .react-multi-carousel-item {
+    padding-inline: 0.5rem;
+  }
+
+}

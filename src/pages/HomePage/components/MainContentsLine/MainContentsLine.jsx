@@ -1,21 +1,26 @@
 import Carousel from 'react-multi-carousel';
-import { useContentsList } from '../../../../hooks/useMainPage';
+import {useContentsList} from '../../../../hooks/useMainPage';
+import LoadingSpinner from '../../../../common/LoadingSpinner/LoadingSpinner';
+import ErrorBox from '../../../../common/ErrorBox/ErrorBox';
+import TextCard from '../TextCard/TextCard';
+import 'react-multi-carousel/lib/styles.css';
+import './MainContentsLineStyle.css';
 
 const responsive = {
   superLargeDesktop: {
     breakpoint: {max: 3000, min: 1600},
-    items: 6,
-    slidesToSlide: 6,
-  },
-  LargeDesktop: {
-    breakpoint: {max: 1400, min: 1200},
     items: 5,
     slidesToSlide: 5,
   },
-  desktop: {
-    breakpoint: {max: 1200, min: 992},
+  LargeDesktop: {
+    breakpoint: {max: 1400, min: 1200},
     items: 4,
     slidesToSlide: 4,
+  },
+  desktop: {
+    breakpoint: {max: 1200, min: 992},
+    items: 3,
+    slidesToSlide: 3,
   },
   tablet: {
     breakpoint: {max: 992, min: 576},
@@ -37,15 +42,20 @@ const MainContentsLine = ({title, genreCode, kidState}) => {
   };
   const {data, isLoading, isError, error} = useContentsList(contentsLineParams);
   console.log(data);
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+  if (isError) {
+    return <ErrorBox error={error} />;
+  }
 
   return (
-    <div className="py-4">
-      <h2 className="text-center mb-3">{title}</h2>
-      <Carousel responsive={responsive}>
-        <div>Item 1</div>
-        <div>Item 2</div>
-        <div>Item 3</div>
-        <div>Item 4</div>
+    <div className="main-contents-line-container py-4">
+      <h2 className="text-center fw-bold mb-3">{title}</h2>
+      <Carousel responsive={responsive} autoPlay={false}>
+        {data?.map((item, i) => (
+          <TextCard key={i} item={item} />
+        ))}
       </Carousel>
     </div>
   );
