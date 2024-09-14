@@ -6,4 +6,39 @@
     padding-inline: 0.5rem;
   }
 
+  .contents-line-title {
+    position: relative;
+    &::before {
+      left: 15%;
+    }
+    &::after {
+      right: 15%;
+    }
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      display: block;
+      top: 50%;
+      width: 25%;
+      height: 0.4rem;
+      transform: translateY(-50%);
+    }
+  }
+  .highlight-color1::before,
+  .highlight-color1::after {
+    background-color: var(--highlight-color1);
+  }
+  .highlight-color2::before,
+  .highlight-color2::after {
+    background-color: var(--highlight-color2);
+  }
+  .highlight-color3::before,
+  .highlight-color3::after {
+    background-color: var(--highlight-color3);
+  }
+  .highlight-color4::before,
+  .highlight-color4::after {
+    background-color: var(--highlight-color4);
+  }
 }
