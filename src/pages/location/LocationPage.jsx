@@ -7,6 +7,7 @@ import VenuesList from "./component/VenuesList";  // 공연장 리스트 컴포�
 import queryString from 'query-string'; // URL 쿼리 파라미터를 파싱하기 위한 라이브러리
 
 const regions = [
+
   { code: "all", name: "전체" },  // "전체" 항목 추가
   { code: "11", name: "서울" },
   { code: "26", name: "부산" },
