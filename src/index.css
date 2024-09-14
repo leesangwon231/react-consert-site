@@ -1,12 +1,42 @@
 @import url('https://cdn.jsdelivr.net/gh/sun-typeface/SUITE@2/fonts/variable/woff2/SUITE-Variable.css');
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body {line-height: 1;}
-ul { list-style: none; margin: 0; padding: 0; }
-h1, h2, h3, h4, h5, h6 {margin: 0; padding: 0;}
-a { text-decoration: none; color: inherit; display: block; }
-input, select, textarea, fieldset { border: 0; }
-img { vertical-align: top; border: 0; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  line-height: 1;
+}
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+input,
+select,
+textarea,
+fieldset {
+  border: 0;
+}
+img {
+  vertical-align: top;
+  border: 0;
+}
 
 body {
   font-family: 'SUITE Variable', sans-serif;
@@ -22,5 +52,4 @@ body {
   --highlight-color4: #cea6c0;
   --gray-color1: #f3f3f3;
   --gray-color2: #e2e2e2;
-  
 }

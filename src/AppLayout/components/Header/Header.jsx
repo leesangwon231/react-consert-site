@@ -1,7 +1,7 @@
+import {useState} from 'react';
 import './HeaderStyle.css';
-import React, { useState, useEffect } from 'react';
-import { Button, Form } from 'react-bootstrap';
-import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
+import {Button, Form} from 'react-bootstrap';
+import {Link, NavLink, useNavigate} from 'react-router-dom';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
@@ -32,77 +32,55 @@ const Header = () => {
       itemLink: '/location',
     },
   ];
-
-  const [inputValue, setInputValue] = useState('');
   const navigate = useNavigate();
-  const location = useLocation();
-
-  useEffect(() => {
-    const queryParams = new URLSearchParams(location.search);
-    const queryKeyword = queryParams.get('q');
-    if (queryKeyword) {
-      setInputValue(decodeURIComponent(queryKeyword));
-    } else {
-      setInputValue('');
-    }
-  }, [location.search]);
-
-  const handleSubmit = (event) => {
+  const [keyword, setKeyword] = useState('');
+  const searchByKeyword = (event) => {
     event.preventDefault();
-    if (inputValue.trim()) {
-      navigate(`/search?q=${encodeURIComponent(inputValue.trim())}`);
-    } else {
-      navigate('/search');
-    }
+    // change API URL with keywords
+    navigate(`/search?q=${keyword}`);
+    setKeyword('');
   };
-
   return (
     <header id="header" className="global-mx position-sticky top-0 bg-light-subtle py-2 py-lg-0 z-2">
-        <div className="big-menu-box d-flex align-items-center">
-          <h2>
-            <Link to="/" className="me-4">
-              <div>LOGO</div>
-            </Link>
-          </h2>
-          <nav className="me-auto">
-            <ul className="d-flex align-items-center my-2 d-none d-lg-flex">
-              {menuItems.map(({itemName, itemLink}, i) => (
-                <li key={i} className="menu-item-box">
-                  <NavLink className="nav-menu-item pb-2 pt-3 fs-5" to={itemLink}>
-                    {itemName}
-                    <div className="underline"></div>
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
-          </nav>
-          <Form className="input-box fs-5 d-flex" onSubmit={handleSubmit}>
-            <Form.Control 
-              type="text" 
-              placeholder="검색어를 입력하세요" 
-              className="me-2 w-75" 
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-            />
-            <Button variant="primary" type="submit" className="input-button">
-              검색
-            </Button>
-            {/* <FontAwesomeIcon icon={faMagnifyingGlass} /> */}
-          </Form>
-        </div>
-        <div className="mobile-menu">
-          <ul className="d-flex align-items-center my-2 d-flex d-lg-none justify-content-evenly">
+      <div className="big-menu-box d-flex align-items-center">
+        <h2>
+          <Link to="/" className="me-4">
+            <div>LOGO</div>
+          </Link>
+        </h2>
+        <nav className="me-auto">
+          <ul className="d-flex align-items-center my-2 d-none d-lg-flex">
             {menuItems.map(({itemName, itemLink}, i) => (
-              <li key={i} className="mobile-menu-item-box">
-                <NavLink className="mobile-menu-item pb-2 pt-3 fs-5" to={itemLink}>
+              <li key={i} className="menu-item-box">
+                <NavLink className="nav-menu-item pb-2 pt-3 fs-5" to={itemLink}>
                   {itemName}
-                <div className="underline"></div>
+                  <div className="underline"></div>
                 </NavLink>
               </li>
             ))}
           </ul>
-        </div>
-      </header>
-  )
-}
-export default Header
+        </nav>
+        <Form className="input-box fs-5 d-flex" onSubmit={searchByKeyword}>
+          <Form.Control type="search" placeholder="검색어를 입력하세요" className="me-2 w-75" value={keyword} onChange={(event) => setKeyword(event.target.value)} />
+          <Button variant="primary" type="submit" className="input-button">
+            검색
+          </Button>
+          {/* <FontAwesomeIcon icon={faMagnifyingGlass} /> */}
+        </Form>
+      </div>
+      <div className="mobile-menu">
+        <ul className="d-flex align-items-center my-2 d-flex d-lg-none justify-content-evenly">
+          {menuItems.map(({itemName, itemLink}, i) => (
+            <li key={i} className="mobile-menu-item-box">
+              <NavLink className="mobile-menu-item pb-2 pt-3 fs-5" to={itemLink}>
+                {itemName}
+                <div className="underline"></div>
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </header>
+  );
+};
+export default Header;
