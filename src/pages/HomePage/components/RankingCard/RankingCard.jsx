@@ -17,7 +17,7 @@ const RankingCard = ({item}) => {
       <div className="text-box mt-3">
         <h5 className="fw-bold mb-3">{item?.prfnm}</h5>
         <p className="mb-2">{item?.prfpd}</p>
-        <p>{item?.prfplcnm}</p>
+        <p className='lh-sm'>{item?.prfplcnm}</p>
       </div>
     </div>
   );

@@ -4,7 +4,7 @@
   &:hover {
     img {
       transition: all 0.3s;
-      transform: scale(1.03);
+      transform: scale(1.06);
     }
   }
   img {

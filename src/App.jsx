@@ -5,9 +5,10 @@ import SearchPage from './pages/SearchPage/SearchPage';
 import ContentsPage from './pages/ContentsPage/ContentsPage';
 import ContentsDetailPage from './pages/ContentsDetailPage/ContentsDetailPage';
 import LocationPage from './pages/location/LocationPage';
-import VenueDetailPage from './pages/location/VenueDetailPage'; 
+import VenueDetailPage from './pages/location/VenueDetailPage';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import {useEffect} from 'react';
+import RankingPage from './pages/RankingPage/RankingPage';
 
 // 앱 레이아웃 - 헤더랑 푸터
 
@@ -31,9 +32,7 @@ const App = () => {
         </Route>
         <Route path="/location" element={<LocationPage />} />
         <Route path="/hall/:id" element={<VenueDetailPage />} />
-        {/* <Route path="/hall">
-            <Route path=":id" element={<HallDetailPage />} />
-        </Route> */}
+        <Route path="/ranking" element={<RankingPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
