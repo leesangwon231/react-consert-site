@@ -68,7 +68,7 @@ export const useBoxOfficeList = (period, categoryCode) => {
     queryKey: ['boxOffice', period, todayDate, categoryCode],
     queryFn: fetchBoxOfficeList,
     select: (result) => result.boxofs.boxof,
-    retry: 3,
+    retry: 1,
     // staleTime: 600000,
   });
 };

@@ -39,14 +39,15 @@ const RankingLine = () => {
 
   // const {data, isLoading, isError, error} = useBoxOfficeList('day', todayDate, selectedCategory);
   const {data, isLoading, isError, error} = useBoxOfficeList('month', selectedCategory);
-  console.log("Ranking Data:", data);
-  console.log("Ranking error:", error);
-  
+  // console.log('Ranking Data:', data);
+  // console.log('Ranking error:', error);
+
   console.log(selectedCategory);
+
   useEffect(() => {
-    setSlicedData(data?.slice(5));
-    console.log(slicedData);
-  }, [data]);
+    setSlicedData(data?.slice(0, 5));
+  }, []);
+  console.log('slicedData:', slicedData);
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -68,14 +69,14 @@ const RankingLine = () => {
         ))}
       </div>
       <div className="ranking-card-container mt-4">
-        {/* {slicedData?.map((item, i) => (
+        {slicedData?.map((item, i) => (
           <RankingCard key={i} item={item} />
-          ))} */}
+        ))}
+        {/* <RankingCard item={dummyItem}></RankingCard>
         <RankingCard item={dummyItem}></RankingCard>
         <RankingCard item={dummyItem}></RankingCard>
         <RankingCard item={dummyItem}></RankingCard>
-        <RankingCard item={dummyItem}></RankingCard>
-        <RankingCard item={dummyItem}></RankingCard>
+        <RankingCard item={dummyItem}></RankingCard> */}
       </div>
     </div>
   );
