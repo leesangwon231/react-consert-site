@@ -12,28 +12,44 @@ const parseXml = async (xml) => {
 };
 
 const fetchSearchContentsData = async ({ queryKey }) => {
-    const { shprfnm = '' } = queryKey[1] || {};
-    try {
-        const response = await api.get('pblprfr', {
+    const { shprfnm = '', shcate = [] } = queryKey[1] || {};
+
+    const requests = shcate.length > 0
+        ? shcate.map((category) => 
+            api.get('pblprfr', {
+                params: {
+                    shprfnm,
+                    shcate: category,
+                    stdate: '20240101',
+                    eddate: '20241231',
+                    cpage: '1',
+                    rows: '1000'
+                }
+            }).then(response => parseXml(response.data))
+        )
+        : [api.get('pblprfr', {
             params: {
                 shprfnm,
+                shcate: '',
                 stdate: '20240101',
                 eddate: '20241231',
-                cpage: '1', 
+                cpage: '1',
                 rows: '1000'
             }
-        });
+        }).then(response => parseXml(response.data))];
 
-        const xmlData = response.data;
-        const jsonData = await parseXml(xmlData);
+    try {
+        const responses = await Promise.all(requests);
 
-        if (jsonData.dbs && jsonData.dbs.db) {
-            const currentResults = jsonData.dbs.db;
-            return { dbs: { db: Array.isArray(currentResults) ? currentResults : [] } };
-        } else {
-            return { dbs: { db: [] } }; 
-        }
+        const mergedResults = responses.reduce((acc, jsonData) => {
+            if (jsonData.dbs && jsonData.dbs.db) {
+                const currentResults = jsonData.dbs.db;
+                acc.push(...(Array.isArray(currentResults) ? currentResults : []));
+            }
+            return acc;
+        }, []);
 
+        return { dbs: { db: mergedResults } };
     } catch (error) {
         console.error('데이터 가져오기 오류:', error);
         throw new Error('데이터 가져오기 오류: ' + error.message);
