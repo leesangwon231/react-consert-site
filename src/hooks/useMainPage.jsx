@@ -41,3 +41,29 @@ export const useContentsList = ({itemNum, genreCode, signgucode, kidState, perfo
     staleTime: 600000,
   });
 };
+
+export const useBoxOfficeList = (period, date, categoryCode) => {
+
+  const fetchBoxOfficeList = async () => {
+    try {
+      const response = await api.get('boxoffice', {
+        params: {
+          ststype: period,
+          date: date.toString(),
+          catecode: categoryCode,
+        },
+      });
+      return await parseXml(response.data);
+    } catch (error) {
+      console.error('데이터 가져오기 오류:', error);
+      throw error;
+    }
+  };
+  return useQuery({
+    queryKey: ['boxOffice', period, date, categoryCode],
+    queryFn: fetchBoxOfficeList,
+    select: (result) => result.boxofs.boxof,
+    retry: 1,
+    // staleTime: 600000,
+  });
+};

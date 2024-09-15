@@ -1,0 +1,33 @@
+.ranking-card-box {
+  cursor: pointer;
+  position: relative;
+  &:hover {
+    img {
+      transition: all 0.3s;
+      transform: scale(1.06);
+    }
+  }
+  img {
+    width: 100%;
+    object-fit: cover;
+    aspect-ratio: 2/3;
+  }
+  .img-box {
+    position: relative;
+    .ranking-number {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 4rem;
+      height: 4rem;
+      border-radius: 50%;
+      bottom: 5%;
+      left: 5%;
+      background-color: var(--highlight-color3);
+      color: var(--gray-color1);
+      font-weight: 900;
+      font-size: 2rem;
+    }
+  }
+}

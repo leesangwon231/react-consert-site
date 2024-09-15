@@ -24,12 +24,12 @@ const responsive = {
     slidesToSlide: 3,
   },
   tablet: {
-    breakpoint: {max: 992, min: 576},
+    breakpoint: {max: 992, min: 767},
     items: 3,
     slidesToSlide: 3,
   },
   mobile: {
-    breakpoint: {max: 576, min: 0},
+    breakpoint: {max: 767, min: 0},
     items: 2,
     slidesToSlide: 2,
   },
@@ -41,8 +41,11 @@ const MainContentsLine = ({title, genreCode, kidState}) => {
     genreCode: genreCode,
     kidState: kidState,
   };
+  const colorNum = Math.floor(Math.random() * 4 + 1);
+  // console.log(colorNum);
+
   const {data, isLoading, isError, error} = useContentsList(contentsLineParams);
-  console.log(data);
+  // console.log(data);
   if (isLoading) {
     return <LoadingSpinner />;
   }
@@ -52,8 +55,8 @@ const MainContentsLine = ({title, genreCode, kidState}) => {
 
   return (
     <div className="main-contents-line-container py-4">
-      <h2 className="text-center fw-bold mb-3">{title}</h2>
-      <Carousel responsive={responsive} autoPlay={false}>
+      <h2 className={`contents-line-title highlight-color${colorNum} text-center fw-bold mb-3`}>{title}</h2>
+      <Carousel responsive={responsive} autoPlay={false} infinite={true}>
         {data?.map((item, i) => (
           <TextCard key={i} item={item} />
         ))}
