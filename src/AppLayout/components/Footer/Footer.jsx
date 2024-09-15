@@ -37,19 +37,19 @@ const Footer = () => {
                 </div>
                 <div className="name-box">
                   <span className="name me-3 fw-bold">이상원</span>
-                  <span>PO | 콘텐츠 페이지</span>
+                  <span>SM | 콘텐츠 페이지</span>
                 </div>
                 <div className="name-box">
                   <span className="name me-3 fw-bold">정민지</span>
-                  <span>PO | 지역, 공연장 상세 페이지</span>
+                  <span>지역, 공연장 상세 페이지</span>
                 </div>
                 <div className="name-box">
                   <span className="name me-3 fw-bold">도수빈</span>
-                  <span>PO | 검색 페이지</span>
+                  <span>검색 페이지</span>
                 </div>
                 <div className="name-box">
                   <span className="name me-3 fw-bold">최지윤</span>
-                  <span>PO | 콘텐츠 상세 페이지</span>
+                  <span>콘텐츠 상세 페이지, Not Found 페이지</span>
                 </div>
               </div>
             </div>
