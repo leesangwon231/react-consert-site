@@ -9,12 +9,16 @@
         margin-bottom: 2%;
         align-items: center; 
         justify-content: center;
+        border-bottom: 1px solid var(--gray-color2);
+    }
+    
+    .list-container:last-child {
+        border-bottom: none;
     }
     
     .list-itemarea {
         border-top: 5px solid var(--gray-color2);
         border-bottom: 5px solid var(--gray-color2);
-        padding-top: 15px;
     }
     .list-titles{
         display: flex;              

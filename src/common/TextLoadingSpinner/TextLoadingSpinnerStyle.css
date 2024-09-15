@@ -9,7 +9,8 @@
   justify-content: center;
   z-index: 9999;
   margin-inline: auto;
-  margin-top: 15%;
+  margin-top: 10%;
+ 
 
   .spinner {
     width: 10rem;

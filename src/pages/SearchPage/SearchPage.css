@@ -106,5 +106,17 @@
     border: none;
   }
 
+  @media (max-width: 768px) {
+    .search-box {
+      justify-content: center; 
+      background-color: var(--gray-color1); 
+      padding: 45px 30px 30px 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+      width: 90%; 
+      margin: 0 auto 0 auto;
+    }
+    
+  }
 }
 
