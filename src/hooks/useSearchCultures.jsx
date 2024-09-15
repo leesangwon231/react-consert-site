@@ -12,42 +12,25 @@ const parseXml = async (xml) => {
 };
 
 const fetchSearchContentsData = async ({ queryKey }) => {
-    const { shprfnm = '', shcate = [] } = queryKey[1] || {};
+    const { shprfnm = '' } = queryKey[1] || {};
 
-    const requests = shcate.length > 0
-        ? shcate.map((category) => 
-            api.get('pblprfr', {
-                params: {
-                    shprfnm,
-                    shcate: category,
-                    stdate: '20240101',
-                    eddate: '20241231',
-                    cpage: '1',
-                    rows: '1000'
-                }
-            }).then(response => parseXml(response.data))
-        )
-        : [api.get('pblprfr', {
+    try {
+        // Fetch the data
+        const response = await api.get('pblprfr', {
             params: {
                 shprfnm,
-                shcate: '',
                 stdate: '20240101',
                 eddate: '20241231',
                 cpage: '1',
                 rows: '1000'
             }
-        }).then(response => parseXml(response.data))];
+        });
 
-    try {
-        const responses = await Promise.all(requests);
+        // Parse the XML response
+        const jsonData = await parseXml(response.data);
 
-        const mergedResults = responses.reduce((acc, jsonData) => {
-            if (jsonData.dbs && jsonData.dbs.db) {
-                const currentResults = jsonData.dbs.db;
-                acc.push(...(Array.isArray(currentResults) ? currentResults : []));
-            }
-            return acc;
-        }, []);
+        // Merge the results
+        const mergedResults = jsonData.dbs?.db ?? [];
 
         return { dbs: { db: mergedResults } };
     } catch (error) {
