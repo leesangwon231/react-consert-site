@@ -40,6 +40,23 @@
     padding: 10px;
     margin-bottom: 1rem;
   }
+  .check-local-container {
+    border: 1px solid var(--highlight-color1);
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .local-seperate {
+    column-count: 2; /* 2열로 분할 */
+    column-gap: 20px; /* 열 간격 */
+  }
+  
+  .checkbox-group {
+    break-inside: avoid; /* 열 분할 시 그룹 깨짐 방지 */
+  }
   
   form {
     display: flex;
@@ -73,27 +90,27 @@
 
   .check-btn-area .btn-submit {
     background-color: var(--highlight-color3);
-    border: 1px solid var(--highlight-color3); /* Ensure border has a width */
-    color: white; /* Ensure text color contrasts with the background */
+    border: 1px solid var(--highlight-color3); 
+    color: white; 
   }
   
   .check-btn-area .btn-submit:hover {
     background-color: var(--highlight-color3);
-    border: 1px solid var(--highlight-color3); /* Ensure border has a width */
-    color: white; /* Ensure text color contrasts with the background */
+    border: 1px solid var(--highlight-color3);
+    color: white; 
   }
   
   .check-btn-area .btn-delete {
     background-color: white;
-    border: 2px solid var(--highlight-color3); /* Ensure border has a width */
+    border: 2px solid var(--highlight-color3); 
     color: var(--highlight-color3); 
-    font-weight: bold;/* Ensure text color contrasts with the background */
+    font-weight: bold;
   }
   
   .check-btn-area .btn-delete:hover {
-    background-color: var(--highlight-color3);
-    border: 1px solid var(--highlight-color3); /* Ensure border has a width */
-    color: white; /* Ensure text color contrasts with the background */
+    background-color: var(--highlight-color4);
+    border: 1px solid var(--highlight-color4); 
+    color: white;
   }
   
 }
