@@ -11,7 +11,7 @@ const AppLayout = () => {
   const [showScrollButton, setShowScrollButton] = useState(false); // Added useState hook
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
 
     const handleScroll = () => {
       if (window.scrollY > 300) {
