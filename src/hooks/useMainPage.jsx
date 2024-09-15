@@ -42,16 +42,20 @@ export const useContentsList = ({itemNum, genreCode, signgucode, kidState, perfo
   });
 };
 
-export const useBoxOfficeList = (period, date, categoryCode) => {
-  console.log(period, date, categoryCode);
+export const useBoxOfficeList = (period, categoryCode) => {
+  const today = new Date();
+  const todayDate = `${today.getFullYear()}${today.getMonth() + 1 < 10 ? '0' + (today.getMonth() + 1) : today.getMonth() + 1}${
+    today.getDate() < 10 ? '0' + today.getDate() : today.getDate()
+  }`;
+  console.log(todayDate, period, categoryCode);
 
   const fetchBoxOfficeList = async () => {
     try {
       const response = await api.get('boxoffice', {
         params: {
-          ststype: 'day',
-          date: 20240915,
-          catecode: 'CCCD',
+          ststype: period,
+          date: todayDate.toString(),
+          catecode: categoryCode,
         },
       });
       return await parseXml(response.data);
@@ -61,10 +65,10 @@ export const useBoxOfficeList = (period, date, categoryCode) => {
     }
   };
   return useQuery({
-    queryKey: ['contents-list', period, date, categoryCode],
+    queryKey: ['boxOffice', period, todayDate, categoryCode],
     queryFn: fetchBoxOfficeList,
     select: (result) => result.boxofs.boxof,
-    retry: 1,
+    retry: 3,
     // staleTime: 600000,
   });
 };

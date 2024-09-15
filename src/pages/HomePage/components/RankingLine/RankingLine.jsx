@@ -20,10 +20,10 @@ const dummyItem = {
 };
 
 const RankingLine = () => {
-  const today = new Date();
-  const todayDate = `${today.getFullYear()}${today.getMonth() + 1 < 10 ? '0' + (today.getMonth() + 1) : today.getMonth() + 1}${
-    today.getDate() < 10 ? '0' + today.getDate() : today.getDate()
-  }`;
+  // const today = new Date();
+  // const todayDate = `${today.getFullYear()}${today.getMonth() + 1 < 10 ? '0' + (today.getMonth() + 1) : today.getMonth() + 1}${
+  //   today.getDate() < 10 ? '0' + today.getDate() : today.getDate()
+  // }`;
   // console.log(todayDate);
 
   const categoryFilterName = [
@@ -37,8 +37,11 @@ const RankingLine = () => {
   const [slicedData, setSlicedData] = useState([]);
   console.log(selectedCategory);
 
-  const {data, isLoading, isError, error} = useBoxOfficeList('day', todayDate, selectedCategory);
-  console.log(data);
+  // const {data, isLoading, isError, error} = useBoxOfficeList('day', todayDate, selectedCategory);
+  const {data, isLoading, isError, error} = useBoxOfficeList('month', selectedCategory);
+  console.log("Ranking Data:", data);
+  console.log("Ranking error:", error);
+  
   console.log(selectedCategory);
   useEffect(() => {
     setSlicedData(data?.slice(5));
