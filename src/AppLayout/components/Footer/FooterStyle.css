@@ -1,15 +1,14 @@
-  @media (min-width: 576px) {
-    .cus-line{
-        border-bottom: 2px solid #dfdfdfaa;
-    }
-  }
-  @media (min-width: 768px) {
-    .cus-line{
-        border-right: 2px solid #dfdfdfaa;
-        border-bottom: none;
+#footer {
+  .cus-line {
+    border-bottom: 2px solid #dfdfdfaa;
+
+    @media (min-width: 768px) {
+      border-right: 2px solid #dfdfdfaa;
+      border-bottom: none;
     }
   }
 
-  
-  
-
+  .name-list {
+    width: fit-content;
+  }
+}
