@@ -1,24 +1,27 @@
 import { useQuery } from "@tanstack/react-query";
 import xml2js from "xml2js";
-import api from "../utils/api.jsx"; 
+import api from "../utils/api.jsx";
 
 const parseXml = async (xml) => {
     const parser = new xml2js.Parser({ explicitArray: false });
     try {
-        return await parser.parseStringPromise(xml);
+        const result = await parser.parseStringPromise(xml);
+        return result;
     } catch (err) {
         throw new Error('XML 파싱 오류: ' + err.message);
     }
 };
 
 const fetchAllSearchCentersData = async ({ queryKey }) => {
-    const { shprfnmfct = '', currentPage = 1 } = queryKey[1] || {};
+    const { shprfnmfct = '', page = 1 } = queryKey[1] || {};
+    let allResults = [];
+
     try {
         const response = await api.get('prfplc', { 
             params: {
                 shprfnmfct,
-                cpage: currentPage.toString(), 
-                rows: '1000' 
+                cpage: page.toString(),  // Fixed: Use 'page' instead of 'currentPage'
+                rows: '500'
             }
         });
 
@@ -27,13 +30,17 @@ const fetchAllSearchCentersData = async ({ queryKey }) => {
 
         if (jsonData.dbs && jsonData.dbs.db) {
             const currentResults = jsonData.dbs.db;
-            return { dbs: { db: Array.isArray(currentResults) ? currentResults : [] } };
-        } else {
-            return { dbs: { db: [] } };
-        }        
+
+            if (Array.isArray(currentResults)) {
+                allResults = [...allResults, ...currentResults];
+            }
+        }
+
+        return { dbs: { db: allResults } };
+
     } catch (error) {
-        console.error('데이터 가져오기 오류:', error);
-        throw new Error('데이터 가져오기 오류: ' + error.message);
+        console.error('데이터 가져오기 오류:', error.response ? error.response.data : error.message);
+        throw error;
     }
 };
 
@@ -42,8 +49,5 @@ export const useSearchCenters = (param) => {
         queryKey: ["centers", param],
         queryFn: fetchAllSearchCentersData,
         retry: 1,
-        select: (data) => {
-            return Array.isArray(data?.dbs?.db) ? data : { dbs: { db: [] } };
-        }
     });
 };
