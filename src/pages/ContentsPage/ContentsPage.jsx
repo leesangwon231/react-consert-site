@@ -14,7 +14,7 @@ const ContentsPage = () => {
     if (params.category === "musical") {
         performanceKinds = ["뮤지컬", "GGGA"];
     } else if (params.category === "classical") {
-        performanceKinds = ["클래식/무용", "BBBC"];
+        performanceKinds = ["클래식", "CCCA"];
     } else if (params.category === "play") {
         performanceKinds = ["연극", "AAAA"];
     } else if (params.category === "concert") {

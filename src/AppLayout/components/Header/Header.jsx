@@ -18,7 +18,7 @@ const Header = () => {
       itemLink: '/contents/musical',
     },
     {
-      itemName: '클래식/무용',
+      itemName: '클래식',
       itemLink: '/contents/classical',
     },
     {
