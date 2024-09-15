@@ -6,6 +6,22 @@
     margin-bottom: 2rem;
   }
 
+  .period-button-box {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    .period-filter-button {
+      cursor: pointer;
+      padding: 1rem 2rem;
+      border-radius: 3rem;
+      background-color: var(--gray-color2);
+      &.active {
+        background-color: var(--highlight-color4);
+        color: var(--gray-color1);
+      }
+    }
+  }
+
   .filter-box {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));

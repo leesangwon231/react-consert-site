@@ -16,6 +16,11 @@ const categoryFilterName = [
   {name: '국악', code: 'CCCC'},
   {name: '서커스/마술', code: 'EEEB'},
 ];
+const period = [
+  {name: '일간', code: 'day'},
+  {name: '주간', code: 'week'},
+  {name: '월간', code: 'month'},
+];
 
 const RankingPage = () => {
   const today = new Date();
@@ -23,7 +28,8 @@ const RankingPage = () => {
     today.getDate() < 10 ? '0' + today.getDate() : today.getDate()
   }`;
   const [selectedCategory, setSelectedCategory] = useState('');
-  const {data, isLoading, isError, error} = useBoxOfficeList('week', todayDate, selectedCategory);
+  const [selectedPeriod, setSelectedPeriod] = useState('week');
+  const {data, isLoading, isError, error} = useBoxOfficeList(selectedPeriod, todayDate, selectedCategory);
   console.log(data);
 
   // if (isLoading) {
@@ -36,6 +42,16 @@ const RankingPage = () => {
   return (
     <Container className="ranking-page-container">
       <h1 className="page-title">순위</h1>
+      <ul className='period-button-box'>
+        {period.map((item, i) => (
+          <li
+            key={i}
+            className={`period-filter-button fs-5 ${item.code === selectedPeriod ? 'active' : ''}`}
+            onClick={() => setSelectedPeriod(item.code)}>
+            {item.name}
+          </li>
+        ))}
+      </ul>
       <ul className="filter-box">
         {categoryFilterName.map((filter, i) => (
           <li
@@ -46,12 +62,15 @@ const RankingPage = () => {
           </li>
         ))}
       </ul>
-      {isLoading ? <LoadingSpinner /> : (<div className="ranking-page-card-container">
-        {data?.map((item, i)=>(
-          <RankingCard key={i} item={item} />
-        ) )}
-
-      </div>)}
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        <div className="ranking-page-card-container">
+          {data?.map((item, i) => (
+            <RankingCard key={i} item={item} />
+          ))}
+        </div>
+      )}
     </Container>
   );
 };
