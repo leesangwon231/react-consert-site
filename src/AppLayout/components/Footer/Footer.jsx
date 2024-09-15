@@ -8,9 +8,9 @@ const Footer = () => {
   return (
     <footer id="footer" className="py-4 mt-5" style={{borderTop: '2px solid #dfdfdfaa'}}>
       <Container>
-        <Row className="mt-3">
+        <Row className="mt-3 row-gap-3">
           <Col md={6} className="pb-3 text-center cus-line">
-            <h2 className="mb-2">코알누 리액트 그룹 프로젝트 8조</h2>
+            <h3 className="mb-2">코알누 리액트 그룹 프로젝트 8조</h3>
             <h4 className="mb-4">공연 예술 정보 페이지</h4>
             <p className="mb-2">Project Duration</p>
             <p>2024.09.08 - 2024.09.15</p>
@@ -25,7 +25,7 @@ const Footer = () => {
             </a>
           </Col>
 
-          <Col md={6} className="my-3">
+          <Col md={6} className="mb-3">
             <div className="d-flex flex-column justify-content-center">
               <div className="mb-3 fs-4 d-flex gap-2 align-items-center justify-content-center">
                 <FontAwesomeIcon icon={faUser} /> Team Member
