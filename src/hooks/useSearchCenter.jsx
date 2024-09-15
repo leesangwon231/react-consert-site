@@ -30,7 +30,7 @@ const fetchAllSearchCentersData = async ({ queryKey }) => {
             return { dbs: { db: Array.isArray(currentResults) ? currentResults : [] } };
         } else {
             return { dbs: { db: [] } };
-        }
+        }        
     } catch (error) {
         console.error('데이터 가져오기 오류:', error);
         throw new Error('데이터 가져오기 오류: ' + error.message);
@@ -42,5 +42,8 @@ export const useSearchCenters = (param) => {
         queryKey: ["centers", param],
         queryFn: fetchAllSearchCentersData,
         retry: 1,
+        select: (data) => {
+            return Array.isArray(data?.dbs?.db) ? data : { dbs: { db: [] } };
+        }
     });
 };

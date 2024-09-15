@@ -61,5 +61,8 @@ export const useSearchCultures = (param) => {
         queryKey: ["cultures", param],
         queryFn: fetchSearchContentsData,
         retry: 1,
+        select: (data) => {
+            return Array.isArray(data?.dbs?.db) ? data : { dbs: { db: [] } };
+        }
     });
 };

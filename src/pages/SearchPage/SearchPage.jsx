@@ -169,8 +169,10 @@ const SearchPage = () => {
               시설
             </Button>
           </div>
-          {keyword && (activeButton === "all" || activeButton === "culture") ? <ListCulture data={cultureData} /> : null}
-          {keyword && (activeButton === "all" || activeButton === "center") ? <ListCenter data={centerData} /> : null}
+          {keyword && (activeButton === "all" || activeButton === "culture") 
+            ? <ListCulture data={Array.isArray(cultureData?.dbs?.db) ? cultureData.dbs.db : []} /> : null}
+          {keyword && (activeButton === "all" || activeButton === "center") 
+            ? <ListCenter data={Array.isArray(centerData?.dbs?.db) ? centerData.dbs.db : []} /> : null}
         </Row>
       </Container>
     </div>
