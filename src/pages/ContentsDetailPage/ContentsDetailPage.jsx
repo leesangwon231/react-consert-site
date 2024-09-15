@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useContentsDetail } from "../../hooks/useContentsDetail";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHouse, faArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { faHouse } from "@fortawesome/free-solid-svg-icons";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import LoadingSpinner from "../../common/LoadingSpinner/LoadingSpinner";
 
@@ -13,24 +13,6 @@ const ContentsDetailPage = () => {
   const { data, isLoading, error } = useContentsDetail(id);
   const [activeTab, setActiveTab] = useState("details");
   const navigate = useNavigate();
-  const [showScrollButton, setShowScrollButton] = useState(false);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-
-    const handleScroll = () => {
-      if (window.scrollY > 300) {
-        setShowScrollButton(true);
-      } else {
-        setShowScrollButton(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
   const contentDetail = data?.dbs?.db;
 
@@ -41,9 +23,6 @@ const ContentsDetailPage = () => {
     }
   };
 
-  const handleScrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
 
   const priceInfo = contentDetail?.pcseguidance
     ? contentDetail.pcseguidance
@@ -283,13 +262,12 @@ const ContentsDetailPage = () => {
 
                 {Array.isArray(contentDetail?.styurls?.styurl) ? (
                   contentDetail.styurls.styurl.map((url, index) => (
-                    <Card.Text key={index} className="mt-4">
+                    <Card.Text key={index} >
                       <img
                         src={url}
                         alt={`상세 이미지 ${index + 1}`}
                         style={{
                           width: "100%",
-                          marginTop: "10px",
                           borderRadius: "5px",
                         }}
                       />
@@ -335,28 +313,6 @@ const ContentsDetailPage = () => {
         )}
       </Row>
 
-      {showScrollButton && (
-        <Button
-          onClick={handleScrollToTop}
-          style={{
-            position: "fixed",
-            bottom: "40px",
-            right: "40px",
-            width: "50px",
-            height: "50px",
-            borderRadius: "50%",
-            backgroundColor: "rgb(56, 53, 84, 0.7)",
-            color: "white",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            zIndex: 1000,
-            border: "none",
-          }}
-        >
-          <FontAwesomeIcon icon={faArrowUp} />
-        </Button>
-      )}
     </Container>
   );
 };
