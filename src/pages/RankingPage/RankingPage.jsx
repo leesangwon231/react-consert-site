@@ -27,10 +27,12 @@ const RankingPage = () => {
   const todayDate = `${today.getFullYear()}${today.getMonth() + 1 < 10 ? '0' + (today.getMonth() + 1) : today.getMonth() + 1}${
     today.getDate() < 10 ? '0' + today.getDate() : today.getDate()
   }`;
+  // console.log(todayDate - 1);
+
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedPeriod, setSelectedPeriod] = useState('week');
-  const {data, isLoading, isError, error} = useBoxOfficeList(selectedPeriod, todayDate, selectedCategory);
-  console.log(data);
+  const {data, isLoading, isError, error} = useBoxOfficeList(selectedPeriod, todayDate - 1, selectedCategory);
+  // console.log(data);
 
   // if (isLoading) {
   //   return <LoadingSpinner />;
@@ -42,7 +44,7 @@ const RankingPage = () => {
   return (
     <Container className="ranking-page-container">
       <h1 className="page-title">순위</h1>
-      <ul className='period-button-box'>
+      <ul className="period-button-box">
         {period.map((item, i) => (
           <li
             key={i}
