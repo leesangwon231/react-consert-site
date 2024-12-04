@@ -1,0 +1,136 @@
+.search-culture {
+    .list-title {
+        margin-top: 3%;
+        margin-bottom: 2%;
+    }
+
+    .list-container {
+        margin-top: 2%;
+        margin-bottom: 2%;
+        display: flex;
+        align-items: center; 
+        justify-content: center; 
+    }
+
+    .list-itemarea {
+        border-top: 5px solid var(--gray-color2);
+        border-bottom: 5px solid var(--gray-color2);
+        padding-top: 15px;
+        display: flex;
+        width: 100%;
+    }
+
+    .list-item {
+        display: flex;
+        flex-direction: row; 
+        align-items: center; 
+        border-radius: 5px;
+        overflow: hidden;
+        border-bottom: 3px solid var(--gray-color1);
+        width: 100%; 
+    }
+
+    .list-item:last-child {
+        border-bottom: none; 
+    }
+
+    .list-img {
+        width: 100px;
+        height: 140px;
+        margin-right: 5%; 
+        margin-left: 2%; 
+        margin-bottom: 15px; 
+        flex: 0 0 auto;
+    }
+
+    .list-details {
+        display: flex;
+        flex: 1;
+        flex-direction: row; 
+        align-items: center; 
+        justify-content: space-between;
+        gap: 5%;
+    }
+
+    .list-detail-title {
+        font-weight: bold;          
+    }
+    .list-detail-group {
+        flex: 0 0 35%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .list-detail {
+        margin-left: 15px;
+        flex: 0 0 25%;
+    }
+
+    .list-detail:last-child {
+        flex: 0 0 35%; 
+    }
+    .badge-status {
+        font-size: 0.9rem;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.2rem;
+        display: inline-block;
+        text-align: center;
+        width: 4.2rem;
+        height: 1.45rem;
+        margin-bottom: 2%;
+    }
+    
+    .badge-status.pending {
+        border: 1px solid var(--highlight-color3) !important;
+        background: transparent !important ;
+        color: var(--highlight-color3) !important;
+    }
+    
+    .badge-status.ongoing {
+        background: var(--highlight-color3) !important;
+        color: white !important;
+        border: 1px solid var(--highlight-color3) !important;
+    }
+    
+    .badge-status.completed {
+        border: 1px solid var(--highlight-color1) !important;
+        background: transparent !important;
+        color: var(--highlight-color1) !important;
+    }
+
+    .no-results{
+        text-align: center;
+        margin-top: 5%;
+        margin-bottom: 6%;
+    }
+
+      @media (max-width: 768px) {
+        .list-item {
+            flex-direction: row; 
+            gap: 2%;
+        }
+
+        .list-img {
+            width: 80px;
+            height: 110px; 
+            margin-right: 3%; 
+            margin-bottom: 0;
+        }
+
+        .list-details {
+            flex-direction: column; 
+            gap: 2%;
+            align-items: flex-start;
+        }
+
+        .list-detail-group {
+            flex: 1; 
+        }
+
+        .list-detail {
+            margin-left: 0;
+        }
+
+    }
+
+}

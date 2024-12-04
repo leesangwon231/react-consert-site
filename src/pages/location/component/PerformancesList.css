@@ -1,0 +1,92 @@
+/* 기본 카드 스타일 */
+.performance-card {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  margin-bottom: 15px;
+  background-color: #fff;
+  height: 100%;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 포스터 이미지 */
+.poster img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* 공연 정보 */
+.performance-details {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 반응형 조정 - 작은 화면에서 포스터 이미지 및 공연 정보를 수직으로 정렬 */
+@media (max-width: 768px) {
+  .performance-card {
+      flex-direction: column;
+      text-align: center;
+  }
+
+  .poster img {
+      width: 60%; /* 작은 화면에서 포스터 크기 조정 */
+      margin: 0 auto;
+  }
+
+  .performance-details {
+      padding-top: 15px;
+  }
+}
+
+/* region-list와 row 사이 간격 */
+.region-list {
+  margin-bottom: 20px;
+}
+
+/* 각 카드 간의 가로 및 세로 구분선을 추가 */
+.col-3 {
+  padding: 15px;
+  border-right: 1px solid #e0e0e0; /* 세로 구분선 */
+  border-bottom: 1px solid #e0e0e0; /* 가로 구분선 */
+}
+
+/* 마지막 열에 세로 구분선 없앰 */
+.col-3:nth-child(4n) {
+  border-right: none;
+}
+
+/* hover 시 시각적 효과 */
+.performance-card:hover {
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 포스터 이미지 hover 효과 */
+.poster img:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+/* 반응형 조정 - 작은 화면에서 카드 배열 조정 */
+@media (max-width: 768px) {
+  .col-3 {
+      max-width: 100%;
+      padding: 15px;
+      border-right: none;
+  }
+}
+@media (max-width: 768px) {
+  .region-item {
+      flex: 1 0 30%; /* 작은 화면에서는 한 줄에 3개씩 배치 */
+  }
+}
+
+@media (max-width: 576px) {
+  .region-item {
+      flex: 1 0 45%; /* 매우 작은 화면에서는 한 줄에 2개씩 배치 */
+  }
+}

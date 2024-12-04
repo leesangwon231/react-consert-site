@@ -1,0 +1,65 @@
+.venue-card {
+    padding: 15px; /* 패딩을 줄여서 간격 감소 */
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px; /* 카드 사이의 간격을 줄임 */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: auto; /* 높이를 자동으로 맞춤 */
+    min-height: 200px; /* 카드의 최소 높이 설정 */
+    max-height: 300px; /* 카드의 최대 높이 설정 */
+    text-align: left;
+    box-sizing: border-box;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.venue-card:hover {
+    transform: translateY(-5px); /* 호버 시 카드가 살짝 올라가는 효과 */
+    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 강조 */
+}
+
+/* Placeholder for map area when no coordinates are available */
+.venue-map-placeholder {
+    height: 200px;
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 8px;
+}
+
+/* 로딩 스피너를 가운데에 배치 */
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.col-3 {
+    width: 100%;
+    max-width: 25%; /* 각 카드가 큰 화면에서는 25% 크기를 차지 */
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 992px) {
+    .col-3 {
+        max-width: 50%; /* 중간 화면에서는 50% 크기 */
+    }
+}
+
+@media (max-width: 768px) {
+    .col-3 {
+        max-width: 100%; /* 작은 화면에서는 100% 크기 */
+    }
+}
+
+h3, p {
+    word-wrap: break-word; /* 너무 긴 텍스트를 적절히 줄바꿈 */
+}

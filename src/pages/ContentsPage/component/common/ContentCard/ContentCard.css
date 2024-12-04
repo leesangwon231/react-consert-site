@@ -1,0 +1,113 @@
+@import url('https://cdn.jsdelivr.net/gh/sun-typeface/SUITE@2/fonts/variable/woff2/SUITE-Variable.css');
+
+.ContentsPage_container {
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-bottom: 50px;
+
+    .ContentsPage_card-box-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.3s;
+
+        .ContentsPage_card-box {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+
+            .ContentsPage_img-box {
+            width: 100%;
+            aspect-ratio: 3/4;
+            overflow: hidden;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            }
+            .ContentsPage_text-box {
+                h5 {
+                    font-size: 20px;
+                    font-weight: bold;
+                    margin-bottom: 4px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    max-width: 240px;
+                }
+                .text-center {
+                    font-size: 15px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    max-width: 240px;
+                }
+            }
+        }
+
+        &:hover {
+            transform: scale(1.1);
+            border-radius: 10px;
+            z-index: 0;
+
+            .ContentsPage_text-box {
+                h5 {
+                    font-size: 20px;
+                    font-weight: bold;
+                    margin-bottom: 4px;
+                    white-space: normal;
+                    overflow: visible;
+                    text-overflow: clip;
+                }
+                .text-center {
+                    font-size: 15px;
+                    white-space: normal;
+                    overflow: visible;
+                    text-overflow: clip;
+                }
+            }
+        }
+    }
+}
+
+
+@media only screen and (min-width: 992px) and (max-width: 1400px) {
+    .ContentsPage_container {
+        .ContentsPage_card-box-container {
+            .ContentsPage_card-box {
+                .ContentsPage_text-box {
+                    .fw-bold {
+                        font-size: 9px; /* 조정된 폰트 크기 */
+                        max-width: 150px;
+                    }
+                    .text-center {
+                        font-size: 8px; /* 조정된 폰트 크기 */
+                        max-width: 150px;
+                    }
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 350px){
+    .ContentsPage_container {
+        .ContentsPage_card-box-container {
+            .ContentsPage_card-box {
+                .ContentsPage_text-box {
+                    .fw-bold {
+                        font-size: 9px; /* 조정된 폰트 크기 */
+                        max-width: 100px;
+                    }
+                    .text-center {
+                        font-size: 8px; /* 조정된 폰트 크기 */
+                        max-width: 150px;
+                    }
+                }
+            }
+        }
+    }
+}
